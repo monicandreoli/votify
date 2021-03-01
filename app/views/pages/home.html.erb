@@ -1,2 +1,150 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<section id="home">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-6 col-sm-12 pt-lg-5 pt-md-5 pt-sm-0">
+                <h1 class="pb-3 mt-5">We give Voice to local people</h1>
+                <p class="subtitle">Ready to take your neighbourhood to another level? Votify is here to help you bring
+                    your ideas to
+                    life.</p>
+                <div class="d-flex pt-lg-4 pt-md-0">
+                    <input type="postcode" class="form-control w-50" id="postcode" aria-describedby="postcode"
+                        placeholder="Enter your postcode here">
+                    <button class="btn btn-warning ml-1">Go to your area</button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <%= image_tag "banner.svg", class: "banner-image" %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="how-it-works">
+    <div class="container">
+        <h1 class="text-center pb-2">How it works</h1>
+        <p class="text-center subtitle">Unlock your neighbourhood's full potential in three simple steps</p>
+        <div class="container box-card">
+            <div class="card how-works-card m-3 p-3">
+                <%= image_tag "bring-your-idea.svg" %>
+                <h5 class="py-3">Bring your idea</h5>
+                <p class="text-center">Is there anything you want to change in your neighbourhood? Bring in your idea,
+                    reach out to your neighbuors and get thier votes.</p>
+            </div>
+            <div class="card how-works-card  m-3 p-3">
+                <%= image_tag "vote-idea.svg" %>
+                <h5 class="py-3">Vote for ideas</h5>
+                <p class="text-center">Do you like the idea of your neighbour? Vote for it! Follow the idea’s lifecycle
+                    and see if is going to come true.</p>
+            </div>
+            <div class="card how-works-card  m-3 p-3">
+                <%= image_tag "make-the-change.svg" %>
+                <h5 class="py-3">Make the change</h5>
+                <p class="text-center">Is there anything you want to change in your neighbourhood? Bring in your idea,
+                    reach out to your neighbuors and get thier votes.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="different">
+    <div class="container">
+        <h1 class="text-center pb-2">We are all different. We all want to be heard</h1>
+        <p class="text-center subtitle pb-4 px-5">Focus on brainstorming and imagining a better future. Let votify
+            handle voting
+            process, make sure your ideas reach your neighbours and resolve communication issues with your local
+            authorities.</p>
+        <div class="d-flex justify-content-center">
+            <%= image_tag "houses.svg" %>
+            <%= image_tag "houses-no-moon.svg", class: "house" %>
+        </div>
+    </div>
+</section>
+
+<section id="consider-interest">
+    <div class="container">
+        <h1 class="text-center pb-2">Consider eveyrone’s best interest</h1>
+        <p class="text-center subtitle pb-4 px-5">Enjoy your inclusive, accesible and vibrant neighbourhood life.</p>
+        <div class="box-card">
+            <div class="card how-works-card m-3 p-3">
+                <i class="fas fa-ban fa-2x mr-3 pt-2 pl-2"></i>
+                <h5 class="py-3 text-center">No more exclusive decision making</h5>
+                <div class="text-left px-4">
+                    <div class="d-flex"><i class="far fa-plus-square mr-3"></i>
+                        <p>Always be included in decisions around you</p>
+                    </div>
+                    <div class="d-flex"><i class="far fa-plus-square mr-3"></i>
+                        <p>Be as engaged in your local community as you want</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card how-works-card m-3 p-3">
+                <i class="far fa-comments fa-2x mr-3 pt-2 pl-2"></i>
+                <h5 class="py-3">No more messy communication</h5>
+                <div class="text-left px-4">
+                    <div class="d-flex"><i class="far fa-plus-square mr-3"></i>
+                        <p>Present your ideas clearly and be understood</p>
+                    </div>
+                    <div class="d-flex"><i class="far fa-plus-square mr-3"></i>
+                        <p>Bring forward real solutions instead of never ending meetings</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card how-works-card m-3 p-3">
+                <i class="far fa-paper-plane fa-2x mr-3 pt-2 pl-2"></i>
+                <h5 class="py-3">No more paper letters</h5>
+                <div class="text-left px-4">
+                    <div class="d-flex"><i class="far fa-plus-square mr-3"></i>
+                        <p>Avoid headaches queuning at the post office</p>
+                    </div>
+                    <div class="d-flex"><i class="far fa-plus-square mr-3"></i>
+                        <p>Make sure you can communicate with local authorities wherever you are</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="get-started">
+    <div class="px-2 d-flex justify-content-center">
+        <%= image_tag "super-hero.svg" %>
+        <div class="px-5 text-center mt-lg-5">
+            <h1>Get started with Votify</h1>
+            <p class="subtitle">Make the change. Be the change.</p>
+            <button class="button btn btn-warning">Get started</button>
+        </div>
+        <%= image_tag "super-hero1.svg" %>
+    </div>
+</section>
+
+<section id="testimonials">
+    <div class="container">
+        <h1 class="text-center pb-2">Happy endings are the endings you deserve</h1>
+        <p class="text-center subtitle pb-4 px-5">Votify helped hundreds of neighbours solve their problems.</p>
+        <div class="box-card">
+            <div class="card how-works-card m-3 p-3">
+                <i class="fas fa-quote-left quotes-left fa-2x ml-3 pt-2 pl-2"></i>
+                <p class="p-3 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perferendis at, molestias iure adipisci eligendi. Est mollitia aspernatur libero totam facere! Porro optio ullam, nam soluta corporis eaque voluptatem placeat.</p>
+                <i class="fas fa-quote-right quotes-right fa-2x mr-3 pb-2 pr-2 text-right"></i>
+                <p>Jasmine, Bremen</p>
+            </div>
+            <div class="card how-works-card m-3 p-3">
+                <i class="fas fa-quote-left quotes-left fa-2x ml-3 pt-2 pl-2"></i>
+                <p class="p-3 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perferendis at, molestias iure adipisci eligendi. Est mollitia aspernatur libero totam facere! Porro optio ullam, nam soluta corporis eaque voluptatem placeat.</p>
+                <i class="fas fa-quote-right quotes-right fa-2x mr-3 pb-2 pr-2 text-right"></i>
+                <p>Jasmine, Bremen</p>
+            </div>
+            <div class="card how-works-card m-3 p-3">
+                <i class="fas fa-quote-left quotes-left fa-2x ml-3 pt-2 pl-2"></i>
+                <p class="p-3 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea perferendis at, molestias iure adipisci eligendi. Est mollitia aspernatur libero totam facere! Porro optio ullam, nam soluta corporis eaque voluptatem placeat.</p>
+                <i class="fas fa-quote-right quotes-right fa-2x mr-3 pb-2 pr-2 text-right"></i>
+                <p>Jasmine, Bremen</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
