@@ -1,1 +1,94 @@
 // Specific CSS for your home-page
+section {
+    padding: 15vh 0;
+
+}
+#home {
+    background-color: $green;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    h1 {
+        font-weight: 900;
+    }
+}
+
+.banner-image {
+    width: 100%;
+    object-fit: contain;
+}
+
+
+
+.btn-warning {
+border-radius: 50px !important;
+}
+
+input {
+border-radius: 50px !important;
+}
+
+.how-works-card {
+    min-width: 300px;
+    border-radius: 15px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    img {
+        max-width: 120px;
+        object-fit: contain;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+.subtitle {
+    font-weight: 600;
+}
+
+.box-card {
+    display: flex;
+    flex-direction: row;
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+    }
+}
+
+#different {
+    background-color: $green;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    img {
+        object-fit: contain;
+    }
+
+    .house {
+        @media screen and (max-width: 800px) {
+            display: none;
+        }
+    }
+}
+
+#get-started {
+    background-color: $green;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#testimonials {
+    .quotes-left {
+        color: $orange !important;
+        opacity: 0.5;
+        width: 100%;
+        justify-content: start;
+    }
+
+    .quotes-right {
+        color: $orange !important;
+        opacity: 0.5;
+        width: 100%;
+        justify-content: end;
+    }
+}
