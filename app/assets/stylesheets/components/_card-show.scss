@@ -1,3 +1,8 @@
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
 .card-show {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -149,4 +154,3 @@ $label-font-size-redo: $default-size * 4;
     border-radius: 50%;
   }
 }
-

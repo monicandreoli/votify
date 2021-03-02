@@ -1,8 +1,10 @@
 <div class="container">
-
   <div class="row card-show">
     <div class="col-sm-12 p-0">
-      <%= image_tag "https://images.unsplash.com/photo-1540639933642-e8fc11a13437?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80", alttext: "neighbourhood", class: "show-img" %>
+
+       <% if @idea.photo.attached?  %>
+         <%= cl_image_tag @idea.photo.key, crop: :fill, class: "show-img" %>
+       <% end %>
     </div>
     <div class="col-sm-12 col-md-8">
       <div class="show-user d-flex align-items-center justify-content-between">
@@ -27,7 +29,7 @@
           <% end %>
         
         </div>
-      </div>
+
 
       <div class="show-details">
         <h1><%= @idea.title %></h1>
@@ -46,6 +48,7 @@
       </div>
 
     </div>
+
 
     <div class="col-sm-12 col-md-4">
 
@@ -68,7 +71,8 @@
     </div>
 
   </div>
-  
+
+  </div>
   <%= link_to 'go back', ideas_path  %>
 
 </div>

@@ -1,8 +1,15 @@
-<h1>edit ideapage</h1>
-<%= simple_form_for @idea do |f| %>
-<%= f.input :title %>
-<%= f.input :problem %>
-<%= f.input :solution %>
-<%= f.input :address %>
-<%= f.submit %>
-<% end %>
+<div class="container d-flex edit-idea justify-content-around py-5">
+    <div class="w-50">
+        <h1>Edit your Idea</h1>
+        <p class="subtitle">Improve the potential of your idea and edit it here!</p>
+        <%= simple_form_for @idea do |f| %>
+        <%= f.input :title %>
+        <%= f.input :problem %>
+        <%= f.input :solution %>
+        <%= f.input :address %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit class: 'btn btn-warning py-2' %>
+        <% end %>
+    </div>
+    <%= image_tag "edit-idea.svg" %>
+</div>
