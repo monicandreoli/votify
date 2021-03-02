@@ -1,6 +1,9 @@
 <div class="container">
   <h1>Single Idea</h1>
   <%= @idea.title %>
+  <% if @idea.photo.attached?  %>
+  <%= cl_image_tag @idea.photo.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
   <%= link_to 'go back', ideas_path  %>
   <%= link_to 'edit', edit_idea_path(@idea)  %>
   <%= link_to 'delete', idea_path(@idea), method: :delete, data: {confirm: 'Are you sure?'} %>
