@@ -1,3 +1,4 @@
+<div class="container">
 <h1>new ideapage</h1>
 <%= simple_form_for @idea do |f| %>
 <%= f.input :title %>
@@ -5,5 +6,6 @@
 <%= f.input :solution %>
 <%= f.input :address %>
 <%= f.input :photo, as: :file %>
-<%= f.submit %>
+<%= f.submit class: 'btn btn-warning py-2' %>
 <% end %>
+</div>
