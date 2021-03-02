@@ -1,0 +1,14 @@
+.primary-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $orange;
+  a {
+    color: white;
+  }
+  &:hover {
+    text-decoration: none;
+    background-color: white;
+    cursor: pointer;
+  }
+}
