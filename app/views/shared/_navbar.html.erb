@@ -4,7 +4,9 @@
     <% end %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon custom-toggler">
+    <i class="fas fa-bars" style="color:#fff; font-size:23px;"></i>
+    </span>
   </button>
 
 
@@ -15,7 +17,7 @@
           <%= link_to "Dashboard", "#", class: "nav-link" %>
         </li>
          <li class="nav-item">
-          <%= link_to "see ideas", ideas_path, class: "nav-link" %>
+          <%= link_to "See ideas", ideas_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
           <div class="avatar dropdown-toggle" id="navbarDropdown", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,7 +40,7 @@
           <%= link_to "Testimonials", "#testimonials", class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "see ideas", ideas_path, class: "nav-link" %>
+          <%= link_to "See ideas", ideas_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "Log in", new_user_session_path, class: "nav-link" %>

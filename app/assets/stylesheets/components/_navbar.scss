@@ -30,12 +30,11 @@
 
 .navbar-toggler {
  background-color: transparent;
- border: 1px solid white !important;
-}
-.navbar-toggler-icon {
-  color: white !important;
 }
 
+.custom-toggler.navbar-toggler {
+  border-color: rgb(255,102,203);
+}
 
 
 .avatar {
