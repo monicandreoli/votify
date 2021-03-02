@@ -1,7 +1,13 @@
-<div class="container">
+<div class="container pt-5">
+<%= link_to "go back", root_path %>
+  <%= link_to 'create new idea', new_idea_path  %>
   <h1>Ideas List</h1>
   <% @ideas.each do |idea| %>
-  <%= link_to idea.title, idea_path(idea)  %>
+  <%= link_to idea_path(idea) do %>
+  <div class="card py-4 px-2">
+  <%= idea.title %>
+  <p><strong>Problem: </strong><%= idea.problem %></p>
+  </div>
   <% end %>
-  <%= link_to 'create new idea', new_idea_path  %>
+  <% end %>
 </div>
