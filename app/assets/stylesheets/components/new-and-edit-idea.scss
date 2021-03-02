@@ -1,0 +1,19 @@
+.new-idea, .edit-idea {
+    input {
+        border-radius: 10px !important;
+    }
+
+    input[type=submit] {
+        border-radius: 50px !important;
+    }
+}
+.edit-idea img {
+        width: 30%;
+        object-fit: contain;
+}
+
+
+.new-idea img {
+    width: 50%;
+    object-fit: contain;
+}
