@@ -1,6 +1,7 @@
 <div class="container">
   <h1>Ideas List</h1>
   <% @ideas.each do |idea| %>
-    <p><%= idea.title %></p>
+  <%= link_to idea.title, idea_path(idea)  %>
   <% end %>
+  <%= link_to 'create new idea', new_idea_path  %>
 </div>
