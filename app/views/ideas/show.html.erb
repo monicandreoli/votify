@@ -1,9 +1,27 @@
 <div class="container">
-  <h1>Single Idea</h1>
-  <%= @idea.title %>
-  <% if @idea.photo.attached?  %>
-  <%= cl_image_tag @idea.photo.key, height: 300, width: 400, crop: :fill %>
-  <% end %>
+  <div class="row card-show">
+    <div class="col-sm-12 p-0">
+       <% if @idea.photo.attached?  %>
+         <%= cl_image_tag @idea.photo.key, crop: :fill, class: "show-img" %>
+       <% end %>
+      <div class="show-user d-flex align-items-center">
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "avatar-large" %>
+        <p class="m-0 pl-3"><%= @idea.user.first_name %> <%= @idea.user.last_name  %> || <%= @idea.deadline %></p>
+      </div>
+      <div class="show-details">
+        <h1><%= @idea.title %></h1>
+        <p class="details-light"><i class="fas fa-map-marker-alt"></i> <%= @idea.address %></p>
+        <div class="details-description">
+          <p class="tag">PROBLEM</p>
+          <p><%= @idea.problem %></p>
+        </div>
+        <div class="details-description">
+          <p class="tag">SOLUTION</p>
+          <p><%= @idea.solution %></p>
+        </div>
+      </div>
+    </div>
+  </div>
   <%= link_to 'go back', ideas_path  %>
   <%= link_to 'edit', edit_idea_path(@idea)  %>
   <%= link_to 'delete', idea_path(@idea), method: :delete, data: {confirm: 'Are you sure?'} %>
