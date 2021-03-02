@@ -1,0 +1,26 @@
+html {
+    scroll-behavior: smooth;
+}
+
+main {
+    margin-top: 69px;
+    min-height: 100vh;
+    padding: 5vh 0;
+}
+
+.btn-warning {
+    padding: 0 20px;
+    border-radius: 50px !important;
+}
+
+input {
+    border-radius: 50px !important;
+}
+
+input[type=file] {
+padding: 10px;
+}
+
+textarea {
+    border-radius: 10px !important;
+}
