@@ -7,18 +7,24 @@
         <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "avatar-large" %>
         <p class="m-0 pl-3"><%= @idea.user.first_name %> <%= @idea.user.last_name  %> || <%= @idea.deadline %></p>
       </div>
-      <div class="show-details">
-        <h1><%= @idea.title %></h1>
-        <p class="details-light"><i class="fas fa-map-marker-alt"></i> <%= @idea.address %></p>
-        <div class="details-description">
-          <p class="tag">PROBLEM</p>
-          <p><%= @idea.problem %></p>
-        </div>
-        <div class="details-description">
-          <p class="tag">SOLUTION</p>
-          <p><%= @idea.solution %></p>
-        </div>
+    </div>
+    <div class="col-sm-12 col-md-8 show-details">
+      <h1><%= @idea.title %></h1>
+      <p class="details-light"><i class="fas fa-map-marker-alt"></i> <%= @idea.address %></p>
+      <div class="details-description">
+        <p class="tag">PROBLEM</p>
+        <p><%= @idea.problem %></p>
       </div>
+      <div class="details-description">
+        <p class="tag">SOLUTION</p>
+        <p><%= @idea.solution %></p>
+      </div>
+      <%= link_to idea_path(@idea), class: "btn btn-warning w-100 mt-4" do %>
+        <i class="fas fa-vote-yea"></i> Vote
+      <% end %>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <p><%= @idea.votes.count %></p>
     </div>
   </div>
 
