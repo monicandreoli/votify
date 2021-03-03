@@ -1,0 +1,30 @@
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+.card p:hover {
+  text-decoration: none;
+}
+
+#index-card {
+  height: 200px;
+}
+
+.card-link:hover {
+  text-decoration: none;
+}
+
+#index-card .content-index p {
+  overflow: scroll;
+}
+
+#map {
+  position: sticky;
+  top: 0;
+}
+
+.title-index {
+  font-size: 24px;
+  font-weight: 900;
+}
