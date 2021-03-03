@@ -1,1 +1,0 @@
-const graph = document.getElementById('graph');
