@@ -68,29 +68,26 @@
 
 
 
+    <% pre_vote = @idea.votes.find { |vote| vote.user_id == current_user.id} %>
+    <% if pre_vote %>
+      <%= button_to 'Unvote', vote_path(pre_vote), method: :delete %>
+    <% else %>
+      <%= button_to 'Vote', idea_votes_path(@idea), method: :post %>
+    <% end %>
+
+
 <p><%= @idea.votes.count %> <%= (@idea.votes.count) == 1 ? 'Vote' : 'Votes'%></p>
 
-<% pre_vote = @idea.votes.find { |vote| vote.user_id == current_user.id} %>
-<% if pre_vote %>
-  <%= button_to 'Unvote', idea_vote_path(@idea, pre_vote), method: :delete, remote:true %>
-<% else %>
-  <%= button_to 'Vote', idea_votes_path(@idea), method: :post, remote:true %>
-<% end %>
-
-
-    <p><%= @idea.votes.count %></p>
-
     </div>
-
   </div>
-
   </div>
-  <%= link_to 'go back', ideas_path  %>
+  <%= link_to 'go back', ideas_path %>
 
 </div>
 
 
 <%#= this is the only piece of code for the progress bar  %>
-<div class="progress" id="progress">
+<div class="progress-container" data-total= "<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>"></div>
+
 
 </div>
