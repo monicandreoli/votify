@@ -25,7 +25,7 @@ require("channels")
 // External imports
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
-import { progressBar } from '../plugins/progessbar'
+import { circleProgress } from '../plugins/progess_bar'
 
 import { tryToSeeIfWorks } from "../packs/try"
 
@@ -37,5 +37,5 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   tryToSeeIfWorks();
   initMapbox();
-  progressBar();
+  circleProgress();
 });
