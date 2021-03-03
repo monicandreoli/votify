@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "progressbar": "^1.3.0"
+  },
+  "devDependencies": {
+    "webpack-permissions-plugin": "^1.0.8"
   }
 }
