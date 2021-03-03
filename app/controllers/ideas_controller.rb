@@ -2,7 +2,12 @@ class IdeasController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   def index
-    @ideas = Idea.all
+    if params[:query].present?
+      sql_query = "address ILIKE :query"
+      @ideas = Idea.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @ideas = Idea.all
+    end
   end
 
   def show
