@@ -3,8 +3,7 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   def index
     if params[:query].present?
-      sql_query = "address ILIKE :query"
-      @ideas = Idea.where(sql_query, query: "%#{params[:query]}%")
+      @ideas = Idea.near(params[:query], 1, units: :km)
     else
       @ideas = Idea.all
     end

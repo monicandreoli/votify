@@ -6,7 +6,8 @@
 <%= f.input :title %>
 <%= f.input :problem %>
 <%= f.input :solution %>
-<%= f.input :address %>
+<%= f.label :address, "Address * ..Dont't forgert the postcode 😉"%>
+<%= f.input :address, as: :string, label: false %>
 <%= f.input :photo, as: :file %>
 <%= f.submit class: 'btn btn-warning py-2' %>
 
