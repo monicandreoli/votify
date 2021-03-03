@@ -67,7 +67,17 @@
       </div>
 
 
-      <p><%= @idea.votes.count %></p>
+<p><%= @idea.votes.count %> <%= (@idea.votes.count) == 1 ? 'Vote' : 'Votes'%></p>
+
+<% pre_vote = @idea.votes.find { |vote| vote.user_id == current_user.id} %>
+<% if pre_vote %>
+  <%= button_to 'Unvote', idea_vote_path(@idea, pre_vote), method: :delete %>
+<% else %>
+  <%= button_to 'Vote', idea_votes_path(@idea), method: :post %>
+<% end %>
+
+
+    <p><%= @idea.votes.count %></p>
     </div>
 
   </div>
