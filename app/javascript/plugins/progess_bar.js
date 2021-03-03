@@ -1,6 +1,6 @@
 import ProgressBar from 'progressbar.js'
 
-const progressBar = () => {
+const circleProgress = () => {
   document.querySelectorAll(".progress-container").forEach((container) => {
 
     var bar = new ProgressBar.Circle(container, {
@@ -40,4 +40,4 @@ const progressBar = () => {
 }
 //comment
 
-export { progressBar }
+export { circleProgress }
