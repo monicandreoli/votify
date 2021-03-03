@@ -31,13 +31,13 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to "Home", "#home", class: "nav-link" %>
+          <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "How it works", "#how-it-works", class: "nav-link" %>
+          <%= link_to "How it works", root_path(anchor: 'how-it-works'), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Testimonials", "#testimonials", class: "nav-link" %>
+          <%= link_to "Testimonials", root_path(anchor: 'testimonials'), class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "See ideas", ideas_path, class: "nav-link" %>
