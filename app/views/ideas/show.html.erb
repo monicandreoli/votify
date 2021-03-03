@@ -89,6 +89,7 @@
 
 
 <%#= this is the only piece of code for the progress bar  %>
-<div class="progress" id="progress">
+
+<div class="progress-container" data-total= "<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>"></div>
 
 </div>
