@@ -21,19 +21,21 @@ const progressBar = () => {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
 
-        var value = Math.round(circle.value() * 100);
+        var value = Math.round(circle.value() * container.dataset.total);
+        let centerText = "".concat(value, "/", container.dataset.total);
         if (value === 0) {
           circle.setText('');
         } else {
-          circle.setText(value);
+          circle.setText(centerText);
         }
 
       }
     });
     bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-    bar.text.style.fontSize = '2rem';
+    bar.text.style.fontSize = '1rem';
 
-    bar.animate(container.dataset.vote);  // Number from 0.0 to 1.0
+    bar.animate(container.dataset.vote / container.dataset.total);
+    // Number from 0.0 to 1.0
   });
 }
 

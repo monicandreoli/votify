@@ -2,10 +2,15 @@ class IdeasController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   def index
-    if params[:query].present?
-      @ideas = Idea.near(params[:query], 1, units: :km)
+
+    if user_signed_in?
+      @ideas = Idea.near(current_user.address, 2, units: :km)
     else
-      @ideas = Idea.all
+        if params[:query].present?
+          @ideas = Idea.near(params[:query], 1, units: :km)
+        else
+          @ideas = Idea.all
+        end
     end
 
     @markers = @ideas.geocoded.map do |idea|
