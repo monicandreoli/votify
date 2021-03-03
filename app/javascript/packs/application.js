@@ -24,6 +24,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import { initMapbox } from '../plugins/init_mapbox';
 import { progressBar } from '../plugins/progessbar'
 
 // Internal imports, e.g:
@@ -32,5 +33,6 @@ import { progressBar } from '../plugins/progessbar'
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  initMapbox();
   progressBar();
 });
