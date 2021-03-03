@@ -8,6 +8,13 @@ class IdeasController < ApplicationController
     else
       @ideas = Idea.all
     end
+
+    @markers = @ideas.geocoded.map do |idea|
+      {
+        lat: idea.latitude,
+        lng: idea.longitude
+      }
+    end
   end
 
   def show
