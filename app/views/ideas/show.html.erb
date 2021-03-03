@@ -8,14 +8,14 @@
     </div>
     <div class="col-sm-12 col-md-8">
       <div class="show-user d-flex align-items-center justify-content-between">
-      
+
         <div class="d-flex align-items-center">
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "avatar-large" %>
           <p class="m-0 pl-2"><%= @idea.user.first_name %> <%= @idea.user.last_name  %></p>
           <p class="m-0 pl-4"><%= @idea.deadline %></p>
         </div>
         <div class="show-icons">
-        
+
           <% if @idea.user == current_user %>
             <%= link_to edit_idea_path(@idea), class: "pr-2" do %>
               <i class="fas fa-edit"></i>
@@ -27,7 +27,7 @@
               <i class="fas fa-trash"></i>
             <% end %>
           <% end %>
-        
+
         </div>
 
 
@@ -74,5 +74,11 @@
 
   </div>
   <%= link_to 'go back', ideas_path  %>
+
+</div>
+
+
+<%#= this is the only piece of code for the progress bar  %>
+<div class="progress" id="progress">
 
 </div>
