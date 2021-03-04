@@ -25,9 +25,10 @@ require("channels")
 // External imports
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
+
 // import { circleProgress } from '../plugins/progess_bar'
 
-import { tryToSeeIfWorks } from "../packs/try"
+
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -35,7 +36,9 @@ import { tryToSeeIfWorks } from "../packs/try"
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  tryToSeeIfWorks();
+
   initMapbox();
+
   // circleProgress();
+
 });
