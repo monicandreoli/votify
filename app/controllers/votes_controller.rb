@@ -4,7 +4,7 @@ class VotesController < ApplicationController
       @idea.votes.create(user_id: current_user.id)
       @vote = @idea.pre_vote_find(current_user)
       @vote.save
-      redirect_to idea_path(@idea)
+      redirect_to idea_path(@idea, anchor: "vote-#{@vote.id}")
     end
 
     def destroy
