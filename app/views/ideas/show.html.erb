@@ -29,8 +29,6 @@
           <% end %>
 
         </div>
-
-
       <div class="show-details">
         <h1><%= @idea.title %></h1>
         <p class="details-light"><i class="fas fa-map-marker-alt"></i> <%= @idea.address %></p>
@@ -46,48 +44,33 @@
           <i class="fas fa-microphone"></i> Vote
         <% end %>
       </div>
-
     </div>
+        <div class="col-sm-12 col-md-4">
+          <div class="show-progress charts-container d-flex justify-content-center">
 
-
-    <div class="col-sm-12 col-md-4">
-
-
-      <div class="show-progress charts-container d-flex justify-content-center">
-
-        <div class="pie-wrapper">
-          <span class="label">45<span class="smaller">%</span></span>
-          <div class="pie">
-            <div class="left-side half-circle"></div>
-            <div class="right-side half-circle"></div>
+            <div class="pie-wrapper">
+              <span class="label">45<span class="smaller">%</span></span>
+              <div class="pie">
+                <div class="left-side half-circle"></div>
+                <div class="right-side half-circle"></div>
+              </div>
+              <div class="shadow"></div>
+            </div>
           </div>
-          <div class="shadow"></div>
         </div>
-
       </div>
-
-
-
-    <% pre_vote = @idea.votes.find { |vote| vote.user_id == current_user.id} %>
-    <% if pre_vote %>
-      <%= button_to 'Unvote', vote_path(pre_vote), method: :delete, remote: true, class: "btn btn-warning", id: "vote-<%= pre_vote %> %>
-    <% else %>
-      <%= button_to 'Vote', idea_votes_path(@idea), method: :post, remote: true, class: "btn btn-warning", id: "vote-<%= @idea.vote.id %> " %>
-    <% end %>
-
+      </div>
+      <%= link_to 'go back', ideas_path %>
+      <% pre_vote =  @idea.pre_vote_find(current_user) %>
+        <% if pre_vote %>
+            <%= button_to 'Unvote', vote_path(pre_vote), method: :delete, remote: true, class: "btn btn-warning" %>
+        <% else %>
+            <%= button_to 'Vote', idea_votes_path(@idea), method: :post, remote: true, class: "btn btn-warning" %>
+        <% end %>
 
 <p><%= @idea.votes.count %> <%= (@idea.votes.count) == 1 ? 'Vote' : 'Votes'%></p>
-
     </div>
-  </div>
-  </div>
-  <%= link_to 'go back', ideas_path %>
-
+    <div class="progress-container" data-total= "<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>"></div>
 </div>
 
 
-<%#= this is the only piece of code for the progress bar  %>
-<div class="progress-container" data-total= "<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>"></div>
-
-
-</div>
