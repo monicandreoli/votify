@@ -1,0 +1,118 @@
+
+.tab-col-green {
+    position: sticky;
+    top: 0px;
+    background-color: $green;
+    height: 100vh;
+}
+
+.dashboard-logo {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #2798B0;
+    position: relative;
+}
+
+.d-dash {
+    font-size: 20px;
+    color: #93d9e9;
+    position: absolute;
+    top: 6px;
+}
+
+.top-table {
+    background-color: $green;
+}
+
+.title-dash {
+    font-size: 17px;
+    font-weight: 100;
+    color: #93d9e9;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #93d9e925;
+}
+
+.dash-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.profile-dashbar {
+    height: 60px;
+    color: rgba(34, 34, 34, 0.404);
+
+    .fa-search:hover, .fa-bell:hover {
+        color: rgba(34, 34, 34, 0.616);
+    }
+}
+
+    .nav-tabs .active {
+    color: $green !important;
+
+    }
+
+.dash-profile-content {
+    height: 100%;
+    align-items: center;
+}
+
+
+
+
+
+// these refers to the overview tab
+.nav-tabs a {
+  color: rgba(68, 68, 68, 0.37);
+    &:hover {
+    color: rgba(68, 68, 68, 0.37);
+    }
+}
+
+.arrow-idea {
+    opacity: 0;
+}
+.card-latest {
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    transition: 0.6s ease;
+    transform: scale(1);
+    &:hover {
+        transform: scale(1.03);
+        text-decoration: none;
+        .arrow-idea {
+            opacity: 0.5;
+            transition: 0.3s ease;
+        }
+    }
+  }
+
+  .card-latest .img-latest {
+    height: 100%;
+    width: 200px;
+    object-fit: cover;
+  }
+
+  .dash-latest-card {
+      align-items: center;
+    }
+
+    .profile-card-latest {
+    background-color: rgba(231, 231, 231, 0.356);
+    height: 100%;
+    align-items: center;
+    }
+
+.link-latest {
+    color: rgb(53, 53, 53);
+}
+
+.link-latest:hover {
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+}
