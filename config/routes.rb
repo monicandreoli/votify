@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
 
   resources :votes, only: :destroy
+  get '/dashboard', to: 'ideas#dashboard'
 end
