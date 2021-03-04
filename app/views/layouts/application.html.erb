@@ -14,13 +14,23 @@
 </head>
 
   <body>
-      <%= render 'shared/navbar' %>
+      <% unless action_name == "dashboard" %>
+        <%= render 'shared/navbar' %>
+      <% end %>
       <%= render 'shared/flashes' %>
 
-      <main>
-        <%= yield %>
-      </main>
+      <% if action_name == "dashboard" %>
+        <main>
+          <%= yield %>
+        </main>
+      <% else %>
+        <main style="margin-top: 59px">
+          <%= yield %>
+        </main>
+      <% end %>
 
-      <%= render 'shared/footer' %>
+      <% unless action_name == "dashboard" %>
+        <%= render 'shared/footer' %>
+      <% end %>
   </body>
 </html>
