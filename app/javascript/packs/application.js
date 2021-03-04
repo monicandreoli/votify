@@ -26,7 +26,7 @@ require("channels")
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 
-// import { circleProgress } from '../plugins/progess_bar'
+import { circleProgress } from '../plugins/progess_bar'
 
 
 
@@ -39,6 +39,6 @@ document.addEventListener('turbolinks:load', () => {
 
   initMapbox();
 
-  // circleProgress();
+  circleProgress();
 
 });
