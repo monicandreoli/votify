@@ -1,0 +1,51 @@
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+.card p:hover {
+  text-decoration: none;
+}
+
+.index-card {
+  min-height: 200px;
+}
+
+.card-link:hover {
+  text-decoration: none;
+}
+
+#map {
+  position: sticky;
+  top: 0;
+}
+
+.title-index {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.user-index {
+  display: flex;
+}
+
+.user-index .avatar {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.user-name {
+  align-self: center;
+}
+.user-index .date {
+  align-self: center;
+}
+
+.user-name::after {
+  content: " - ";
+  white-space: pre;
+}
+
+.footer-index {
+  color: #929292;
+}
