@@ -17,7 +17,7 @@
             <p class="letter"><%= idea.user.first_name.first.capitalize %></p>
           </div>
           <div class='user-name'><%= idea.user.first_name %></div>
-          <div class='date'><%= time_ago_in_words(idea.created_at) %></div>
+          <div class='date'><%= time_ago_in_words(idea.created_at) %> ago</div>
         </div>
         <div class='title-index'>
           <p>
