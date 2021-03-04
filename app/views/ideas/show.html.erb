@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container container-show">
   <div class="row card-show">
 
     <div class="col-sm-12 p-0">
@@ -13,9 +13,11 @@
 
       <div class="show-user d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "avatar-large" %>
+          <div class="avatar dropdown-toggle" id="navbarDropdown", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <p class="letter"><%= @idea.user.first_name.first.capitalize %><%= @idea.user.last_name.first.capitalize %></p>
+          </div>
           <p class="m-0 pl-2"><%= @idea.user.first_name %> <%= @idea.user.last_name  %></p>
-          <p class="m-0 pl-4"><%= @idea.deadline %></p>
+          <p class="m-0 pl-4"><%= time_ago_in_words(@idea.created_at) %> ago</p>
         </div>
 
         <div class="show-icons">
@@ -51,19 +53,23 @@
     </div>
 
     <div class="col-sm-12 col-md-4">
-      <%# PROBLEM: STYLE INLINE BECAUSE CSS CLASS DOES NOT APPLY %>
-      <div class="show-vote d-flex justify-content-center align-items-center" style="height: 56px; margin: 40px 20px 20px 20px">
-        <% pre_vote =  @idea.pre_vote_find(current_user) %>
-        <% if pre_vote %>
-            <%= button_to vote_path(pre_vote), method: :delete, remote: true, class: "btn btn-warning py-2 w-100" do %>
-              <i class="far fa-square"></i></i> Unvote
-            <% end %>
-        <% else %>
-            <%= button_to idea_votes_path(@idea), method: :post, remote: true, class: "btn btn-warning py-2 w-100" do %>
-              <i class="far fa-check-square"></i> Vote
-            <% end %>
-        <% end %>
-      </div>
+    
+      <%# unless @idea.user = current_user %>
+        <%# PROBLEM: STYLE INLINE BECAUSE CSS CLASS DOES NOT APPLY %>
+        <div class="show-vote d-flex justify-content-center align-items-center" style="height: 56px; margin: 40px 20px 20px 20px">
+          <% pre_vote =  @idea.pre_vote_find(current_user) %>
+          <% if pre_vote %>
+              <%= button_to vote_path(pre_vote), method: :delete, remote: true, class: "btn btn-warning py-2 w-100" do %>
+                <i class="far fa-square"></i></i> Unvote
+              <% end %>
+          <% else %>
+              <%= button_to idea_votes_path(@idea), method: :post, remote: true, class: "btn btn-warning py-2 w-100" do %>
+                <i class="far fa-check-square"></i> Vote
+              <% end %>
+          <% end %>
+        </div>
+      <%# end %>
+    
 
 
       <div class="show-progress d-flex justify-content-center">
@@ -78,5 +84,3 @@
   
   </div>
 </div>
-
-<p><%= @idea.votes.count %> <%= (@idea.votes.count) == 1 ? 'Vote' : 'Votes'%></p>
