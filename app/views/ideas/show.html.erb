@@ -70,9 +70,9 @@
 
     <% pre_vote = @idea.votes.find { |vote| vote.user_id == current_user.id} %>
     <% if pre_vote %>
-      <%= button_to 'Unvote', vote_path(pre_vote), method: :delete %>
+      <%= button_to 'Unvote', vote_path(pre_vote), method: :delete, remote: true, class: "btn btn-warning", id: "vote-<%= pre_vote %> %>
     <% else %>
-      <%= button_to 'Vote', idea_votes_path(@idea), method: :post %>
+      <%= button_to 'Vote', idea_votes_path(@idea), method: :post, remote: true, class: "btn btn-warning", id: "vote-<%= @idea.vote.id %> " %>
     <% end %>
 
 
