@@ -1,13 +1,14 @@
 <div class="m-4 pt-5">
   <div class="row">
     <div class="col-6">
-      <%= link_to "go back", root_path %>
-      <%= link_to 'create new idea', new_idea_path  %>
       <div>
         <h3><strong>Check out all ideas around you!</strong></h3>
       </div>
       <div>
-        <p>These are ideas from people living in your neighborhood. Your vote could make the difference!</p>
+        <p>
+          These are ideas from people living in your neighborhood.
+          <br> Your vote could make the difference!
+        </p>
       </div>
       <% @ideas.each do |idea| %>
       <%= link_to idea_path(idea), class: 'card-link' do %>
