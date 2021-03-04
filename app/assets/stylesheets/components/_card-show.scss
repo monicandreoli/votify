@@ -156,11 +156,10 @@ $label-font-size-redo: $default-size * 4;
 }
 
 // monica trials on the progrss bar
-.progress {
-  height: 150px;
-}
 
-.progress > svg {
-  height: 100%;
-  display: block;
+.progress-container {
+  margin: 20px;
+  width: 100px;
+  height: 100px;
+  position: relative;
 }

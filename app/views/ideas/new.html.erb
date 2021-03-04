@@ -6,6 +6,8 @@
 <%= f.input :title %>
 <%= f.input :problem %>
 <%= f.input :solution %>
+<%= f.label :goal, "How many votes do you think your problem should have to be noticed by authorities?"%>
+<%= f.input :goal, as: :string, label: false %>
 <%= f.label :address, "Address * ..Dont't forgert the postcode 😉"%>
 <%= f.input :address, as: :string, label: false %>
 <%= f.input :photo, as: :file %>
