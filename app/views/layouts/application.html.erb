@@ -9,28 +9,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_pack_tag 'application' %>
-
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+
 </head>
 
-  <body>
-      <% unless action_name == "dashboard" %>
-        <%= render 'shared/navbar' %>
-      <% end %>
-      <%= render 'shared/flashes' %>
+<body>
+  <% unless action_name == "dashboard" %>
+  <%= render 'shared/navbar' %>
+  <% end %>
+  <%= render 'shared/flashes' %>
 
-      <% if action_name == "dashboard" %>
-        <main>
-          <%= yield %>
-        </main>
-      <% else %>
-        <main style="margin-top: 59px">
-          <%= yield %>
-        </main>
-      <% end %>
+  <% if action_name == "dashboard" %>
+  <main>
+    <%= yield %>
+  </main>
+  <% else %>
+  <main style="margin-top: 59px">
+    <%= yield %>
+  </main>
+  <% end %>
 
-      <% unless action_name == "dashboard" %>
-        <%= render 'shared/footer' %>
-      <% end %>
-  </body>
+  <% unless action_name == "dashboard" %>
+  <%= render 'shared/footer' %>
+  <% end %>
+</body>
 </html>
