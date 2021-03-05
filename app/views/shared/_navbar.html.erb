@@ -14,13 +14,7 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
       <li class="nav-item active">
-        <%= link_to "Edit account", edit_user_registration_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item active">
-        <%= link_to "home", root_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "create idea", new_idea_path, class: "nav-link" %>
+        <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
         <%= link_to "view ideas", ideas_path, class: "nav-link" %>

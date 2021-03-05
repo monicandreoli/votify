@@ -12,36 +12,28 @@
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
           aria-controls="v-pills-home" aria-selected="true">Overview</a>
+        <%= link_to "Browse website", ideas_path, class: "nav-link" %>
         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
           aria-controls="v-pills-profile" aria-selected="false">My ideas</a>
         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
           aria-controls="v-pills-messages" aria-selected="false">Voted ideas</a>
-        <a class="nav-link" id="v-pills-create-tab" data-toggle="pill" href="#v-pills-create" role="tab"
-          aria-controls="v-pills-create" aria-selected="false">Create New</a>
+        <%= link_to "Create new", new_idea_path, class: "nav-link" %>
+        <%= link_to "Edit account", edit_user_registration_path, class: "nav-link" %>
         <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
           aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
       </div>
     </div>
     <div class="col-9">
       <div class="d-flex justify-content-end align-items-center profile-dashbar mt-3 mr-4">
-        <div class="d-flex dash-profile-content">
+        <div class="d-flex dash-profile-content mr-3">
           <div>
             <i class="fas fa-search"></i>
             <i class="fas fa-bell ml-2"></i>
             <span class="ml-3">|</span>
             <span class="ml-3"><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></span>
           </div>
-          <div class="d-flex mr-0 dropdown">
-            <div class="dropdown-toggle" id="navbarDropdown" , data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "dash-avatar ml-1" %>
-            </div>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
-              <%= link_to "Browse website", ideas_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            </div>
-          </div>
+              <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "dash-avatar ml-2" %>
         </div>
       </div>
 
@@ -70,81 +62,85 @@
 
             <%# LATEST IDEAS %>
             <div class="tab-pane fade show active" id="home-dashboard" role="tabpanel" aria-labelledby="home-tab">
-            <p class="mt-3">Let's see the latest ideas in your area 😉</p>
-            <div>
-              <% @latest_ideas.each do |idea| %>
-              <%= link_to idea_path(idea), class: 'link-latest' do %>
+              <p class="mt-3">Let's see the latest ideas in your area 😉</p>
+              <div>
+                <% @latest_ideas.each do |idea| %>
+                <%= link_to idea_path(idea), class: 'link-latest' do %>
                 <div class="m-1 card-latest">
-                <div class="d-flex justify-content-between p-2 profile-card-latest">
-                  <div class="d-flex dash-latest-card">
-                    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-                    <div>
+                  <div class="d-flex justify-content-between p-2 profile-card-latest">
+                    <div class="d-flex dash-latest-card">
+                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
+                        class="card-trip-user avatar-bordered" />
+                      <div>
                         <small class='date pl-2'>
-                        <%= time_ago_in_words(idea.created_at) %> ago by
-                        <%= idea.user.first_name %> <%= idea.user.last_name %>
+                          <%= time_ago_in_words(idea.created_at) %> ago by
+                          <%= idea.user.first_name %> <%= idea.user.last_name %>
                         </small>
+                      </div>
+                    </div>
+                    <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
+                  </div>
+
+
+                  <div class="px-3">
+                    <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <i class="fas fa-map-marker-alt pr-1"></i>
+                        <p> <%= idea.address %></p>
+                      </div>
+                      <div class="d-flex arrow-idea">
+                        <p>Visit idea</p>
+                        <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
+                      </div>
                     </div>
                   </div>
-                  <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
-                </div>
-
-
-                <div class="px-3">
-                  <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
-                  <div class="d-flex justify-content-between">
-                  <div class="d-flex">
-                  <i class="fas fa-map-marker-alt pr-1"></i><p> <%= idea.address %></p>
-                  </div>
-                  <div class="d-flex arrow-idea">
-                  <p>Visit idea</p>
-                  <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
-                  </div>
-                  </div>
-                </div>
 
                 </div>
-              <% end %>
-              <% end %>
-            </div>
+                <% end %>
+                <% end %>
+              </div>
             </div>
 
             <%# MOST VOTED IDEAS %>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <p class="mt-3">Take a look to the most voted! 💯</p>
+              <p class="mt-3">Take a look to the most voted! 💯</p>
               <div>
-              <% @popular_ideas.each do |idea| %>
-              <%= link_to idea_path(idea), class: 'link-latest' do %>
+                <% @popular_ideas.each do |idea| %>
+                <%= link_to idea_path(idea), class: 'link-latest' do %>
                 <div class="m-1 card-latest">
-                <div class="d-flex justify-content-between p-2 profile-card-latest">
-                  <div class="d-flex dash-latest-card">
-                    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-                    <div>
+                  <div class="d-flex justify-content-between p-2 profile-card-latest">
+                    <div class="d-flex dash-latest-card">
+                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
+                        class="card-trip-user avatar-bordered" />
+                      <div>
                         <small class='date pl-2'>
-                        <%= time_ago_in_words(idea.created_at) %> ago by
-                        <%= idea.user.first_name %> <%= idea.user.last_name %>
+                          <%= time_ago_in_words(idea.created_at) %> ago by
+                          <%= idea.user.first_name %> <%= idea.user.last_name %>
                         </small>
+                      </div>
+                    </div>
+                    <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
+                  </div>
+
+
+                  <div class="px-3">
+                    <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <i class="fas fa-map-marker-alt pr-1"></i>
+                        <p> <%= idea.address %></p>
+                      </div>
+                      <div class="d-flex arrow-idea">
+                        <p>Visit idea</p>
+                        <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
+                      </div>
                     </div>
                   </div>
-                  <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
-                </div>
-
-
-                <div class="px-3">
-                  <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
-                  <div class="d-flex justify-content-between">
-                  <div class="d-flex">
-                  <i class="fas fa-map-marker-alt pr-1"></i><p> <%= idea.address %></p>
-                  </div>
-                  <div class="d-flex arrow-idea">
-                  <p>Visit idea</p>
-                  <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
-                  </div>
-                  </div>
-                </div>
 
                 </div>
-              <% end %>
-              <% end %>
+                <% end %>
+                <% end %>
               </div>
             </div>
           </div>
@@ -154,19 +150,89 @@
 
         <%# MY IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-          my-ideas
+        <h4>My ideas</h4>
+          <p>Browse your ideas!</p>
+          <% @my_ideas.each do |idea| %>
+               <%= link_to idea_path(idea), class: 'link-latest' do %>
+                <div class=" my-1 card-latest">
+                  <div class="d-flex justify-content-between p-2 profile-card-latest">
+                    <div class="d-flex dash-latest-card">
+                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
+                        class="card-trip-user avatar-bordered" />
+                      <div>
+                        <small class='date pl-2'>
+                          <%= time_ago_in_words(idea.created_at) %> ago by
+                          <%= idea.user.first_name %> <%= idea.user.last_name %>
+                        </small>
+                      </div>
+                    </div>
+                    <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
+                  </div>
+
+
+                  <div class="px-3">
+                    <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <i class="fas fa-map-marker-alt pr-1"></i>
+                        <p> <%= idea.address %></p>
+                      </div>
+                      <div class="d-flex arrow-idea">
+                        <p>Visit idea</p>
+                        <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <% end %>
+          <% end %>
+
         </div>
 
+        <%# MY VOTED IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-          ...
+
+            <% @my_voted_ideas.each do |idea| %>
+               <%= link_to idea_path(idea), class: 'link-latest' do %>
+                <div class=" my-1 card-latest">
+                  <div class="d-flex justify-content-between p-2 profile-card-latest">
+                    <div class="d-flex dash-latest-card">
+                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
+                        class="card-trip-user avatar-bordered" />
+                      <div>
+                        <small class='date pl-2'>
+                          <%= time_ago_in_words(idea.created_at) %> ago by
+                          <%= idea.user.first_name %> <%= idea.user.last_name %>
+                        </small>
+                      </div>
+                    </div>
+                    <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
+                  </div>
+
+                  <div class="px-3">
+                    <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <i class="fas fa-map-marker-alt pr-1"></i>
+                        <p> <%= idea.address %></p>
+                      </div>
+                      <div class="d-flex arrow-idea">
+                        <p>Visit idea</p>
+                        <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <% end %>
+            <% end %>
+
         </div>
 
-        <%# CREATE NEW CONTENT  %>
-        <div class="tab-pane fade" id="v-pills-create" role="tabpanel" aria-labelledby="v-pills-create-tab">
+        <%# SETTINGS CONTENT  %>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
 
-        </div>
-
-        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...
         </div>
       </div>
     </div>
