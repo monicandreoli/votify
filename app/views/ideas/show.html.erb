@@ -58,7 +58,7 @@
 
     <div class="col-sm-12 col-md-4">
 
-      <%# unless @idea.user = current_user %>
+      <% unless @idea.user == current_user %>
         <%# PROBLEM: STYLE INLINE BECAUSE CSS CLASS DOES NOT APPLY %>
         <div class="show-vote d-flex justify-content-center align-items-center" style="height: 56px; margin: 40px 20px 20px 20px">
           <% pre_vote =  @idea.pre_vote_find(current_user) %>
@@ -72,17 +72,28 @@
               <% end %>
           <% end %>
         </div>
-      <%# end %>
+      <% end %>
 
 
 
       <div class="show-progress d-flex justify-content-center">
+    
 
         <div class="progress-container" data-total="<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>">
 
         </div>
 
+
       </div>
+
+        <div class="d-flex align-items-center ml-4 mt-4">
+        
+          <p style="color: #777;">So far the ideas has <strong><%= @idea.votes.count %></strong> votes.</p>
+        </div>
+
+         <div class="d-flex align-items-center ml-4">
+          <p style="color: #777;">The idea needs <strong>20</strong> votes to reach the goal.</p>
+        </div>
 
     </div>
 

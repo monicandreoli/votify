@@ -26,7 +26,7 @@ const circleProgress = () => {
         if (value === 0) {
           circle.setText('');
         } else {
-          circle.setText(centerText);
+          circle.setText('');
         }
 
       }
