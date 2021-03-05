@@ -53,7 +53,7 @@
     </div>
 
     <div class="col-sm-12 col-md-4">
-    
+
       <%# unless @idea.user = current_user %>
         <%# PROBLEM: STYLE INLINE BECAUSE CSS CLASS DOES NOT APPLY %>
         <div class="show-vote d-flex justify-content-center align-items-center" style="height: 56px; margin: 40px 20px 20px 20px">
@@ -69,18 +69,18 @@
           <% end %>
         </div>
       <%# end %>
-    
+
 
 
       <div class="show-progress d-flex justify-content-center">
-      
+
         <div class="progress-container" data-total="<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>">
-          
+
         </div>
 
       </div>
 
     </div>
-  
+
   </div>
 </div>
