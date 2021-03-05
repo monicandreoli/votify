@@ -12,12 +12,12 @@
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
           aria-controls="v-pills-home" aria-selected="true">Overview</a>
-        <%= link_to "Browse website", ideas_path, class: "nav-link" %>
+        <%= link_to "Explore ideas", ideas_path, class: "nav-link" %>
         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
           aria-controls="v-pills-profile" aria-selected="false">My ideas</a>
         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
           aria-controls="v-pills-messages" aria-selected="false">Voted ideas</a>
-        <%= link_to "Create new", new_idea_path, class: "nav-link" %>
+        <%= link_to "Pitch your idea", new_idea_path, class: "nav-link" %>
         <%= link_to "Edit account", edit_user_registration_path, class: "nav-link" %>
         <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
           aria-controls="v-pills-settings" aria-selected="false">Settings</a>
@@ -50,8 +50,8 @@
 
         <%# OVERVIEW CONTENT  %>
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-          <h2>Welcome <%= current_user.first_name.capitalize %>!</h2>
-          <p>Have a look what is happening in your neighborhood!</p>
+          <h2>Welcome <%= current_user.first_name.capitalize %></h2>
+          <p>What do you want to do today for your neighbourhood?</p>
 
 
           <%# OVERVIEW TABS  %>
@@ -69,7 +69,7 @@
 
             <%# LATEST IDEAS %>
             <div class="tab-pane fade show active" id="home-dashboard" role="tabpanel" aria-labelledby="home-tab">
-              <p class="mt-3">Let's see the latest ideas in your area 😉</p>
+              <p class="mt-3">Explore the latest ideas around you</p>
               <div>
                 <% @latest_ideas.each do |idea| %>
                 <%= link_to idea_path(idea), class: 'link-latest' do %>
@@ -116,7 +116,7 @@
 
             <%# MOST VOTED IDEAS %>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <p class="mt-3">Take a look to the most voted! 💯</p>
+              <p class="mt-3">Explore the most popular ideas around you</p>
               <div>
                 <% @popular_ideas.each do |idea| %>
                 <%= link_to idea_path(idea), class: 'link-latest' do %>
@@ -167,7 +167,7 @@
         <%# MY IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
           <h4>My ideas</h4>
-          <p>Browse your ideas!</p>
+          <p>See all the ideas you pitched</p>
           <% @my_ideas.each do |idea| %>
           <%= link_to idea_path(idea), class: 'link-latest' do %>
           <div class=" my-1 card-latest">
@@ -213,9 +213,12 @@
 
         <%# MY VOTED IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-          <h4>My Voted Ideas</h4>
-          <p>Which idea I voted for? let's take a look!</p>
+          <h4>My voted ideas</h4>
+          <p>See all the ideas you voted for</p>
           <% @my_voted_ideas.each do |idea| %>
+          
+          <% unless idea.user == current_user %>
+            
           <%= link_to idea_path(idea), class: 'link-latest' do %>
           <div class=" my-1 card-latest">
             <div class="d-flex justify-content-between p-2 profile-card-latest">
@@ -253,6 +256,8 @@
 
           </div>
           <% end %>
+          <% end %>
+          
           <% end %>
 
         </div>
