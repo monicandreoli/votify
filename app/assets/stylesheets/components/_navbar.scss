@@ -1,7 +1,7 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: $green;
-  padding: 1vh 5vw;
+  padding: 1vh 2vw;
   width: 100%;
   z-index: 999;
   top: 0;
@@ -38,25 +38,29 @@
 
 
 .avatar {
-  background-color: white;
-  border: 2px solid $orange;
+  border: 1px solid $orange;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 42px;
-  width: 42px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .letter {
+  background-color: white;
+  border: 1px solid $orange;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
   display: flex;
-  padding: 0;
-  margin: 0;
   color: $orange;
-  width: 100%;
   justify-content: center;
   font-size: 22px !important;
   font-weight: 400;
-  height: 100%;
   align-items: center;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .dropdown-toggle::after {
