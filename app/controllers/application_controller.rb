@@ -13,4 +13,17 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     dashboard_path
   end
+
+  def resource_name
+    current_user.name || :user
+  end
+
+  def resource
+    # @resource ||= User.new
+    @resource ||= current_user
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
 end
