@@ -10,10 +10,10 @@ class IdeasController < ApplicationController
   def index
 
     if user_signed_in?
-      @ideas = Idea.near(current_user.address, 2, units: :km)
+      @ideas = Idea.near(current_user.address, 5, units: :km)
     else
         if params[:query].present?
-          @ideas = Idea.near(params[:query], 1, units: :km)
+          @ideas = Idea.near(params[:query], 5, units: :km)
         else
           @ideas = Idea.all
         end
