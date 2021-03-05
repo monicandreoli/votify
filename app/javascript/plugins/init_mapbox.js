@@ -13,7 +13,7 @@ const initMapbox = () => {
   const addMarkersToMap = (map, markers) => {
     markers.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.infoWindow); // add this
-  
+
       new mapboxgl.Marker()
         .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup) // add this
@@ -25,13 +25,13 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/jolis/cklw04zcp3qmk17qpw96zr524'
+      style: 'mapbox://styles/jolis/cklw04zcp3qmk17qpw96zr524',
     });
 
     const markers = JSON.parse(mapElement.dataset.markers);
     markers.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
-    
+
       // Create a HTML element for your custom marker
       const element = document.createElement('div');
       element.className = 'marker';
@@ -40,7 +40,7 @@ const initMapbox = () => {
       element.style.width = '25px';
       element.style.height = '25px';
       element.style.color = '#FF5C00';
-    
+
       // Pass the element as an argument to the new marker
       new mapboxgl.Marker(element)
         .setLngLat([marker.lng, marker.lat])
