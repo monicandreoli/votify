@@ -29,8 +29,8 @@ puts "User #{demo_user.first_name} created"
 
 demo_idea = Idea.new(
   title: "Paper Trash Flying Around",
-  problem: "After work I often go for a walk to Oosterpark, since it's just 5 minutes away from my apartment. I love this routine, it really calms me down, especially now when I rarely leave home. Unfortunately it's so so dark at night! The main alley is lit but it gets boring to walk the same path every night...",
-  solution: "I suggest we install more lamps in the park, not only on the main alley. Perahps we can use some solar-powered ones? Perhaps we can arrange a crowdfunding? This was all of us who feel uneasy in the darkness can enjoy more of our beautiful park.",
+  problem: "Fellow Neighbours! Have you also noticed that paper trash pickup seems to happen less often than needed? There is a lot of paper trash flying around on our street which gets particularily messy when it's raning... And it's rainig most of the time in the Netherlands :)",
+  solution: "Let's raise enough votes to change the trash pickup schedule! Maybe instead of only Thursday mornings we could arrange Monday mornings as well?",
   address: "Ruyschstraat 401, 1091MS Amsterdam",
   user: demo_user
   )
@@ -93,7 +93,7 @@ puts "User #{second_user.first_name} created"
   
 second_idea = Idea.new(
   title: "Benches for Watchers!",
-  problem: "My problem is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
+  problem: "My 'problem' is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
   solution: "My solution is even simpler. Let's have a bench!",
   address: "Plantage Lepellaan, 1018DL Amsterdam",
   user: second_user
@@ -118,8 +118,8 @@ puts "User #{third_user.first_name} created"
 
 third_idea = Idea.new(
   title: "Minigolf in Funenpark",
-  problem: "My problem is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
-  solution: "My solution is even simpler. Let's have a bench!",
+  problem: "Any minigolf fans around here? I've always wanted to play some golf, but going to the real field is a long trip.",
+  solution: "Having a minigolf field in Funenpark would we awesome. I don't think it requires much inter",
   address: "Funenpark, 1018AK Amsterdam",
   user: third_user
 )
@@ -143,8 +143,8 @@ puts "User #{fourth_user.first_name} created"
 
 fourth_idea = Idea.new(
   title: "Tired of Dirty Windows",
-  problem: "My problem is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
-  solution: "My solution is even simpler. Let's have a bench!",
+  problem: "Some of the windows don't open in my house and I live on the fifth floor. How do I ever clean them? Has any of you had the same problem or am I just missing something?",
+  solution: "Clean Window Saturday: we chip in for a very long stick and tackle those stains! It would be ideal if the city could provide such a service in the future.",
   address: "Populierenweg 64, 1092ER Amsterdam",
   user: fourth_user
 )
@@ -168,8 +168,8 @@ puts "User #{fifth_user.first_name} created"
 
 fifth_idea = Idea.new(
   title: "Dappermarkt Infrastructure",
-  problem: "My problem is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
-  solution: "My solution is even simpler. Let's have a bench!",
+  problem: "Like some of you here, I am a local food producer who sells their goodies on Dappermarkt. The infrastructure is working, but there is always space for improvement.",
+  solution: "The other day I was wondering how to make the place more attractive (and increase sales :) I did some research and found some cool permanent market stall solutions.",
   address: "Dappermarkt, 1093BX Amsterdam",
   user: fifth_user
 )
@@ -193,8 +193,8 @@ puts "User #{sixth_user.first_name} created"
 
 sixth_idea = Idea.new(
   title: "Greener Playground",
-  problem: "My problem is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
-  solution: "My solution is even simpler. Let's have a bench!",
+  problem: "I am a nature lover and I want to raise my kids in such a spirit. The playround in front of our house is soo dull and gray though... No trees, just a few small plants.",
+  solution: "My suggestion is to plant some more greenery around the playground. It's a win win for us and for the climate. It can be trees or maybe some fruit trees, or maybe some vegetable mini-gardens...",
   address: "Domselaerstraat 121, 1093MB Amsterdam",
   user: sixth_user
 )
