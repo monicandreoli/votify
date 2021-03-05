@@ -1,2 +1,12 @@
-<h6><%= idea.title %></h6>
-<p><%= idea.address %></p>
+<div class="mapboxgl-popup-content">
+  <% if idea.photo.attached?  %>
+    <%= cl_image_tag idea.photo.key, crop: :fill, class: "show-img" %>
+  <% end %>
+  <p><strong><%= idea.title %></strong></p>
+  <p><%= idea.address %></p>
+  <% if idea.votes.count == 1 %>
+    <p><%= idea.votes.count %> vote</p> 
+  <% else %>
+    <p><%= idea.votes.count %> votes</p>
+  <% end %>
+</div>
