@@ -1,19 +1,25 @@
-<div class="container">
+<div class="container container-show">
   <div class="row card-show">
+
     <div class="col-sm-12 p-0">
 
        <% if @idea.photo.attached?  %>
          <%= cl_image_tag @idea.photo.key, crop: :fill, class: "show-img" %>
        <% end %>
-    </div>
-    <div class="col-sm-12 col-md-8">
-      <div class="show-user d-flex align-items-center justify-content-between">
 
+    </div>
+
+    <div class="col-sm-12 col-md-8">
+
+      <div class="show-user d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "avatar-large" %>
+          <div class="avatar dropdown-toggle" id="navbarDropdown", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <p class="letter"><%= @idea.user.first_name.first.capitalize %><%= @idea.user.last_name.first.capitalize %></p>
+          </div>
           <p class="m-0 pl-2"><%= @idea.user.first_name %> <%= @idea.user.last_name  %></p>
-          <p class="m-0 pl-4"><%= @idea.deadline %></p>
+          <p class="m-0 pl-4"><%= time_ago_in_words(@idea.created_at) %> ago</p>
         </div>
+
         <div class="show-icons">
 
           <% if @idea.user == current_user %>
@@ -29,6 +35,8 @@
           <% end %>
 
         </div>
+      </div>
+
       <div class="show-details">
         <h1><%= @idea.title %></h1>
         <p class="details-light"><i class="fas fa-map-marker-alt"></i> <%= @idea.address %></p>
@@ -41,38 +49,38 @@
           <p class="tag">SOLUTION</p>
           <p><%= @idea.solution %></p>
         </div>
-        <%= link_to idea_path(@idea), class: "btn btn-warning w-100 mt-4" do %>
-          <i class="fas fa-microphone"></i> Vote
-        <% end %>
       </div>
     </div>
-        <div class="col-sm-12 col-md-4">
-          <div class="show-progress charts-container d-flex justify-content-center">
 
-            <div class="pie-wrapper">
-              <span class="label">45<span class="smaller">%</span></span>
-              <div class="pie">
-                <div class="left-side half-circle"></div>
-                <div class="right-side half-circle"></div>
-              </div>
-              <div class="shadow"></div>
-            </div>
-          </div>
+    <div class="col-sm-12 col-md-4">
+    
+      <%# unless @idea.user = current_user %>
+        <%# PROBLEM: STYLE INLINE BECAUSE CSS CLASS DOES NOT APPLY %>
+        <div class="show-vote d-flex justify-content-center align-items-center" style="height: 56px; margin: 40px 20px 20px 20px">
+          <% pre_vote =  @idea.pre_vote_find(current_user) %>
+          <% if pre_vote %>
+              <%= button_to vote_path(pre_vote), method: :delete, remote: true, class: "btn btn-warning py-2 w-100" do %>
+                <i class="far fa-square"></i></i> Unvote
+              <% end %>
+          <% else %>
+              <%= button_to idea_votes_path(@idea), method: :post, remote: true, class: "btn btn-warning py-2 w-100" do %>
+                <i class="far fa-check-square"></i> Vote
+              <% end %>
+          <% end %>
         </div>
+      <%# end %>
+    
+
+
+      <div class="show-progress d-flex justify-content-center">
+      
+        <div class="progress-container" data-total="<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>">
+          
+        </div>
+
       </div>
-      </div>
-      <%= link_to 'go back', ideas_path %>
+
     </div>
-    <div class="progress-container" data-total= "<%= @idea.goal %>" data-vote="<%= @idea.votes.count %>"></div>
+  
+  </div>
 </div>
-
-
- <% pre_vote =  @idea.pre_vote_find(current_user) %>
-        <% if pre_vote %>
-            <%= button_to 'Unvote', vote_path(pre_vote), method: :delete, remote: true, class: "btn btn-warning" %>
-        <% else %>
-            <%= button_to 'Vote', idea_votes_path(@idea), method: :post, remote: true, class: "btn btn-warning" %>
-        <% end %>
-    <p><%= @idea.votes.count %> <%= (@idea.votes.count) == 1 ? 'Vote' : 'Votes'%></p>
-
-

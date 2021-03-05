@@ -15,7 +15,7 @@
       <div class="card py-4 px-4 d-flex index-card">
         <div class='user-index'>
           <div class="avatar dropdown-toggle" id="navbarDropdown", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <p class="letter"><%= idea.user.first_name.first.capitalize %></p>
+            <p class="letter"><%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %></p>
           </div>
           <div class='user-name'><%= idea.user.first_name %></div>
           <div class='date'><%= time_ago_in_words(idea.created_at) %> ago</div>
@@ -26,7 +26,7 @@
           </p></div>
           <div class='content-index'>
             <p>
-              Problem: <%= truncate(idea.problem, length: 120) %>
+              <%= truncate(idea.problem, length: 120) %>
             </p>
           </div>
           <div class='footer-index'>
@@ -48,21 +48,24 @@
         <div id="map"
         style="width: 100%; height: 600px;"
         data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+        class="mapboxgl-popup mapboxgl-popup-content">
       </div>
     </div>
   </div>
 </div>
-  <%# <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
 
-        kiapfihdfpiahp
 
-        </div>
+
+<%# GOOD HTML STRUCTURE USING BOOTSTRAP GRID %>
+<%# <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+      # CONTENT
+
       </div>
     </div>
-  </div> %>
-
-
+  </div>
+</div> %>

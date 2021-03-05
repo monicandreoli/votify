@@ -4,7 +4,7 @@ const circleProgress = () => {
   document.querySelectorAll(".progress-container").forEach((container) => {
 
     var bar = new ProgressBar.Circle(container, {
-      color: '#aaa',
+      color: '#C7C9C7',
       // This has to be the same size as the maximum width to
       // prevent clipping
       strokeWidth: 4,
@@ -14,8 +14,8 @@ const circleProgress = () => {
       text: {
         autoStyleContainer: false
       },
-      from: { color: '#aaa', width: 1 },
-      to: { color: '#333', width: 4 },
+      from: { color: '#FF5C00', width: 1 },
+      to: { color: '#FF5C00', width: 4 },
       // Set default step function for all animate calls
       step: function(state, circle) {
         circle.path.setAttribute('stroke', state.color);
