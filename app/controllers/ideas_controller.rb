@@ -1,18 +1,16 @@
 class IdeasController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
-
   def dashboard
     @ideas = Idea.all
     @latest_ideas = Idea.order(:created_at).limit(5)
-    @popular_ideas = Idea.left_joins(:votes).group(:id).order("COUNT(votes.id)").limit(5)
-    @my_ideas = Idea.where(user_id: current_user).order(created_at: :desc)
-    @my_voted_ideas = Idea.includes(:votes).where(votes: { user_id: current_user })
+    @popular_ideas = Idea.most_popular
+    # @popular_ideas = Idea.includes(:votes).order("votes DESC")
+    @my_ideas = current_user.ideas.order(created_at: :desc)
+    @my_voted_ideas = current_user.voted_ideas
   end
 
-
   def index
-
     if user_signed_in?
       @ideas = Idea.geocoded.near(current_user.address, 5, units: :km)
     else
@@ -34,7 +32,6 @@ class IdeasController < ApplicationController
   end
 
   def show
-
   end
 
   def new

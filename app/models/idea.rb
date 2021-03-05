@@ -12,6 +12,8 @@ class Idea < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
+  scope :most_popular, -> { left_joins(:votes).group(:id).order("COUNT(votes.id) DESC").limit(5) }
+
   def pre_vote_find(current_user)
     self.votes.find { |vote| vote.user_id == current_user.id }
   end

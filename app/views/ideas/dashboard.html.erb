@@ -33,7 +33,14 @@
             <span class="ml-3">|</span>
             <span class="ml-3"><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></span>
           </div>
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/joannalisiak", alttext: "profile picture", class: "dash-avatar ml-2" %>
+          <div class="ml-2">
+            <% if current_user.photo.attached?  %>
+            <%= cl_image_tag current_user.photo.key, crop: :fill, class: 'avatar' %>
+            <% else %>
+            <p class="letter">
+              <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %></p>
+            <% end %>
+          </div>
         </div>
       </div>
 
@@ -69,12 +76,17 @@
                 <div class="m-1 card-latest">
                   <div class="d-flex justify-content-between p-2 profile-card-latest">
                     <div class="d-flex dash-latest-card">
-                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
-                        class="card-trip-user avatar-bordered" />
+                      <% if idea.user.photo.attached?  %>
+                      <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                      <% else %>
+                      <p class="letter">
+                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                      </p>
+                      <% end %>
                       <div>
                         <small class='date pl-2'>
                           <%= time_ago_in_words(idea.created_at) %> ago by
-                          <%= idea.user.first_name %> <%= idea.user.last_name %>
+                          <%= idea.user.first_name.capitalize %> <%= idea.user.last_name.capitalize %>
                         </small>
                       </div>
                     </div>
@@ -111,18 +123,22 @@
                 <div class="m-1 card-latest">
                   <div class="d-flex justify-content-between p-2 profile-card-latest">
                     <div class="d-flex dash-latest-card">
-                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
-                        class="card-trip-user avatar-bordered" />
+                       <% if idea.user.photo.attached?  %>
+                      <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                      <% else %>
+                      <p class="letter">
+                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                      </p>
+                      <% end %>
                       <div>
                         <small class='date pl-2'>
                           <%= time_ago_in_words(idea.created_at) %> ago by
-                          <%= idea.user.first_name %> <%= idea.user.last_name %>
+                          <%= idea.user.first_name.capitalize %> <%= idea.user.last_name.capitalize %>
                         </small>
                       </div>
                     </div>
                     <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
                   </div>
-
 
                   <div class="px-3">
                     <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
@@ -150,42 +166,47 @@
 
         <%# MY IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        <h4>My ideas</h4>
+          <h4>My ideas</h4>
           <p>Browse your ideas!</p>
           <% @my_ideas.each do |idea| %>
-               <%= link_to idea_path(idea), class: 'link-latest' do %>
-                <div class=" my-1 card-latest">
-                  <div class="d-flex justify-content-between p-2 profile-card-latest">
-                    <div class="d-flex dash-latest-card">
-                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
-                        class="card-trip-user avatar-bordered" />
-                      <div>
-                        <small class='date pl-2'>
-                          <%= time_ago_in_words(idea.created_at) %> ago by
-                          <%= idea.user.first_name %> <%= idea.user.last_name %>
-                        </small>
-                      </div>
-                    </div>
-                    <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
-                  </div>
-
-
-                  <div class="px-3">
-                    <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex">
-                        <i class="fas fa-map-marker-alt pr-1"></i>
-                        <p> <%= idea.address %></p>
-                      </div>
-                      <div class="d-flex arrow-idea">
-                        <p>Visit idea</p>
-                        <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
-                      </div>
-                    </div>
-                  </div>
-
+          <%= link_to idea_path(idea), class: 'link-latest' do %>
+          <div class=" my-1 card-latest">
+            <div class="d-flex justify-content-between p-2 profile-card-latest">
+              <div class="d-flex dash-latest-card">
+                 <% if idea.user.photo.attached?  %>
+                      <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                      <% else %>
+                      <p class="letter">
+                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                      </p>
+                      <% end %>
+                <div>
+                  <small class='date pl-2'>
+                    <%= time_ago_in_words(idea.created_at) %> ago by
+                    <%= idea.user.first_name.capitalize %> <%= idea.user.last_name.capitalize %>
+                  </small>
                 </div>
-                <% end %>
+              </div>
+              <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
+            </div>
+
+
+            <div class="px-3">
+              <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                  <i class="fas fa-map-marker-alt pr-1"></i>
+                  <p> <%= idea.address %></p>
+                </div>
+                <div class="d-flex arrow-idea">
+                  <p>Visit idea</p>
+                  <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <% end %>
           <% end %>
 
         </div>
@@ -194,40 +215,45 @@
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
           <h4>My Voted Ideas</h4>
           <p>Which idea I voted for? let's take a look!</p>
-            <% @my_voted_ideas.each do |idea| %>
-               <%= link_to idea_path(idea), class: 'link-latest' do %>
-                <div class=" my-1 card-latest">
-                  <div class="d-flex justify-content-between p-2 profile-card-latest">
-                    <div class="d-flex dash-latest-card">
-                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob"
-                        class="card-trip-user avatar-bordered" />
-                      <div>
-                        <small class='date pl-2'>
-                          <%= time_ago_in_words(idea.created_at) %> ago by
-                          <%= idea.user.first_name %> <%= idea.user.last_name %>
-                        </small>
-                      </div>
-                    </div>
-                    <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
-                  </div>
-
-                  <div class="px-3">
-                    <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex">
-                        <i class="fas fa-map-marker-alt pr-1"></i>
-                        <p> <%= idea.address %></p>
-                      </div>
-                      <div class="d-flex arrow-idea">
-                        <p>Visit idea</p>
-                        <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
-                      </div>
-                    </div>
-                  </div>
-
+          <% @my_voted_ideas.each do |idea| %>
+          <%= link_to idea_path(idea), class: 'link-latest' do %>
+          <div class=" my-1 card-latest">
+            <div class="d-flex justify-content-between p-2 profile-card-latest">
+              <div class="d-flex dash-latest-card">
+                 <% if idea.user.photo.attached?  %>
+                      <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                      <% else %>
+                      <p class="letter">
+                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                      </p>
+                      <% end %>
+                <div>
+                  <small class='date pl-2'>
+                    <%= time_ago_in_words(idea.created_at) %> ago by
+                    <%= idea.user.first_name.capitalize %> <%= idea.user.last_name.capitalize %>
+                  </small>
                 </div>
-                <% end %>
-            <% end %>
+              </div>
+              <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
+            </div>
+
+            <div class="px-3">
+              <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                  <i class="fas fa-map-marker-alt pr-1"></i>
+                  <p> <%= idea.address %></p>
+                </div>
+                <div class="d-flex arrow-idea">
+                  <p>Visit idea</p>
+                  <i class="fas fa-arrow-circle-right pl-1 mt-1"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <% end %>
+          <% end %>
 
         </div>
 

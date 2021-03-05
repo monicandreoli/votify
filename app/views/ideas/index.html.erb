@@ -13,11 +13,16 @@
       <% @ideas.each do |idea| %>
       <%= link_to idea_path(idea), class: 'card-link' do %>
       <div class="card py-4 px-4 d-flex index-card">
+
         <div class='user-index'>
-          <div class="avatar dropdown-toggle" id="navbarDropdown", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <p class="letter"><%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %></p>
+          <div>
+           <% if idea.user.photo.attached?  %>
+        <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+        <% else %>
+          <p class="letter avatar"><%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %></p>
+          <% end %>
           </div>
-          <div class='user-name'><%= idea.user.first_name %></div>
+          <div class='user-name ml-2'><%= idea.user.first_name %></div>
           <div class='date'><%= time_ago_in_words(idea.created_at) %> ago</div>
         </div>
         <div class='title-index'>
