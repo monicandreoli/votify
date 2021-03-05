@@ -6,7 +6,9 @@
   z-index: 999;
   top: 0;
   position: fixed;
+  height: 60px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  align-items: center;
 }
 .navbar-custom {
   color: white;
@@ -65,4 +67,8 @@
 
 .dropdown-toggle::after {
   color: transparent !important;
+}
+
+.avatar-nav {
+  transform: translate(0, 8px);
 }
