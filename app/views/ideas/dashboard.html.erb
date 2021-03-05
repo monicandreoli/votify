@@ -192,7 +192,8 @@
 
         <%# MY VOTED IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-
+          <h4>My Voted Ideas</h4>
+          <p>Which idea I voted for? let's take a look!</p>
             <% @my_voted_ideas.each do |idea| %>
                <%= link_to idea_path(idea), class: 'link-latest' do %>
                 <div class=" my-1 card-latest">

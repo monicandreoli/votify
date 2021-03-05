@@ -17,32 +17,36 @@
         <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "view ideas", ideas_path, class: "nav-link" %>
+        <%= link_to "View ideas", ideas_path, class: "nav-link" %>
       </li>
       <li class="nav-item dropdown">
         <div class="avatar dropdown-toggle" id="navbarDropdown", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <% if current_user.photo.attached?  %>
+        <%= cl_image_tag current_user.photo.key, crop: :fill, class: "avatar" %>
+        <% else %>
           <p class="letter"><%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %></p>
+          <% end %>
         </div>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <%= link_to "dashboard", dashboard_path, class: "dropdown-item" %>
+          <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
         </div>
       </li>
       <% else %>
       <li class="nav-item">
-        <%= link_to "home", root_path, class: "nav-link" %>
+        <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "how it works", root_path(anchor: 'how-it-works'), class: "nav-link" %>
+        <%= link_to "How it works", root_path(anchor: 'how-it-works'), class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "testimonials", root_path(anchor: 'testimonials'), class: "nav-link" %>
+        <%= link_to "Testimonials", root_path(anchor: 'testimonials'), class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "view ideas", ideas_path, class: "nav-link" %>
+        <%= link_to "View ideas", ideas_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "log in", new_user_session_path, class: "nav-link" %>
+        <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
       </li>
       <% end %>
     </ul>
