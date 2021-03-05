@@ -74,7 +74,7 @@ second_idea = Idea.new(
   title: "Benches for Watchers!",
   problem: "My problem is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
   solution: "My solution is even simpler. Let's have a bench!",
-  address: "Nieuwe Spiegelstraat 1, 1017 DB Amsterdam",
+  address: "Plantage Lepellaan, 1018 DL Amsterdam",
   user: second_user
 )
 second_idea.save!
