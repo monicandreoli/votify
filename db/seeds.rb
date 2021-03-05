@@ -12,6 +12,16 @@ User.destroy_all
 
 puts "Creating users and ideas..."
 
+
+
+puts "creating cocktail 3..."
+cocktail_3 = Cocktail.new(name: "Pau's Piña Colada")
+cocktail_3_picture = URI.open('https://images.unsplash.com/photo-1582633987110-6b4ca43e9a49?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')
+cocktail_3.photo.attach(io: cocktail_3_picture, filename: 'ginto.png', content_type: 'image/png')
+cocktail_3.save!
+
+
+
 # FIRST USER & FIRST IDEA
 
 first_user = User.new(
@@ -30,12 +40,16 @@ first_idea = Idea.new(
   problem: "After work I often go for a walk to Oosterpark, since it's just 5 minutes away from my apartment. I love this routine, it really calms me down, especially now when I rarely leave home. Unfortunately it's so so dark at night! The main alley is lit but it gets boring to walk the same path every night...",
   solution: "I suggest we install more lamps in the park, not only on the main alley. Perahps we can use some solar-powered ones? Perhaps we can arrange a crowdfunding? This was all of us who feel uneasy in the darkness can enjoy more of our beautiful park.",
   address: "Oosterpark, 1092 CA Amsterdam",
-  image_url: "https://images.unsplash.com/photo-1504810935423-dbbe9a698963?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=882&q=80",
   user: first_user,
   goal: 300
   )
   first_idea.save!
   puts "Idea #{first_idea.title} of #{first_idea.user.first_name} created"
+
+first_vote = Vote.new(
+  user: User.all.sample,
+  idea: Idea.last
+)
 
 
 
@@ -57,7 +71,6 @@ second_idea = Idea.new(
   problem: "My problem is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
   solution: "My solution is even simpler. Let's have a bench!",
   address: "Nieuwe Spiegelstraat 1, 1017 DB Amsterdam",
-  image_url: "https://images.unsplash.com/photo-1561326598-8e19291f9c7b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80",
   user: second_user,
   goal: 100
 )
