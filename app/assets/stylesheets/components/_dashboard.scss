@@ -116,3 +116,10 @@
     text-decoration: none;
     color: rgb(29, 29, 29);
 }
+
+a {
+    color: white;
+    &:hover {
+        text-decoration: none;
+    }
+}
