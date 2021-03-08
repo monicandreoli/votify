@@ -11,17 +11,37 @@
       </div>
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-          aria-controls="v-pills-home" aria-selected="true">Overview</a>
-        <%= link_to "Explore ideas", ideas_path, class: "nav-link" %>
+          aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-chart-pie pr-2"></i>Overview</a>
+
+        <%= link_to ideas_path do %>
+        <p class="nav-link pb-0 mb-2">
+        <i class="far fa-compass pr-2"></i>Explore ideas
+        </p>
+        <% end %>
         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-          aria-controls="v-pills-profile" aria-selected="false">My ideas</a>
+          aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-lightbulb pr-2"></i>My ideas</a>
         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-          aria-controls="v-pills-messages" aria-selected="false">Voted ideas</a>
-        <%= link_to "Pitch your idea", new_idea_path, class: "nav-link" %>
-        <%= link_to "Edit account", edit_user_registration_path, class: "nav-link" %>
+          aria-controls="v-pills-messages" aria-selected="false"><i class="far fa-check-circle pr-2"></i>Voted ideas</a>
+        <%= link_to new_idea_path do%>
+        <p  class="nav-link pb-0 mb-2">
+       <i class="far fa-plus-square pr-2"></i>
+        Pitch your idea
+        </p>
+        <% end %>
+        <%= link_to edit_user_registration_path do %>
+        <p class="nav-link pb-0 mb-2">
+        <i class="fas fa-user-edit pr-1"></i>
+        Edit account
+        </p>
+        <% end %>
         <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
-          aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-cogs pr-2"></i>Settings</a>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+        <a class="nav-link">
+        <i class="fas fa-sign-out-alt"></i>
+        Log out
+        </a>
+        <% end %>
       </div>
     </div>
     <div class="col-9">
@@ -216,9 +236,9 @@
           <h4>My voted ideas</h4>
           <p>See all the ideas you voted for</p>
           <% @my_voted_ideas.each do |idea| %>
-          
+
           <% unless idea.user == current_user %>
-            
+
           <%= link_to idea_path(idea), class: 'link-latest' do %>
           <div class=" my-1 card-latest">
             <div class="d-flex justify-content-between p-2 profile-card-latest">
@@ -257,7 +277,7 @@
           </div>
           <% end %>
           <% end %>
-          
+
           <% end %>
 
         </div>
