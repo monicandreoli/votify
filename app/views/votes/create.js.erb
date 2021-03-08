@@ -1,0 +1,5 @@
+$('#exampleModal').modal('show')
+
+document.getElementById('vote-btn').innerHTML = '<%= button_to vote_path(@vote), method: :delete, remote: true, class: "btn btn-warning py-2 w-100" do %> <i class="far fa-square"></i></i> Unvote <% end %>'
+
+document.querySelector('.modal-body').innerHTML = '<%= j render "form", vote: @vote %>'

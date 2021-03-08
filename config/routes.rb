@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     resources :votes, only: :create
   end
 
-  resources :votes, only: :destroy
+  resources :votes, only: [:update, :destroy]
   get '/dashboard', to: 'ideas#dashboard'
 end
