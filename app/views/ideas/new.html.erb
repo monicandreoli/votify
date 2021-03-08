@@ -2,7 +2,7 @@
 <div class="w-50">
 <h1>Pitch your idea</h1>
 <p class="subtitle">Shape your opinion and pitch your idea</p>
-<%= simple_form_for @idea do |f| %>
+<%= simple_form_for @idea, id: "new-idea-form" do |f| %>
 <%= f.input :title %>
 <%= f.input :problem %>
 <%= f.input :solution %>
@@ -10,9 +10,22 @@
 <%= f.label :address, "Address * (Please include the postcode)"%>
 <%= f.input :address, as: :string, label: false %>
 <%= f.input :photo, as: :file %>
-<%= f.submit class: 'btn btn-warning py-2' %>
+
+<%= f.label :municipality, "Does your idea require involvment of your local municipality?" %>
+<%= f.input :municipality, as: :boolean, label: false, input_html: {id: "municipality-needed"} %>
+
+
+<div id="participators-field" class="participators-hide">
+  <%= f.label :participators, "How many people do you need to participate in your idea? *" %>
+  <%= f.input :participators, label: false %>
+</div>
+
+<%= button_tag type: 'submit', class: "btn btn-warning py-2" do %>
+  <i class="far fa-plus-square pr-1"></i> Add Idea
+<% end %>
 
 <% end %>
+
 </div>
-<%= image_tag "new-idea.svg"%>
+  <%= image_tag "new-idea.svg"%>
 </div>

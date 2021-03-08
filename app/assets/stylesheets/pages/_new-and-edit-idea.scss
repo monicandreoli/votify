@@ -12,8 +12,12 @@
         object-fit: contain;
 }
 
-
 .new-idea img {
     width: 50%;
     object-fit: contain;
+}
+
+.participators-hide {
+    display: none;
+    transition: display, 2s;
 }
