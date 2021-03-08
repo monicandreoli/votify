@@ -1,14 +1,18 @@
 .navbar-lewagon {
+  top: 0;
+  position: fixed;
+  width: 100vw;
   justify-content: space-between;
   background: $green;
   padding: 1vh 2vw;
-  width: 100%;
   z-index: 999;
-  top: 0;
-  position: fixed;
   height: 60px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   align-items: center;
+
+  ul {
+    background-color: $green;
+  }
 }
 .navbar-custom {
   color: white;
@@ -33,11 +37,6 @@
 .navbar-toggler {
  background-color: transparent;
 }
-
-.custom-toggler.navbar-toggler {
-  border-color: rgb(255,102,203);
-}
-
 
 .avatar {
   border: 1px solid $orange;
