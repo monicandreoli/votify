@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<% if current_user.role == "Municipality" %>
+<div class="container-fluid" id="dashboard">
   <div class="row">
     <div class="col-3 tab-col-green">
 
@@ -15,7 +16,157 @@
 
         <%= link_to ideas_path do %>
         <p class="nav-link pb-0 mb-2">
-        <i class="far fa-compass pr-2"></i>Explore ideas
+          <i class="far fa-compass pr-2"></i>Explore
+        </p>
+        <% end %>
+
+
+        <%= link_to edit_user_registration_path do %>
+        <p class="nav-link pb-0 mb-2">
+          <i class="fas fa-user-edit pr-1"></i>
+          Edit account
+        </p>
+        <% end %>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+          aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-cogs pr-2"></i>Settings</a>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+        <a class="nav-link">
+          <i class="fas fa-sign-out-alt pr-2"></i>
+          Log out
+        </a>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="d-flex justify-content-end align-items-center profile-dashbar mt-3 mr-4">
+        <div class="d-flex dash-profile-content mr-3">
+          <div>
+            <i class="fas fa-search"></i>
+            <i class="fas fa-bell ml-2"></i>
+            <span class="ml-3">|</span>
+            <span class="ml-3"><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></span>
+          </div>
+          <div class="ml-2">
+            <% if current_user.photo.attached?  %>
+            <%= cl_image_tag current_user.photo.key, crop: :fill, class: 'avatar' %>
+            <% else %>
+            <p class="letter">
+              <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+      <%# TABS CONTENT  %>
+      <div class="tab-content m-5" id="v-pills-tabContent">
+
+        <%# OVERVIEW CONTENT  %>
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <h2>Welcome <%= current_user.first_name.capitalize %></h2>
+          <p>Give opportunities to these idea to be taken care of! </p>
+
+          <table class="table pt-3">
+            <thead>
+              <tr>
+                <th scope="col">Owner's idea</th>
+                <th scope="col">Idea Details</th>
+                <th scope="col">Where</th>
+                <th scope="col">Votes</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% @ideas.each do |idea| %>
+                  <tr>
+                    <th scope="row">
+                    <div class="d-flex pt-3 pl-3">
+                    <% if idea.user.photo.attached?  %>
+                          <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                          <% else %>
+                          <p class="letter">
+                            <%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %>
+                          </p>
+                          <% end %>
+
+                          <p class=" pl-2"> <%= idea.user.first_name.capitalize %> <%= idea.user.last_name.capitalize %><br/><small class="date"><%= time_ago_in_words(idea.created_at) %> ago</small></p>
+                    </div>
+                    </th>
+                    <td><%= idea.title.capitalize %></td>
+                    <td><%= idea.address.capitalize %></td>
+
+                    <td>
+                    <% if idea.votes.count > 5 %>
+                    <p class="bg-info text-white p-vote"><%= idea.votes.count %></p>
+                    <% elsif idea.votes.count > 10 %>
+                    <p class="bg-danger text-white p-vote"><%= idea.votes.count %></p>
+                    <% else %>
+                    <p class="bg-success text-white p-vote"> <%= idea.votes.count %></p>
+                    <% end %>
+                    <i class="fas fa-ellipsis-v dots"></i>
+                    </td>
+                  </tr>
+              <% end %>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <%# MY IDEAS CONTENT  %>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+        </div>
+
+        <%# MY VOTED IDEAS CONTENT  %>
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+
+        </div>
+
+        <%# SETTINGS CONTENT  %>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% else %>
+<div class="container-fluid" id="dashboard">
+  <div class="row">
+    <div class="col-3 tab-col-green">
+
+      <%# TABS ON RIGHT STARTS HERE %>
+      <div class="top-table d-flex flex-row p-3">
+        <div class="dashboard-logo d-flex justify-content-center">
+          <p class="d-dash">D</p>
+        </div>
+        <p class="ml-3 pt-2 title-dash">Dashboard</p>
+      </div>
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+          aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-chart-pie pr-2"></i>Overview</a>
+
+        <%= link_to ideas_path do %>
+        <p class="nav-link pb-0 mb-2">
+          <i class="far fa-compass pr-2"></i>Explore ideas
         </p>
         <% end %>
         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
@@ -23,23 +174,23 @@
         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
           aria-controls="v-pills-messages" aria-selected="false"><i class="far fa-check-circle pr-2"></i>Voted ideas</a>
         <%= link_to new_idea_path do%>
-        <p  class="nav-link pb-0 mb-2">
-       <i class="far fa-plus-square pr-2"></i>
-        Pitch your idea
+        <p class="nav-link pb-0 mb-2">
+          <i class="far fa-plus-square pr-2"></i>
+          Pitch your idea
         </p>
         <% end %>
         <%= link_to edit_user_registration_path do %>
         <p class="nav-link pb-0 mb-2">
-        <i class="fas fa-user-edit pr-1"></i>
-        Edit account
+          <i class="fas fa-user-edit pr-1"></i>
+          Edit account
         </p>
         <% end %>
         <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
           aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-cogs pr-2"></i>Settings</a>
         <%= link_to destroy_user_session_path, method: :delete do %>
         <a class="nav-link">
-        <i class="fas fa-sign-out-alt"></i>
-        Log out
+          <i class="fas fa-sign-out-alt pr-2"></i>
+          Log out
         </a>
         <% end %>
       </div>
@@ -143,7 +294,7 @@
                 <div class="m-1 card-latest">
                   <div class="d-flex justify-content-between p-2 profile-card-latest">
                     <div class="d-flex dash-latest-card">
-                       <% if idea.user.photo.attached?  %>
+                      <% if idea.user.photo.attached?  %>
                       <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
                       <% else %>
                       <p class="letter">
@@ -193,13 +344,13 @@
           <div class=" my-1 card-latest">
             <div class="d-flex justify-content-between p-2 profile-card-latest">
               <div class="d-flex dash-latest-card">
-                 <% if idea.user.photo.attached?  %>
-                      <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
-                      <% else %>
-                      <p class="letter">
-                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
-                      </p>
-                      <% end %>
+                <% if idea.user.photo.attached?  %>
+                <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                <% else %>
+                <p class="letter">
+                  <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                </p>
+                <% end %>
                 <div>
                   <small class='date pl-2'>
                     <%= time_ago_in_words(idea.created_at) %> ago by
@@ -243,13 +394,13 @@
           <div class=" my-1 card-latest">
             <div class="d-flex justify-content-between p-2 profile-card-latest">
               <div class="d-flex dash-latest-card">
-                 <% if idea.user.photo.attached?  %>
-                      <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
-                      <% else %>
-                      <p class="letter">
-                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
-                      </p>
-                      <% end %>
+                <% if idea.user.photo.attached?  %>
+                <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                <% else %>
+                <p class="letter">
+                  <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                </p>
+                <% end %>
                 <div>
                   <small class='date pl-2'>
                     <%= time_ago_in_words(idea.created_at) %> ago by
@@ -290,3 +441,4 @@
     </div>
   </div>
 </div>
+<% end %>
