@@ -132,6 +132,7 @@
 
 //  MUNICIPALITY DASHBOARD
 
+
 table {
     font-size: 13px;
     background-color: white;
@@ -170,7 +171,7 @@ table {
     margin-top: 12px;
 }
 
-.dots {
-    color: rgba(0, 0, 0, 0.356);
-    transform: translate(10px, 0);
+.table .fa-search {
+    color: rgba(0, 0, 0, 0.288);
+    transform: translate(12px, 1px);
 }

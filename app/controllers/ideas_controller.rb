@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_idea, only: [:show, :edit, :update, :destroy]
+  before_action :set_idea, only: [:show, :edit, :update, :destroy, :approve, :deny]
   def dashboard
     @ideas = Idea.all
     @latest_ideas = Idea.order(:created_at).limit(5)
@@ -59,6 +59,22 @@ class IdeasController < ApplicationController
   def destroy
     @idea.destroy
     redirect_to ideas_path
+  end
+
+  def approve
+    @idea.status = "Approved"
+    @idea.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def deny
+    @idea.status = "Denied"
+    @idea.save
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
