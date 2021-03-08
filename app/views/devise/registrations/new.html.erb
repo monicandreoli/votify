@@ -31,6 +31,8 @@
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
         <%= f.input :photo, as: :file %>
+        <%= f.input :role, collection: ["Municipality"] %>
+        <p>By choosing the Municipality option you will be in charge of managing all the ideas in the area.</p>
       </div>
 
       <div class="form-actions">
