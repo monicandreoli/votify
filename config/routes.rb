@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   resources :votes, only: [:update, :destroy]
   get '/dashboard', to: 'ideas#dashboard'
+  patch '/approve/:id', to: "ideas#approve", as: :approve
+  patch '/deny/:id', to: "ideas#deny", as: :deny
 end
