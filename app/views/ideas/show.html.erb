@@ -57,6 +57,19 @@
       </div>
     </div>
 
+    <div class="details-description">
+      <% if current_user.role == "municipality" || @idea.user == current_user  %>
+        <p class="tag">FEEDBACK</p>
+        <% @idea.votes.each do |vote|  %>
+          <% unless vote.comment == nil %>
+          <%= vote.comment %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
     <div class="col-sm-12 col-md-4">
 
     <% if current_user.role == "Municipality" %>
