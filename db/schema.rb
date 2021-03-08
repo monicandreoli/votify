@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_111133) do
+ActiveRecord::Schema.define(version: 2021_03_08_144935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_03_08_111133) do
     t.text "problem"
     t.text "solution"
     t.string "address"
-    t.integer "goal", default: 20
+    t.integer "goal", default: 12
     t.date "deadline"
     t.string "status"
     t.bigint "user_id", null: false
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2021_03_08_111133) do
     t.float "latitude"
     t.float "longitude"
     t.boolean "municipality", default: true
-    t.integer "participators"
     t.index ["user_id"], name: "index_ideas_on_user_id"
   end
 

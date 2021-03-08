@@ -25,7 +25,7 @@ require("channels")
 // External imports
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
-import { circleProgress } from '../plugins/progess_bar';
+import { circleProgress } from '../plugins/progress_bar';
 import { addField } from '../plugins/add_field.js';
 
 

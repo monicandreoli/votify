@@ -7,15 +7,15 @@ const circleProgress = () => {
       color: '#C7C9C7',
       // This has to be the same size as the maximum width to
       // prevent clipping
-      strokeWidth: 4,
-      trailWidth: 1,
+      strokeWidth: 10,
+      trailWidth: 10,
       easing: 'easeInOut',
       duration: 1400,
       text: {
-        autoStyleContainer: false
+        autoStyleContainer: true
       },
-      from: { color: '#FF5C00', width: 1 },
-      to: { color: '#FF5C00', width: 4 },
+      from: { color: '#FF5C00', width: 10 },
+      to: { color: '#FF5C00', width: 10 },
       // Set default step function for all animate calls
       step: function(state, circle) {
         circle.path.setAttribute('stroke', state.color);
@@ -26,14 +26,19 @@ const circleProgress = () => {
         if (value === 0) {
           circle.setText('');
         } else {
-          circle.setText('');
+          circle.setText(centerText);
         }
 
       }
     });
-    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-    bar.text.style.fontSize = '1rem';
+    bar.text.style.fontFamily = 'Source Sans Pro, Helvetica, sans-serif';
+    bar.text.style.fontSize = '28px';
 
+    // if (container.dataset.vote < container.dataset.total) {
+    //   
+    // } else {
+    //   bar.animate(container.dataset.total / container.dataset.total);
+    // }
     bar.animate(container.dataset.vote / container.dataset.total);
     // Number from 0.0 to 1.0
   });

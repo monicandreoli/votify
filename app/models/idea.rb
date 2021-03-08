@@ -7,8 +7,9 @@ class Idea < ApplicationRecord
   validates :problem, presence: true
   validates :solution, presence: true
   validates :address, presence: true
-  validates :municipality, presence: true
-  validates :participators, presence: true
+  validate :allow_vote
+  # validates :municipality, presence: true
+  # validates :participators, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
@@ -17,5 +18,11 @@ class Idea < ApplicationRecord
 
   def pre_vote_find(current_user)
     self.votes.find { |vote| vote.user_id == current_user.id }
+  end
+
+  def allow_vote
+    if self.votes.count > self.goal
+      errors.add(:votes, "The limit is reached")
+    end
   end
 end
