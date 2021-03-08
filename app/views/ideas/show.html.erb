@@ -53,6 +53,17 @@
       <p class="tag">SOLUTION</p>
       <p><%= @idea.solution %></p>
     </div>
+
+    <div class="details-description">
+      <% if current_user.role == "Municipality" || @idea.user == current_user  %>
+        <p class="tag">FEEDBACK</p>
+        <% @idea.votes.each do |vote|  %>
+          <% unless vote.comment == nil %>
+          <%= vote.comment %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 
