@@ -48,16 +48,24 @@
   font-weight: 400;
 }
 
-// PROBLEM: CSS CLASS DOES NOT APPLY
 .show-vote {
   height: 56px;
   margin: 40px 20px 20px 20px;
 }
 
+.show-goal-info {
+  // box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid $orange;
+  border-radius: 4px;
+  margin: 20px 40px;
+  padding: 20px;
+  text-align: left;
+  color: $dark-gray;
+}
+
 .show-progress {
-  margin: 40px 20px 20px 20px;
   font-size: 10em;
-  margin: 0 20px;
+  margin: 20px;
   padding: 20px;
 }
 

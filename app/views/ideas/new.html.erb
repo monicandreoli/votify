@@ -16,8 +16,8 @@
 
 
 <div id="participators-field" class="participators-hide">
-  <%= f.label :participators, "How many people do you need to participate in your idea? *" %>
-  <%= f.input :participators, label: false %>
+  <%= f.label :goal, "How many people do you need to participate in your idea? *" %>
+  <%= f.input :goal, label: false %>
 </div>
 
 <%= button_tag type: 'submit', class: "btn btn-warning py-2" do %>
@@ -27,5 +27,5 @@
 <% end %>
 
 </div>
-  <%= image_tag "new-idea.svg"%>
+  <%= image_tag "new-idea.svg", class: "form=img" %>
 </div>
