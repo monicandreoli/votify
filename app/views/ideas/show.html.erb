@@ -12,7 +12,7 @@
    </div>
 
     <%# LEFT SIDE %>
-    
+
     <div class="col-sm-12 col-md-8">
 
       <div class="show-user d-flex align-items-center justify-content-between">
@@ -58,19 +58,22 @@
           <p class="tag">SOLUTION</p>
           <p><%= @idea.solution %></p>
         </div>
-        
-        <%# FEEDBACK %>
+
+         <%# FEEDBACK %>
         <div class="details-description">
-          <% if current_user.role == "municipality" || @idea.user == current_user  %>
+          <% if current_user.role == "Municipality" || @idea.user == current_user  %>
             <p class="tag">FEEDBACK</p>
             <% @idea.votes.each do |vote|  %>
               <% unless vote.comment == nil %>
-              <%= vote.comment %>
+              <div class="details-description">
+                <div class="user-feedback"><%= time_ago_in_words(vote.updated_at) %> ago</div>
+                <p><%= vote.comment %></p>
+              </div>
               <% end %>
             <% end %>
           <% end %>
         </div>
-        
+
       </div>
     </div>
 
@@ -84,7 +87,7 @@
 
               <%= link_to "Denied", deny_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger" %>
             </div>
-      
+
           </div>
         </div>
       <% else %>
@@ -133,7 +136,7 @@
           <%# INFO IF IDEA OFFICIAL %>
           <% if @idea.municipality == true %>
             <p class="mb-2">So far the idea has <strong><%= @idea.votes.count %></strong> votes.</p>
-            
+
             <% if @idea.votes.count > @idea.goal %>
               <p class="m-0">The idea has <strong><%= @idea.votes.count - @idea.goal %></strong> votes more than needed in order to be discussed in your local municipality.</p>
             <% elsif @idea.votes.count == @idea.goal %>
@@ -141,11 +144,11 @@
             <% else %>
               <p class="m-0"> The idea needs <strong><%= @idea.goal - @idea.votes.count %></strong> votes more in order to be discussed in your local municipality.</p>
             <% end %>
-            
+
           <%# INFO IF IDEA PERSONAL   %>
           <% else %>
             <p class="mb-2">So far the idea has <strong><%= @idea.votes.count %></strong> participants.</p>
-            
+
             <% if @idea.votes.count > @idea.goal %>
               <p class="m-0">The idea has <strong><%= @idea.votes.count - @idea.goal %></strong> participants more than needed in order to be realised.</p>
             <% elsif @idea.votes.count == @idea.goal %>
