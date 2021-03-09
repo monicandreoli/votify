@@ -1,2 +1,4 @@
-document.querySelector('.approved-denied').insertAdjacentHTML("beforeend", "<p>The idea has been denied</p>")
+$('#denyModalCenter').modal('show')
+
+document.querySelector('approved-denied').innerHTML = '<%= link_to "Denied", deny_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger" %>'
 
