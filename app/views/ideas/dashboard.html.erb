@@ -60,9 +60,6 @@
           <div class="d-flex justify-content-between">
             <p>Give opportunities to these idea to be taken care of!</p>
 
-            <%= link_to "Sort now!", dashboard_path(filter_by: { votes: 'desc' }) %>
-
-            <%#= link_to "Filter now!", dashboard_path(filter_by: 'accepted') %>
       
         
           </div>
@@ -70,21 +67,35 @@
           <table class="table pt-3">
             <thead>
               <tr>
-                <th scope="col">Owner's idea</th>
-                <th scope="col">Idea Details</th>
-                <th scope="col">Where</th>
-                <th scope="col">Votes
+                <th scope="col">Resident</th>
+                <th scope="col">Title</th>
+                <th scope="col">Location</th>
+                <th scope="col">
+                  Status
+               
+                    <%= icon('fas', 'filter', class: "dropdown-toggle filter-icon ml-1", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false)  %>
 
-                  <%= link_to "desc", dashboard_path(filter_by: { votes: "desc" }), style: "color: black;" %>
-                  <%= link_to "asc", dashboard_path(filter_by: { votes: "asc" }), style: "color: black;" %>
-                  
-                  <%= link_to dashborad_path(:filter_by {votes: "desc"}) do %>
-                    <i class="fas fa-caret-down"></i>
-                  <% end %>
-                  <%#= link_to dashboard_path(:filter_by {votes: "asc"}) do %>
-                    <%# <i class="fas fa-caret-up"></i> %>
-                  <%# end %>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    
+                      <%= link_to "Pending", url_for(params.permit("status", "votes").merge(status: "pending")), class: "filter-icon dropdown-item" %>
+                      <%= link_to "Approved", url_for(params.permit("status", "votes").merge(status: "approved")), class: "filter-icon dropdown-item" %>
+                      <%= link_to "Denied", url_for(params.permit("status", "votes").merge(status: "denied")), class: "filter-icon dropdown-item" %>
+                      <%= link_to "All", dashboard_path(created_at: "asc"), class: "filter-icon dropdown-item" %>
+                    </div>
+                
+         
                 </th>
+                <th scope="col">
+                  Votes
+                  <%= link_to url_for(params.permit("status", "votes").merge(votes: "desc")), class: "filter-icon ml-1" do %>
+                    <i class="fas fa-sort-amount-down"></i>
+                  <% end %>
+                  <%= link_to url_for(params.permit("status", "votes").merge(votes: "asc")), class: "filter-icon ml-1" do %>
+                  <%# dashboard_path( votes: "asc" ) %>
+                    <i class="fas fa-sort-amount-up-alt"></i>
+                  <% end %>
+                </th>
+                <th> </th>
               </tr>
             </thead>
             <tbody>
@@ -108,20 +119,19 @@
                             class="date"><%= time_ago_in_words(idea.created_at) %> ago</small></p>
                       </div>
                     </th>
-                    <td><%= idea.title.capitalize %></td>
-                    <td><%= idea.address.capitalize %></td>
+                    <td><%= idea.title %></td>
+                    <td><%= idea.address %></td>
+                    
+                    <td><%= idea.status %></td>
 
                     <td>
-                      <% if idea.votes.count > 5 %>
-                        <p class="bg-info text-white p-vote"><%= idea.votes.count %></p>
-                      <% elsif idea.votes.count > 10 %>
-                        <p class="bg-danger text-white p-vote"><%= idea.votes.count %></p>
-                      <% else %>
-                        <p class="bg-success text-white p-vote"> <%= idea.votes.count %></p>
-                      <% end %>
-                      <%= link_to idea_path(idea) do %>
-                      <i class="fas fa-search"></i>
-                      <% end %>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <p class="number-round-green m-0"><%= idea.votes.count %></p>
+                        
+                        <%= link_to idea_path(idea) do %>
+                          <i class="fas fa-arrow-circle-right mr-3", id="arrow-icon"></i>
+                        <% end %>
+                      </div>
                     </td>
                   </tr>
 

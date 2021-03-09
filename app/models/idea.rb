@@ -16,6 +16,8 @@ class Idea < ApplicationRecord
 
   scope :by_votes, -> (direction) { left_joins(:votes).group(:id).order("COUNT(votes.id) #{direction.upcase}") }
 
+  scope :by_status, -> (status) { where(status: status) }
+
   def pre_vote_find(current_user)
     self.votes.find { |vote| vote.user_id == current_user.id }
   end
