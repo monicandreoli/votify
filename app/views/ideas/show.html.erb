@@ -33,7 +33,7 @@
           <% end %>
           <% end %>
 
-          <% if @idea.user == current_user %>
+          <% if @idea.user == current_user || current_user.role == "Municipality" %>
           <%= link_to idea_path(@idea), method: :delete, data: {confirm: 'Are you sure?'} do %>
           <i class="fas fa-trash"></i>
           <% end %>
@@ -70,9 +70,10 @@
 
 
          <%# FEEDBACK %>
+      <% if @idea.has_feedback? %>
         <div class="details-description">
+          <p class="tag">FEEDBACK</p>
           <% if current_user.role == "Municipality" || @idea.user == current_user  %>
-            <p class="tag">FEEDBACK</p>
             <% @idea.votes.each do |vote|  %>
               <% unless vote.comment == nil %>
               <div class="details-description">
@@ -83,7 +84,7 @@
             <% end %>
           <% end %>
         </div>
-
+      <% end %>
       </div>
     </div>
 
