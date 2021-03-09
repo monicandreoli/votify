@@ -3,11 +3,29 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :approve, :deny]
   def dashboard
     @ideas = Idea.all
+
+    if params[:filter_by].present?
+      if params[:filter_by][:votes].present?
+        @ideas = @ideas.by_votes(params[:filter_by][:votes])
+      end
+     
+        
+    end
+
     @latest_ideas = Idea.order(:created_at).limit(5)
     @popular_ideas = Idea.most_popular
+
     # @popular_ideas = Idea.includes(:votes).order("votes DESC")
     @my_ideas = current_user.ideas.order(created_at: :desc)
     @my_voted_ideas = current_user.voted_ideas
+
+    # sort by votes desc
+    # sort by votes asc
+    # filter by status 
+
+    # def order_by(parameter)
+    #   Idea.order(parameter: :desc)
+    # end
   end
 
   def index

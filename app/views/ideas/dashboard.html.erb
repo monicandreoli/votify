@@ -57,7 +57,15 @@
         <%# OVERVIEW CONTENT  %>
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
           <h2>Welcome <%= current_user.first_name.capitalize %></h2>
-          <p>Give opportunities to these idea to be taken care of! </p>
+          <div class="d-flex justify-content-between">
+            <p>Give opportunities to these idea to be taken care of!</p>
+
+            <%= link_to "Sort now!", dashboard_path(filter_by: { votes: 'desc' }) %>
+
+            <%#= link_to "Filter now!", dashboard_path(filter_by: 'accepted') %>
+      
+        
+          </div>
 
           <table class="table pt-3">
             <thead>
@@ -65,46 +73,59 @@
                 <th scope="col">Owner's idea</th>
                 <th scope="col">Idea Details</th>
                 <th scope="col">Where</th>
-                <th scope="col">Votes</th>
+                <th scope="col">Votes
+
+                  <%= link_to "desc", dashboard_path(filter_by: { votes: "desc" }), style: "color: black;" %>
+                  <%= link_to "asc", dashboard_path(filter_by: { votes: "asc" }), style: "color: black;" %>
+                  
+                  <%= link_to dashborad_path(:filter_by {votes: "desc"}) do %>
+                    <i class="fas fa-caret-down"></i>
+                  <% end %>
+                  <%#= link_to dashboard_path(:filter_by {votes: "asc"}) do %>
+                    <%# <i class="fas fa-caret-up"></i> %>
+                  <%# end %>
+                </th>
               </tr>
             </thead>
             <tbody>
 
               <% @ideas.each do |idea| %>
+                <% if idea.municipality == true %>
+              
+                  <tr>
+                    <th scope="row">
+                      <div class="d-flex pt-3 pl-3">
+                        <% if idea.user.photo.attached?  %>
+                          <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+                        <% else %>
+                          <p class="letter">
+                            <%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %>
+                          </p>
+                        <% end %>
 
-              <tr>
-                <th scope="row">
-                  <div class="d-flex pt-3 pl-3">
-                    <% if idea.user.photo.attached?  %>
-                      <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
-                    <% else %>
-                      <p class="letter">
-                        <%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %>
-                      </p>
-                    <% end %>
+                        <p class=" pl-2"> <%= idea.user.first_name.capitalize %>
+                          <%= idea.user.last_name.capitalize %><br /><small
+                            class="date"><%= time_ago_in_words(idea.created_at) %> ago</small></p>
+                      </div>
+                    </th>
+                    <td><%= idea.title.capitalize %></td>
+                    <td><%= idea.address.capitalize %></td>
 
-                    <p class=" pl-2"> <%= idea.user.first_name.capitalize %>
-                      <%= idea.user.last_name.capitalize %><br /><small
-                        class="date"><%= time_ago_in_words(idea.created_at) %> ago</small></p>
-                  </div>
-                </th>
-                <td><%= idea.title.capitalize %></td>
-                <td><%= idea.address.capitalize %></td>
+                    <td>
+                      <% if idea.votes.count > 5 %>
+                        <p class="bg-info text-white p-vote"><%= idea.votes.count %></p>
+                      <% elsif idea.votes.count > 10 %>
+                        <p class="bg-danger text-white p-vote"><%= idea.votes.count %></p>
+                      <% else %>
+                        <p class="bg-success text-white p-vote"> <%= idea.votes.count %></p>
+                      <% end %>
+                      <%= link_to idea_path(idea) do %>
+                      <i class="fas fa-search"></i>
+                      <% end %>
+                    </td>
+                  </tr>
 
-                <td>
-                  <% if idea.votes.count > 5 %>
-                    <p class="bg-info text-white p-vote"><%= idea.votes.count %></p>
-                  <% elsif idea.votes.count > 10 %>
-                    <p class="bg-danger text-white p-vote"><%= idea.votes.count %></p>
-                  <% else %>
-                    <p class="bg-success text-white p-vote"> <%= idea.votes.count %></p>
-                  <% end %>
-                  <%= link_to idea_path(idea) do %>
-                  <i class="fas fa-search"></i>
-                  <% end %>
-                </td>
-              </tr>
-
+                <% end %>
               <% end %>
             </tbody>
           </table>

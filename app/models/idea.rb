@@ -14,6 +14,8 @@ class Idea < ApplicationRecord
 
   scope :most_popular, -> { left_joins(:votes).group(:id).order("COUNT(votes.id) DESC").limit(5) }
 
+  scope :by_votes, -> (direction) { left_joins(:votes).group(:id).order("COUNT(votes.id) #{direction.upcase}") }
+
   def pre_vote_find(current_user)
     self.votes.find { |vote| vote.user_id == current_user.id }
   end
