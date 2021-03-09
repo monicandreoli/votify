@@ -39,6 +39,12 @@
           <% end %>
           <% end %>
 
+          <% if @idea.user != current_user && current_user.role != "Municipality" %>
+          <%= link_to (@idea), class: "pr-2" do %>
+          <i class="fas fa-flag"></i>
+          <% end %>
+          <% end %>
+
         </div>
       </div>
 
