@@ -4,14 +4,26 @@ class IdeasController < ApplicationController
 
   def dashboard
     @ideas = Idea.all
+
+
+      if params[:status].present?
+        @ideas = @ideas.by_status(params[:status])
+      end
+      if params[:votes].present?
+        @ideas = @ideas.by_votes(params[:votes])
+      end
+  
+
     @latest_ideas = Idea.order(:created_at).limit(5)
     @popular_ideas = Idea.most_popular
+
     # @popular_ideas = Idea.includes(:votes).order("votes DESC")
     @my_ideas = current_user.ideas.order(created_at: :desc)
     @my_voted_ideas = current_user.voted_ideas
 
     @chatroom = Chatroom.first
     @message = Message.new
+
   end
 
   def index

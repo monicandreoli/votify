@@ -13,31 +13,61 @@ Idea.destroy_all
 User.destroy_all
 Vote.destroy_all
 
-puts "Creating demo user & her ideas..."
+puts "Creating municipality demo user..."
+mun_user = User.new(
+  first_name: "Zofia",
+  last_name: "Matryca",
+  email: "zofia@gmail.com",
+  password: "123456",
+  address: "Ruyschstraat 401, 1091MS Amsterdam",
+  role: "municipality"
+)
+mun_user_image = URI.open("https://images.unsplash.com/photo-1565697451991-9c2bd0524fd2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2030&q=80")
+mun_user.photo.attach(io: mun_user_image, filename: "female5.png", content_type: "image/png")
+mun_user.save!
+puts "User #{mun_user.first_name} created"
 
-demo_user = User.new(
+
+puts "Creating resident demo user & her ideas..."
+
+res_user = User.new(
   first_name: "Maria",
   last_name: "Peszek",
   email: "joanna@gmail.com",
   password: "123456",
   address: "Ruyschstraat 401, 1091MS Amsterdam"
 )
-demo_user_image = URI.open("https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
-demo_user.photo.attach(io: demo_user_image, filename: "female4.png", content_type: "image/png")
-demo_user.save!
-puts "User #{demo_user.first_name} created"
+res_user_image = URI.open("https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
+res_user.photo.attach(io: res_user_image, filename: "female4.png", content_type: "image/png")
+res_user.save!
+puts "User #{res_user.first_name} created"
 
-demo_idea = Idea.new(
-  title: "Paper Trash Flying Around",
+demo_idea_official = Idea.new(
+  # title: "Paper Trash Flying Around",
+  title: "This is my official idea",
   problem: "Fellow Neighbours! Have you also noticed that paper trash pickup seems to happen less often than needed? There is a lot of paper trash flying around on our street which gets particularily messy when it's raning... And it's rainig most of the time in the Netherlands :)",
   solution: "Let's raise enough votes to change the trash pickup schedule! Maybe instead of only Thursday mornings we could arrange Monday mornings as well?",
   address: "Ruyschstraat 401, 1091MS Amsterdam",
-  user: demo_user
+  user: res_user
   )
-demo_idea_image = URI.open("https://images.unsplash.com/photo-1528323273322-d81458248d40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2301&q=80")
-demo_idea.photo.attach(io: demo_idea_image, filename: "trash.png", content_type: "image/png")
-demo_idea.save!
-puts "Idea #{demo_idea.title} of #{demo_idea.user.first_name} created"
+demo_idea_official_image = URI.open("https://images.unsplash.com/photo-1528323273322-d81458248d40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2301&q=80")
+demo_idea_official.photo.attach(io: demo_idea_official_image, filename: "trash.png", content_type: "image/png")
+demo_idea_official.save!
+puts "Idea #{demo_idea_official.title} of #{demo_idea_official.user.first_name} created"
+
+demo_idea_personal = Idea.new(
+  # title: "Paper Trash Flying Around",
+  title: "This is my personal idea",
+  problem: "Fellow Neighbours! Have you also noticed that paper trash pickup seems to happen less often than needed? There is a lot of paper trash flying around on our street which gets particularily messy when it's raning... And it's rainig most of the time in the Netherlands :)",
+  solution: "Let's raise enough votes to change the trash pickup schedule! Maybe instead of only Thursday mornings we could arrange Monday mornings as well?",
+  address: "Ruyschstraat 401, 1091MS Amsterdam",
+  user: res_user,
+  municipality: false
+  )
+demo_idea_personal_image = URI.open("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
+demo_idea_personal.photo.attach(io: demo_idea_personal_image, filename: "party.png", content_type: "image/png")
+demo_idea_personal.save!
+puts "Idea #{demo_idea_personal.title} of #{demo_idea_personal.user.first_name} created"
 
 
 puts "Creating users & ideas..."
@@ -146,7 +176,8 @@ fourth_idea = Idea.new(
   problem: "Some of the windows don't open in my house and I live on the fifth floor. How do I ever clean them? Has any of you had the same problem or am I just missing something?",
   solution: "Clean Window Saturday: we chip in for a very long stick and tackle those stains! It would be ideal if the city could provide such a service in the future.",
   address: "Populierenweg 64, 1092ER Amsterdam",
-  user: fourth_user
+  user: fourth_user,
+  municipality: false
 )
 fourth_idea_image = URI.open("https://images.unsplash.com/photo-1518662932499-75af27874c30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
 fourth_idea.photo.attach(io: fourth_idea_image, filename: "windows.png", content_type: "image/png")
@@ -196,7 +227,8 @@ sixth_idea = Idea.new(
   problem: "I am a nature lover and I want to raise my kids in such a spirit. The playround in front of our house is soo dull and gray though... No trees, just a few small plants.",
   solution: "My suggestion is to plant some more greenery around the playground. It's a win win for us and for the climate. It can be trees or maybe some fruit trees, or maybe some vegetable mini-gardens...",
   address: "Domselaerstraat 121, 1093MB Amsterdam",
-  user: sixth_user
+  user: sixth_user,
+  municipality: false
 )
 sixth_idea_image = URI.open("https://images.unsplash.com/photo-1596997000103-e597b3ca50df?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80")
 sixth_idea.photo.attach(io: sixth_idea_image, filename: "playgournd.png", content_type: "image/png")

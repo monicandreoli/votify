@@ -8,13 +8,15 @@ class Idea < ApplicationRecord
   validates :solution, presence: true
   validates :address, presence: true
   validate :allow_vote
-  # validates :municipality, presence: true
-  # validates :participators, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
   scope :most_popular, -> { left_joins(:votes).group(:id).order("COUNT(votes.id) DESC").limit(5) }
+
+  scope :by_votes, -> (direction) { left_joins(:votes).group(:id).order("COUNT(votes.id) #{direction.upcase}") }
+
+  scope :by_status, -> (status) { where(status: status) }
 
   def pre_vote_find(current_user)
     self.votes.find { |vote| vote.user_id == current_user.id }
