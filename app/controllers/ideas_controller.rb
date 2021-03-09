@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: :index
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :approve, :deny]
+
   def dashboard
     @ideas = Idea.all
 
@@ -20,13 +21,9 @@ class IdeasController < ApplicationController
     @my_ideas = current_user.ideas.order(created_at: :desc)
     @my_voted_ideas = current_user.voted_ideas
 
-    # sort by votes desc
-    # sort by votes asc
-    # filter by status 
+    @chatroom = Chatroom.first
+    @message = Message.new
 
-    # def order_by(parameter)
-    #   Idea.order(parameter: :desc)
-    # end
   end
 
   def index

@@ -3,16 +3,12 @@
 
     <%# IMAGE %>
     <div class="col-sm-12 p-0">
-
-
      <% if @idea.photo.attached?  %>
-     <%= cl_image_tag @idea.photo.key, crop: :fill, class: "show-img" %>
+       <%= cl_image_tag @idea.photo.key, crop: :fill, class: "show-img" %>
      <% end %>
-
-   </div>
+    </div>
 
     <%# LEFT SIDE %>
-    
     <div class="col-sm-12 col-md-8">
 
       <div class="show-user d-flex align-items-center justify-content-between">
@@ -22,7 +18,7 @@
             <%= cl_image_tag @idea.user.photo.key, class: 'avatar' %>
             <% else %>
             <p class="letter avatar">
-              <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %></p>
+              <%=  @idea.user.first_name.first.capitalize %><%=  @idea.user.last_name.first.capitalize %></p>
             <% end %>
           </div>
           <p class="m-0 pl-2"><%= @idea.user.first_name.capitalize %> <%= @idea.user.last_name.capitalize  %></p>
@@ -37,9 +33,15 @@
           <% end %>
           <% end %>
 
-          <% if @idea.user == current_user %>
+          <% if @idea.user == current_user || current_user.role == "Municipality" %>
           <%= link_to idea_path(@idea), method: :delete, data: {confirm: 'Are you sure?'} do %>
           <i class="fas fa-trash"></i>
+          <% end %>
+          <% end %>
+
+          <% if @idea.user != current_user && current_user.role != "Municipality" %>
+          <%= link_to (@idea), class: "pr-2" do %>
+          <i class="fas fa-flag"></i>
           <% end %>
           <% end %>
 
@@ -47,7 +49,23 @@
       </div>
 
       <div class="show-details">
+      <div class="d-flex">
         <h1><%= @idea.title %></h1>
+        <div class="mt-3 pl-3">
+        <%# if the idea reached the goal will have the label showing: %>
+        <% if @idea.votes.count == @idea.goal %>
+          <% if @idea.status == "Pending" %>
+          <p class="bg-light text-dark status-label"><small><%= @idea.status %></small></p>
+        <% elsif @idea.status == "Approved" %>
+          <p class="bg-success text-light status-label"><small><%= @idea.status %></small></p>
+        <% else %>
+          <p class="bg-danger text-light status-label"><small><%= @idea.status %></small></p>
+        <% end %>
+        <% end %>
+        </div>
+      </div>
+
+
         <p class="details-light"><i class="fas fa-map-marker-alt"></i> <%= @idea.address %></p>
 
         <div class="details-description">
@@ -58,37 +76,49 @@
           <p class="tag">SOLUTION</p>
           <p><%= @idea.solution %></p>
         </div>
-        
-        <%# FEEDBACK %>
+
+
+         <%# FEEDBACK %>
+      <% if @idea.has_feedback? %>
         <div class="details-description">
-          <% if current_user.role == "municipality" || @idea.user == current_user  %>
-            <p class="tag">FEEDBACK</p>
+          <% if current_user.role == "Municipality" || @idea.user == current_user  %>
+          <p class="tag">FEEDBACK</p>
             <% @idea.votes.each do |vote|  %>
               <% unless vote.comment == nil %>
-              <%= vote.comment %>
+              <div class="details-description pt-0 mt-0">
+                <div class="user-feedback"><small> <%= time_ago_in_words(vote.updated_at) %> ago</small></div>
+                <p><%= vote.comment %></p>
+              </div>
               <% end %>
             <% end %>
           <% end %>
         </div>
-        
+      <% end %>
       </div>
     </div>
 
+    <%# RIGHT SIDE %>
     <div class="col-sm-12 col-md-4 text-center">
+     <%# if the user is municipality %>
       <% if current_user.role == "Municipality" %>
         <div class="pt-5">
-          <div class="approved-denied">
-            <p class="subtitle"> This idea will be:</p>
-            <div>
-              <%= link_to "Approved", approve_path(@idea), method: :patch, remote: true, class: "btn btn-outline-success" %>
-
-              <%= link_to "Denied", deny_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger" %>
-            </div>
-      
-          </div>
+          <h5>Status</h5>
+            <%# if the idea has the right vote can be approved/denied %>
+              <% if @idea.votes.count == @idea.goal %>
+                <div class="approved-denied">
+                    <h6 class="subtitle"> This idea will be:</h6>
+                      <div>
+                        <%= link_to "Approved", approve_path(@idea), method: :patch, remote: true, class: "btn btn-outline-success" %>
+                        <%= link_to "Denied", deny_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger" %>
+                      </div>
+                </div>
+              <% else %>
+                <div>
+                  <p>This idea still has to reach the right amount of votes to be approved or denied.</p>
+                </div>
+              <% end %>
         </div>
       <% else %>
-
         <% unless @idea.user == current_user %>
           <%# VOTE & UNVOTE BUTTON %>
           <% if @idea.municipality == true %>
@@ -104,8 +134,8 @@
                 <% end %>
               <% end %>
             </div>
-          <% else %>
 
+          <% else %>
         <%# PARTICIPATE BUTTON %>
           <div id='participate-btn' class="show-vote d-flex justify-content-center align-items-center">
             <% pre_vote =  @idea.pre_vote_find(current_user) %>
@@ -113,9 +143,7 @@
               <i class="fas fa-rocket mr-2"></i> Participate
             <% end %>
           </div>
-
           <% end %>
-
         <% end %>
         <% end %>
 
@@ -133,7 +161,7 @@
           <%# INFO IF IDEA OFFICIAL %>
           <% if @idea.municipality == true %>
             <p class="mb-2">So far the idea has <strong><%= @idea.votes.count %></strong> votes.</p>
-            
+
             <% if @idea.votes.count > @idea.goal %>
               <p class="m-0">The idea has <strong><%= @idea.votes.count - @idea.goal %></strong> votes more than needed in order to be discussed in your local municipality.</p>
             <% elsif @idea.votes.count == @idea.goal %>
@@ -141,11 +169,11 @@
             <% else %>
               <p class="m-0"> The idea needs <strong><%= @idea.goal - @idea.votes.count %></strong> votes more in order to be discussed in your local municipality.</p>
             <% end %>
-            
+
           <%# INFO IF IDEA PERSONAL   %>
           <% else %>
             <p class="mb-2">So far the idea has <strong><%= @idea.votes.count %></strong> participants.</p>
-            
+
             <% if @idea.votes.count > @idea.goal %>
               <p class="m-0">The idea has <strong><%= @idea.votes.count - @idea.goal %></strong> participants more than needed in order to be realised.</p>
             <% elsif @idea.votes.count == @idea.goal %>
@@ -162,29 +190,43 @@
 </div>
 
 
-<!-- Modal -->
+<!--Approve Modal -->
 <div class="modal fade" id="approvedModalCenter" tabindex="-1" role="dialog" aria-labelledby="approvedModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close text-right pr-3 pt-2" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
       <div class="modal-body-approved">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="p-3"><h5 class="text-success">The idea has been approved successfully!</h5>
+          <p>Start working on this idea right now and fix an appointment with the owner's idea!</p>
+          <div class="d-flex justify-content-center">
+          <a href = "mailto:<%= @idea.user.email %>" class="btn btn-warning py-2">Send Email</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+<!--Deny Modal -->
+<div class="modal fade" id="denyModalCenter" tabindex="-1" role="dialog" aria-labelledby="denyModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <button type="button" class="close text-right pr-3 pt-2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      <div class="modal-body-approved">
+        <div class="p-3"><h5 class="text-danger">The idea has been officially denied.</h5>
+          <p>The owner of this idea will be informed shortly.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Feedback Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">

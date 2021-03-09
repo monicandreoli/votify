@@ -27,4 +27,9 @@ class Idea < ApplicationRecord
       errors.add(:votes, "The limit is reached")
     end
   end
+
+  def has_feedback?
+    votes_with_comment = votes.where.not(comment: nil)
+    votes_with_comment.length > 0
+  end
 end

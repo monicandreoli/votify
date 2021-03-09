@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   end
 
   resources :votes, only: [:update, :destroy]
+
+  post '/chatrooms/:chatroom_id/messages', to: 'messages#create', as: :chatroom_messages
+
   get '/dashboard', to: 'ideas#dashboard'
   patch '/approve/:id', to: "ideas#approve", as: :approve
   patch '/deny/:id', to: "ideas#deny", as: :deny

@@ -1,0 +1,6 @@
+<div class="message-container card py-3 my-3 px-3" id="message-<%= message.id %>">
+  <i class="author">
+    <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+  </i>
+  <p><%= message.content %></p>
+</div>

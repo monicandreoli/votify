@@ -19,10 +19,11 @@
   <%= f.label :goal, "How many people do you need to participate in your idea? *" %>
   <%= f.input :goal, label: false %>
 </div>
-
-<%= button_tag type: 'submit', class: "btn btn-warning py-2" do %>
+<div class="d-flex justify-content-center">
+<%= button_tag type: 'submit', class: "btn btn-warning py-2 mt-3" do %>
   <i class="far fa-plus-square pr-1"></i> Add Idea
 <% end %>
+</div>
 
 <% end %>
 

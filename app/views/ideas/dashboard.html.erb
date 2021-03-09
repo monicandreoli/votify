@@ -1,4 +1,7 @@
+
 <% if current_user.role == "municipality" %>
+
+<%# MUNICIPALITY DASHBOARD %>
 <div class="container-fluid" id="dashboard">
   <div class="row">
     <div class="col-3 tab-col-green">
@@ -11,8 +14,10 @@
         <p class="ml-3 pt-2 title-dash">Dashboard</p>
       </div>
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-          aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-chart-pie pr-2"></i>Overview</a>
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-chart-pie pr-2"></i>Overview</a>
+
+        <a class="nav-link" id="v-pills-chat-tab" data-toggle="pill" href="#v-pills-chat" role="tab"
+          aria-controls="v-pills-chat" aria-selected="true"><i class="fas fa-info-circle pr-2"></i></i>InfoChat</a>
 
         <%= link_to edit_user_registration_path do %>
         <p class="nav-link pb-0 mb-2">
@@ -99,7 +104,6 @@
               </tr>
             </thead>
             <tbody>
-
               <% @ideas.each do |idea| %>
                 <% if idea.municipality == true %>
               
@@ -136,19 +140,15 @@
                   </tr>
 
                 <% end %>
+
               <% end %>
             </tbody>
           </table>
         </div>
 
-        <%# MY IDEAS CONTENT  %>
-        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-
-        </div>
-
-        <%# MY VOTED IDEAS CONTENT  %>
-        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-
+        <%# CHAT CONTENT  %>
+        <div class="tab-pane fade" id="v-pills-chat" role="tabpanel" aria-labelledby="v-pills-chat-tab">
+           <%= render(partial: "chatrooms/chat", locals: { chatroom: @chatroom, message: @message }) %>
         </div>
 
         <%# SETTINGS CONTENT  %>
@@ -160,23 +160,9 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <% else %>
+
+<%# RESIDENT DASHBOARD %>
 <div class="container-fluid" id="dashboard">
   <div class="row">
     <div class="col-3 tab-col-green">
@@ -207,6 +193,9 @@
           Pitch your idea
         </p>
         <% end %>
+        <a class="nav-link" id="v-pills-chatuser-tab" data-toggle="pill" href="#v-pills-chatuser" role="tab"
+          aria-controls="v-pills-chatuser" aria-selected="true"><i class="fas fa-info-circle pr-2"></i>InfoChat</a>
+
         <%= link_to edit_user_registration_path do %>
         <p class="nav-link pb-0 mb-2">
           <i class="fas fa-user-edit pr-1"></i>
@@ -279,7 +268,7 @@
                       <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
                       <% else %>
                       <p class="letter">
-                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                        <%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %>
                       </p>
                       <% end %>
                       <div>
@@ -326,7 +315,7 @@
                       <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
                       <% else %>
                       <p class="letter">
-                        <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                        <%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %>
                       </p>
                       <% end %>
                       <div>
@@ -376,7 +365,7 @@
                 <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
                 <% else %>
                 <p class="letter">
-                  <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                  <%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %>
                 </p>
                 <% end %>
                 <div>
@@ -410,6 +399,11 @@
 
         </div>
 
+         <%# CHAT CONTENT  %>
+        <div class="tab-pane fade" id="v-pills-chatuser" role="tabpanel" aria-labelledby="v-pills-chatuser-tab">
+           <%= render(partial: "chatrooms/chat", locals: { chatroom: @chatroom, message: @message }) %>
+        </div>
+
         <%# MY VOTED IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
           <h4>My voted ideas</h4>
@@ -426,7 +420,7 @@
                 <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
                 <% else %>
                 <p class="letter">
-                  <%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %>
+                  <%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %>
                 </p>
                 <% end %>
                 <div>

@@ -18,6 +18,10 @@
   margin: 40px 20px 20px 20px;
 }
 
+.user-feedback {
+  color: $dark-gray;
+}
+
 .show-icons a {
   color: $medium-gray;
   font-size: 20px;
@@ -81,4 +85,10 @@
   width: 150px;
   height: 150px;
   // position: relative;
+}
+.status-label {
+  display: inline-block;
+  padding: 0 10px;
+  border-radius: 4px;
+
 }
