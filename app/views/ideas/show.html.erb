@@ -33,13 +33,13 @@
           <% end %>
           <% end %>
 
-          <% if @idea.user == current_user || current_user.role == "Municipality" %>
+          <% if @idea.user == current_user || current_user.role == "municipality" %>
           <%= link_to idea_path(@idea), method: :delete, data: {confirm: 'Are you sure?'} do %>
           <i class="fas fa-trash"></i>
           <% end %>
           <% end %>
 
-          <% if @idea.user != current_user && current_user.role != "Municipality" %>
+          <% if @idea.user != current_user && current_user.role != "municipality" %>
           <%= link_to (@idea), class: "pr-2" do %>
           <i class="fas fa-flag"></i>
           <% end %>
@@ -81,7 +81,7 @@
          <%# FEEDBACK %>
       <% if @idea.has_feedback? %>
         <div class="details-description">
-          <% if current_user.role == "Municipality" || @idea.user == current_user  %>
+          <% if current_user.role == "municipality" || @idea.user == current_user  %>
           <p class="tag">FEEDBACK</p>
             <% @idea.votes.each do |vote|  %>
               <% unless vote.comment == nil %>
@@ -100,7 +100,7 @@
     <%# RIGHT SIDE %>
     <div class="col-sm-12 col-md-4 text-center">
      <%# if the user is municipality %>
-      <% if current_user.role == "Municipality" %>
+      <% if current_user.role == "municipality" %>
         <div class="pt-5">
           <h5>Status</h5>
             <%# if the idea has the right vote can be approved/denied %>
