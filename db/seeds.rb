@@ -12,6 +12,7 @@ puts "Cleaning database..."
 Idea.destroy_all
 User.destroy_all
 Vote.destroy_all
+Chatroom.destroy_all
 
 puts "Creating municipality demo user..."
 mun_user = User.new(
@@ -263,18 +264,26 @@ end
 end
 
 
+# CHATROOM
+
+chatroom = Chatroom.new(
+  name: "general"
+)
+chatroom.save!
+puts "Chatroom #{chatroom.name} created"
+
+
 # 80 VOTES
 
 puts "Creating votes..."
 
   80.times do
   vote = Vote.new(
-  user: User.all.sample,
-  idea: Idea.all.sample
+    user: User.all.sample,
+    idea: Idea.all.sample
   )
   vote.save!
   puts "Vote for #{vote.idea.title} created"
 end
-
 
 puts "Finished!"
