@@ -17,9 +17,9 @@
         <div class='user-index'>
           <div>
            <% if idea.user.photo.attached?  %>
-        <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar' %>
+        <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar m-0 p-0' %>
         <% else %>
-          <p class="letter avatar"><%= current_user.first_name.first.capitalize %><%= current_user.last_name.first.capitalize %></p>
+          <p class="letter avatar"><%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %></p>
           <% end %>
           </div>
           <div class='user-name ml-2'><%= idea.user.first_name %></div>
