@@ -75,12 +75,12 @@
          <%# FEEDBACK %>
       <% if @idea.has_feedback? %>
         <div class="details-description">
-          <p class="tag">FEEDBACK</p>
           <% if current_user.role == "Municipality" || @idea.user == current_user  %>
+          <p class="tag">FEEDBACK</p>
             <% @idea.votes.each do |vote|  %>
               <% unless vote.comment == nil %>
-              <div class="details-description">
-                <div class="user-feedback"><%= time_ago_in_words(vote.updated_at) %> ago</div>
+              <div class="details-description pt-0 mt-0">
+                <div class="user-feedback"><small> <%= time_ago_in_words(vote.updated_at) %> ago</small></div>
                 <p><%= vote.comment %></p>
               </div>
               <% end %>
