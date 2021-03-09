@@ -27,7 +27,7 @@ import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 import { circleProgress } from '../plugins/progress_bar';
 import { addField } from '../plugins/add_field.js';
-
+import { initChatroomCable } from '../channels/chatroom_channel'
 
 
 // Internal imports, e.g:
@@ -40,5 +40,6 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   circleProgress();
   addField();
+  initChatroomCable();
 
 });
