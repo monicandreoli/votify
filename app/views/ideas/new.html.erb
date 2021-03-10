@@ -1,32 +1,37 @@
 <div class="container d-flex new-idea justify-content-around py-5">
-<div class="w-50">
-<h1>Pitch your idea</h1>
-<p class="subtitle">Shape your opinion and pitch your idea</p>
-<%= simple_form_for @idea, id: "new-idea-form" do |f| %>
-<%= f.input :title %>
-<%= f.input :problem %>
-<%= f.input :solution %>
+  <div class="new-form-text">
+  <div>
+    <h1>Pitch your idea</h1>
+    <p class="subtitle">Shape your opinion and pitch your idea</p>
+    <%= simple_form_for @idea, id: "new-idea-form" do |f| %>
+    <%= f.input :title %>
+    <%= f.input :problem %>
+    <%= f.input :solution %>
 
-<%= f.label :address, "Address * (Please include the postcode)"%>
-<%= f.input :address, as: :string, label: false %>
-<%= f.input :photo, as: :file %>
+    <%= f.label :address, "Address * (Please include the postcode)"%>
+    <%= f.input :address, as: :string, label: false %>
+    <%= f.input :photo, as: :file %>
 
-<%= f.label :municipality, "Does your idea require involvment of your local municipality?" %>
-<%= f.input :municipality, as: :boolean, label: false, input_html: {id: "municipality-needed"} %>
+    <%= f.label :municipality, "Does your idea require involvment of your local municipality?
+            By selecting 'Yes' your idea will take place only with the approval of your town hall. By deselecting 'Yes' your idea will take place once the number of total partecipants is achieved. Every partecipant will collaborate at the realization of the idea." %>
+    <div class="d-flex align-items-start pl-3">
+      <%= f.input :municipality, as: :boolean, label: false, input_html: {id: "municipality-needed"} %>
+      <p>Yes</p>
+    </div>
 
-
-<div id="participators-field" class="participators-hide">
-  <%= f.label :goal, "How many people do you need to participate in your idea? *" %>
-  <%= f.input :goal, label: false %>
-</div>
-<div class="d-flex justify-content-center">
-<%= button_tag type: 'submit', class: "btn btn-warning py-2 mt-3" do %>
-  <i class="far fa-plus-square pr-1"></i> Add Idea
-<% end %>
-</div>
-
-<% end %>
-
-</div>
+    <div id="participators-field" class="participators-hide">
+      <%= f.label :goal, "How many people do you need to participate in your idea? *" %>
+      <%= f.input :goal, label: false %>
+    </div>
+    <div class="d-flex justify-content-center">
+      <%= button_tag type: 'submit', class: "btn btn-warning py-2 mt-3" do %>
+      <i class="far fa-plus-square pr-1"></i> Add Idea
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  </div>
+  <div class="img-box-new">
   <%= image_tag "new-idea.svg", class: "form=img" %>
+  </div>
 </div>

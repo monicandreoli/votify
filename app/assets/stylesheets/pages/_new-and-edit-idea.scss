@@ -7,13 +7,12 @@
         border-radius: 50px !important;
     }
 }
-.edit-idea img {
-        width: 30%;
-        object-fit: contain;
+.new-form-text {
+    display: flex;
+    flex: 1;
 }
-
 .new-idea img {
-    width: 50%;
+    width: 100%;
     object-fit: contain;
 }
 
@@ -24,4 +23,14 @@
 
 .form-img {
     position: sticky;
+}
+
+.img-box-new {
+    flex: 1;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    @media  screen and (max-width: 850px) {
+      display: none;
+    }
 }
