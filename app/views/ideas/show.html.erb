@@ -50,11 +50,11 @@
 
       <div class="show-details">
 
-        <div class="show-title">
+        <div class="show-title d-flex">
           <div class="icon-show">
             <% if @idea.municipality == true %>
               <i class="fas fa-landmark"></i>
-            <% else %>  
+            <% else %>
               <i class="fas fa-handshake"></i>
             <% end %>
           </div>
@@ -62,8 +62,8 @@
              <h1><%= @idea.title %></h1>
              <div class="mt-3 pl-3">
               <%# if the idea reached the goal will have the label showing: %>
-              <% if @idea.votes.count >= @idea.goal %>
-                  <small class="<%= @label %> status-label" id="label-idea"><%= @idea.status %></small>
+              <% if @idea.votes.count %>
+                  <small class="<%= @label %>" id="label-idea"><%= @idea.status %></small>
               <% end %>
             </div>
           </div>
@@ -108,7 +108,7 @@
         <div class="pt-5">
           <h5>Status</h5>
             <%# if the idea has the right vote can be approved/denied %>
-              <% if @idea.votes.count >= @idea.goal %>
+              <% if @idea.votes.count %>
                 <div class="approved-denied">
                     <h6 class="subtitle"> This idea will be:</h6>
                       <div>

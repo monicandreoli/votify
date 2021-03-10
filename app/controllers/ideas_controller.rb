@@ -1,6 +1,7 @@
 class IdeasController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :approve, :deny]
+  before_action :set_label, only: [:show, :approve, :deny]
 
   def dashboard
     @ideas = Idea.all
@@ -48,13 +49,6 @@ class IdeasController < ApplicationController
   end
 
   def show
-    if @idea.status == "Approved"
-     @label = "bg-success text-light"
-    elsif @idea.status == "Denied"
-     @label = "bg-danger text-light"
-    else
-     @label = "bg-light text-dark"
-    end
    end
 
   def new
@@ -109,4 +103,15 @@ class IdeasController < ApplicationController
   def set_idea
     @idea = Idea.find(params[:id])
   end
+
+  def set_label
+    if @idea.status == "Approved"
+      @label = "bg-success text-light"
+     elsif @idea.status == "Denied"
+      @label = "bg-danger text-light"
+     else
+      @label = "bg-light text-dark status-label"
+     end
+  end
+
 end
