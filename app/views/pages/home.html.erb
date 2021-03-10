@@ -1,12 +1,12 @@
 <section id="home">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-6 col-sm-12 pt-lg-5 pt-md-5 pt-sm-0">
-                <h1 class="pb-3 mt-5">We give voice to local people</h1>
+            <div class="col-lg-6 col-md-6 col-sm-12 pt-lg-5 pt-md-4 pt-sm-0">
+                <h1 class="pb-3 mt-lg-5 mt-md-0">We give voice to local people</h1>
                 <p class="subtitle">Ready to take your neighbourhood to another level? Votify is here to help you bring
                     your ideas to
                     life.</p>
-                <div class="pt-lg-4 pt-md-0">
+                <div class="pt-lg-4 pt-md-0 pb-5">
 
                         <%= form_tag ideas_path, method: :get, class: "w-100 d-flex" do %>
                             <%= text_field_tag :query,
@@ -29,7 +29,7 @@
     <div class="container">
         <h1 class="text-center pb-2">How it works</h1>
         <p class="text-center subtitle">Unlock your neighbourhood's full potential in three simple steps</p>
-        <div class="container box-card">
+        <div class="container box-card justify-content-center">
             <div class="card how-works-card m-3 p-3">
                 <%= image_tag "bring-your-idea.svg" %>
                 <h5 class="py-3">Bring your idea</h5>
@@ -115,13 +115,13 @@
 
 <section id="get-started">
     <div class="px-2 d-flex justify-content-center">
-        <%= image_tag "super-hero.svg" %>
+        <%= image_tag "super-hero.svg", class: "super-hero-img" %>
         <div class="px-5 text-center mt-lg-5">
             <h1>Get started with Votify</h1>
             <p class="subtitle">Make the change. Be the change.</p>
              <%= link_to "Get Started", new_user_session_path, class: "btn btn-warning py-2" %>
         </div>
-        <%= image_tag "super-hero1.svg" %>
+        <%= image_tag "super-hero1.svg", class: "super-hero-img" %>
     </div>
 </section>
 
