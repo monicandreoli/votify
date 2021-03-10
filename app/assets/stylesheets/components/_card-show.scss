@@ -18,6 +18,17 @@
   margin: 40px 20px 20px 20px;
 }
 
+.show-title {
+  position: relative;
+}
+
+.icon-show {
+  color: $green;
+  position: absolute;
+  font-size: 24px;
+  right: 0;
+}
+
 .user-feedback {
   color: $dark-gray;
 }

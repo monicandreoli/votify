@@ -21,10 +21,10 @@
         <a class="nav-link" id="v-pills-chat-tab" data-toggle="pill" href="#v-pills-chat" role="tab"
           aria-controls="v-pills-chat" aria-selected="true"><i class="fas fa-info-circle pr-2"></i></i>InfoChat</a>
 
-           <%= link_to ideas_path do %>
-        <p class="nav-link pb-0 mb-2">
-          <i class="far fa-compass pr-2"></i>Explore ideas
-        </p>
+        <%= link_to ideas_path do %>
+          <p class="nav-link pb-0 mb-2">
+            <i class="far fa-compass pr-2"></i>Explore ideas
+          </p>
         <% end %>
 
         <%= link_to edit_user_registration_path do %>
@@ -292,7 +292,14 @@
                   </div>
 
 
-                  <div class="px-3">
+                  <div class="px-3 position-relative">
+                    <div class="icon-dashboard">
+                      <% if idea.municipality == true %>
+                        <i class="fas fa-landmark"></i>
+                      <% else %>  
+                        <i class="fas fa-handshake"></i>
+                      <% end %>
+                    </div>
                     <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
                     <div class="d-flex justify-content-between">
                       <div class="d-flex">
@@ -338,7 +345,14 @@
                     <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
                   </div>
 
-                  <div class="px-3">
+                  <div class="px-3 position-relative">
+                    <div class="icon-dashboard">
+                      <% if idea.municipality == true %>
+                        <i class="fas fa-landmark"></i>
+                      <% else %>  
+                        <i class="fas fa-handshake"></i>
+                      <% end %>
+                    </div>
                     <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
                     <div class="d-flex justify-content-between">
                       <div class="d-flex">
@@ -389,7 +403,14 @@
             </div>
 
 
-            <div class="px-3">
+            <div class="px-3 position-relative">
+              <div class="icon-dashboard">
+                <% if idea.municipality == true %>
+                  <i class="fas fa-landmark"></i>
+                <% else %>  
+                  <i class="fas fa-handshake"></i>
+                <% end %>
+              </div>
               <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
               <div class="d-flex justify-content-between">
                 <div class="d-flex">
@@ -454,7 +475,14 @@
               <div><small><strong><%= idea.votes.count %> votes</strong></small></div>
             </div>
 
-            <div class="px-3">
+            <div class="px-3 position-relative">
+              <div class="icon-dashboard">
+                <% if idea.municipality == true %>
+                  <i class="fas fa-landmark"></i>
+                <% else %>  
+                  <i class="fas fa-handshake"></i>
+                <% end %>
+              </div>
               <p class="pt-2 subtitle"><%= idea.title.capitalize %></p>
               <div class="d-flex justify-content-between">
                 <div class="d-flex">
