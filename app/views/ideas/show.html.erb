@@ -53,10 +53,11 @@
         <div class="show-title">
           <div class="d-flex justify-content-between align-items-center">
              <h1><%= @idea.title %></h1>
+
               <div class="d-flex  align-items-center">
                 <div class="mr-3">
                   <%# if the idea reached the goal will have the label showing: %>
-                  <% if @idea.votes.count %>
+                  <% if @idea.votes.count >= @idea.goal %>
                       <small class="<%= @label %>" id="label-idea"><%= @idea.status %></small>
                   <% end %>
                 </div>
@@ -68,6 +69,7 @@
                   <% end %>
                 </div>
               </div>
+
           </div>
         </div>
 
@@ -110,7 +112,7 @@
         <div class="pt-5">
           <h5>Status</h5>
             <%# if the idea has the right vote can be approved/denied %>
-              <% if @idea.votes.count %>
+              <% if @idea.votes.count >= @idea.goal %>
                 <div class="approved-denied">
                     <h6 class="subtitle"> This idea will be:</h6>
                       <div>
