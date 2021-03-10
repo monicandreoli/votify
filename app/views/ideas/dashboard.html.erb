@@ -21,18 +21,15 @@
         <a class="nav-link" id="v-pills-chat-tab" data-toggle="pill" href="#v-pills-chat" role="tab"
           aria-controls="v-pills-chat" aria-selected="true"><i class="fas fa-info-circle pr-2"></i></i>InfoChat</a>
 
+
         <%= link_to ideas_path do %>
           <p class="nav-link pb-0 mb-2">
             <i class="far fa-compass pr-2"></i>Explore ideas
           </p>
         <% end %>
 
-        <%= link_to edit_user_registration_path do %>
-        <p class="nav-link pb-0 mb-2">
-          <i class="fas fa-user-edit pr-1"></i>
-          Edit account
-        </p>
-        <% end %>
+        <a class="nav-link" id="v-pills-editMun-tab" data-toggle="pill" href="#v-pills-editMun" role="tab" aria-controls="v-pills-editMun" aria-selected="true"><i class="fas fa-user-edit pr-2"></i></i>Edit Account</a>
+
         <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
           aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-cogs pr-2"></i>Settings</a>
         <%= link_to destroy_user_session_path, method: :delete do %>
@@ -162,6 +159,11 @@
         <%# CHAT CONTENT  %>
         <div class="tab-pane fade" id="v-pills-chat" role="tabpanel" aria-labelledby="v-pills-chat-tab">
            <%= render(partial: "chatrooms/chat", locals: { chatroom: @chatroom, message: @message }) %>
+        </div>
+
+        <%# EDIT ACCOUNT MUN CONTENT  %>
+        <div class="tab-pane fade" id="v-pills-editMun" role="tabpanel" aria-labelledby="v-pills-editMun-tab">
+              <%= render(partial: "devise/registrations/edit", locals: { resource: current_user, resource_name: :user, devise_mapping: Devise.mappings[:user] }) %>
         </div>
 
         <%# SETTINGS CONTENT  %>
