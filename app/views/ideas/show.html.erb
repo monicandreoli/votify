@@ -169,9 +169,9 @@
 
         <%# CONGRATULATIONS %>
         <div class="d-flex justify-content-center" id="congratulations">
-          <div class="show-congratulations">
+          <% if @idea.votes.count >= @idea.goal %>
+            <div class="show-congratulations">
             
-            <% if @idea.votes.count >= @idea.goal %>
               
               <% if @idea.user == current_user %>
                 <div class="congrats">
@@ -198,9 +198,9 @@
 
               <% end %>
 
-            <% end %>
             
-          </div>
+            </div>
+          <% end %>
         </div>
 
 
