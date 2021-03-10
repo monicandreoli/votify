@@ -16,8 +16,16 @@
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-chart-pie pr-2"></i>Overview</a>
 
+        
+
         <a class="nav-link" id="v-pills-chat-tab" data-toggle="pill" href="#v-pills-chat" role="tab"
           aria-controls="v-pills-chat" aria-selected="true"><i class="fas fa-info-circle pr-2"></i></i>InfoChat</a>
+
+           <%= link_to ideas_path do %>
+        <p class="nav-link pb-0 mb-2">
+          <i class="far fa-compass pr-2"></i>Explore ideas
+        </p>
+        <% end %>
 
         <%= link_to edit_user_registration_path do %>
         <p class="nav-link pb-0 mb-2">
@@ -63,7 +71,7 @@
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
           <h2>Welcome <%= current_user.first_name.capitalize %></h2>
           <div class="d-flex justify-content-between">
-            <p>Give opportunities to these idea to be taken care of!</p>
+            <p>How do you want to help your citizens today?</p>
 
           </div>
           <table class="table pt-3">
@@ -79,9 +87,9 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                      <%= link_to "Pending", url_for(params.permit("status", "votes").merge(status: "pending")), class: "filter-icon dropdown-item" %>
-                      <%= link_to "Approved", url_for(params.permit("status", "votes").merge(status: "approved")), class: "filter-icon dropdown-item" %>
-                      <%= link_to "Denied", url_for(params.permit("status", "votes").merge(status: "denied")), class: "filter-icon dropdown-item" %>
+                      <%= link_to "Pending", url_for(params.permit("status", "votes").merge(status: "Pending")), class: "filter-icon dropdown-item" %>
+                      <%= link_to "Approved", url_for(params.permit("status", "votes").merge(status: "Approved")), class: "filter-icon dropdown-item" %>
+                      <%= link_to "Denied", url_for(params.permit("status", "votes").merge(status: "Denied")), class: "filter-icon dropdown-item" %>
                       <%= link_to "All", dashboard_path(created_at: "asc"), class: "filter-icon dropdown-item" %>
                     </div>
 
@@ -92,7 +100,6 @@
                     <i class="fas fa-sort-amount-down"></i>
                   <% end %>
                   <%= link_to url_for(params.permit("status", "votes").merge(votes: "asc")), class: "filter-icon ml-1" do %>
-                  <%# dashboard_path( votes: "asc" ) %>
                     <i class="fas fa-sort-amount-up-alt"></i>
                   <% end %>
                 </th>
@@ -101,7 +108,7 @@
             </thead>
             <tbody>
               <% @ideas.each do |idea| %>
-                <% if idea.municipality == true %>
+                <% if idea.municipality == true && idea.votes.count >= idea.goal %>
 
                   <tr>
                     <th scope="row">
@@ -122,7 +129,17 @@
                     <td><%= idea.title %></td>
                     <td><%= idea.address %></td>
 
-                    <td><%= idea.status %></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <% if @idea.status == "Pending" %>
+                          <p class="bg-info text-dark status-label m-0"><%= @idea.status %></p>
+                        <% elsif @idea.status == "Approved" %>
+                          <p class="bg-success text-light status-label m-0"><%= @idea.status %></p>
+                        <% else %>
+                          <p class="bg-danger text-light status-label m-0"><%= @idea.status %></p>
+                        <% end %>
+                      </div>
+                    </td>
 
                     <td>
                       <div class="d-flex align-items-center justify-content-between">
