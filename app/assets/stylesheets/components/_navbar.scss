@@ -6,7 +6,7 @@
   background: $green;
   padding: 1vh 2vw;
   z-index: 999;
-  height: 60px;
+
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   align-items: center;
 
@@ -26,6 +26,8 @@
   font-family: $body-font;
   color: $light-gray;
   font-weight: 900;
+  margin: 0;
+  padding: 0;
 }
  .nav-link {
   color: white;
@@ -70,4 +72,21 @@
 
 .avatar-nav {
   transform: translate(0, 8px);
+}
+
+@media screen and(max-width: 768px) {
+  .navbar-lewagon {
+    padding: 1vh 0;
+  }
+
+  .navbar-brand {
+    margin-left: 16px;
+  }
+
+  ul {
+    text-align: left;
+    margin-left: 16px;
+    padding-bottom: 10px;
+
+  }
 }
