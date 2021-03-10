@@ -48,7 +48,14 @@ class IdeasController < ApplicationController
   end
 
   def show
-  end
+    if @idea.status == "Approved"
+     @label = "bg-success text-light"
+    elsif @idea.status == "Denied"
+     @label = "bg-danger text-light"
+    else
+     @label = "bg-light text-dark"
+    end
+   end
 
   def new
     @idea = Idea.new

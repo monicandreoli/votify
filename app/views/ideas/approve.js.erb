@@ -1,4 +1,5 @@
 $('#approvedModalCenter').modal('show')
 
-document.querySelector('approved-denied').innerHTML = '<%= link_to "Approved", approve_path(@idea), method: :patch, remote: true, class: "btn btn-outline-success" %>'
+document.querySelector("#label-idea").innerHTML = '<%= @idea.status %>'
 
+document.querySelector("#label-idea").classList.add(<%= @label %>);

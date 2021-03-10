@@ -1,4 +1,5 @@
 $('#denyModalCenter').modal('show')
 
-document.querySelector('approved-denied').innerHTML = '<%= link_to "Denied", deny_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger" %>'
+document.querySelector("#label-idea").innerHTML = '<%= @idea.status %>'
 
+document.querySelector("#label-idea").classList.add("<%= @label %>");
