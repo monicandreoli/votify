@@ -197,4 +197,14 @@ table {
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0.7;
 }
+
+.icon-dashboard {
+    color: $green;
+    opacity: 0.7;
+    position: absolute;
+    font-size: 20px;
+    right: 8px;
+    bottom: 16px;
+  }
