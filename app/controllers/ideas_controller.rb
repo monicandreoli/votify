@@ -55,10 +55,7 @@ class IdeasController < ApplicationController
     else
      @label = "bg-light text-dark"
     end
-
-    if (@idea.votes.count >= @idea.goal) && (@idea.municipality == true)
-      @idea.status = "Pending"
-    end
+  
    end
 
   def new

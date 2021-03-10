@@ -22,6 +22,12 @@ class Idea < ApplicationRecord
     self.votes.find { |vote| vote.user_id == current_user.id }
   end
 
+  # def set_status
+  #   if (idea.votes.count >= idea.goal) && (idea.municipality == true)
+  #     idea.status = "Pending"
+  #   end
+  # end
+
   # def allow_vote
   #   if self.votes.count > self.goal
   #     errors.add(:votes, "The limit is reached")
