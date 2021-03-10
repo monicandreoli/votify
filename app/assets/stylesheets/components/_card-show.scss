@@ -24,7 +24,7 @@
 
 .icon-show {
   color: $green;
-  position: absolute;
+  // position: absolute;
   font-size: 24px;
   right: 0;
 }
@@ -68,14 +68,30 @@
   margin: 40px 20px 20px 20px;
 }
 
+.show-congratulations {
+  width: 180px;
+  color: $dark-gray;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.congrats {
+  color: $green;
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .show-goal-info {
   // box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid $orange;
-  border-radius: 4px;
-  margin: 20px 40px;
-  padding: 20px;
+  border-left: 1px solid $orange;
+  // border-radius: 4px;
+  margin: 20px 0;
+  padding: 6px 12px;
   text-align: left;
   color: $dark-gray;
+  width: 180px;
 }
 
 .show-progress {

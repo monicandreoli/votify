@@ -8,6 +8,7 @@ class VotesController < ApplicationController
       format.js
       format.html { redirect_to idea_path(@idea, anchor: "vote-#{@vote.id}")
     }
+    # @idea.set_status
   end
 end
 
