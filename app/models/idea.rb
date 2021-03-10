@@ -22,11 +22,12 @@ class Idea < ApplicationRecord
     self.votes.find { |vote| vote.user_id == current_user.id }
   end
 
-  # def set_status
-  #   if (idea.votes.count >= idea.goal) && (idea.municipality == true)
-  #     idea.status = "Pending"
-  #   end
-  # end
+  def set_status
+    if (self.votes.count >= self.goal) && (self.municipality == true)
+      self.status = "Pending"
+    end
+    self.save
+  end
 
   # def allow_vote
   #   if self.votes.count > self.goal

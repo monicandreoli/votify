@@ -166,6 +166,12 @@
 
 
         <div class="ml-4 mt-4 show-goal-info">
+          <p>Goal: <%= @idea.goal %></p> 
+          <p>Status: <%= @idea.votes.count %></p>
+
+          
+
+
           <%# INFO IF IDEA OFFICIAL %>
           <% if @idea.municipality == true %>
             <p class="mb-2">So far the idea has <strong><%= @idea.votes.count %></strong> votes.</p>
