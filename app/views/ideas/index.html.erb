@@ -1,62 +1,68 @@
 <div class="m-4 pt-5">
-<div class="d-flex">
+  <div class="d-flex">
     <div class=" box-card-index mr-3">
-      <div>
-        <h3><strong>Explore initiatives around you</strong></h3>
-      </div>
-      <div>
-        <p>
-          These are all the ideas from people living in your neighborhood.
-          <br> Your vote can make the real difference!
-        </p>
-      </div>
+      <h3><strong>Explore initiatives around you</strong></h3>
+      <p>
+        These are all the ideas from people living in your neighborhood.
+        <br> Your vote can make the real difference!
+      </p>
       <% @ideas.each do |idea| %>
-      <%= link_to idea_path(idea), class: 'card-link' do %>
-      <div class="card py-4 px-4 d-flex index-card">
+        <%= link_to idea_path(idea), class: 'card-link' do %>
+          <div class="card py-4 px-4 d-flex index-card">
 
-        <div class='user-index'>
-          <div>
-           <% if idea.user.photo.attached?  %>
-        <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar m-0 p-0' %>
-        <% else %>
-          <p class="letter avatar"><%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %></p>
-          <% end %>
+            <div class="icon-index">
+              <% if idea.municipality == true %>
+                <i class="fas fa-landmark"></i>
+              <% else %>  
+                <i class="fas fa-handshake"></i>
+              <% end %>
+            </div>
+
+            <div class='user-index'>
+              <% if idea.user.photo.attached?  %>
+                <%= cl_image_tag idea.user.photo.key, crop: :fill, class: 'avatar m-0 p-0' %>
+              <% else %>
+                <p class="letter avatar"><%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %></p>
+              <% end %>
+              <div class='user-name ml-2'>
+                <%= idea.user.first_name %>
+              </div>
+              <div class='date'>
+                <%= time_ago_in_words(idea.created_at) %> ago
+              </div>
+            </div>
+
+            <div class='title-index mt-3'>
+              <h4><%= idea.title %></h4>
+            </div>
+
+            <div class='content-index'>
+              <p><%= truncate(idea.problem, length: 120) %></p> 
+            </div>
+
+            <div class='footer-index'>
+              <% if idea.votes.count == 1 %>
+                <%= idea.votes.count %> vote
+              <% else %>
+                <%= idea.votes.count %> votes
+              <% end %>
+            </div>
+
           </div>
-          <div class='user-name ml-2'><%= idea.user.first_name %></div>
-          <div class='date'><%= time_ago_in_words(idea.created_at) %> ago</div>
-        </div>
-        <div class='title-index'>
-          <p>
-            <%= idea.title %>
-          </p></div>
-          <div class='content-index'>
-            <p>
-              <%= truncate(idea.problem, length: 120) %>
-            </p>
-          </div>
-          <div class='footer-index'>
-            <% if idea.votes.count == 1 %>
-            <%= idea.votes.count %> vote
-            <% else %>
-            <%= idea.votes.count %> votes
-            <% end %>
-
-          </div>
-
-
-        </div>
         <% end %>
-        <% end %>
+      <% end %>
+
       </div>
         <div class='w-100 map'>
-        <div id="map"
-        style="width: 100%; height: 800px;"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-        class="mapboxgl-popup mapboxgl-popup-content">
+          <div id="map"
+          style="width: 100%; height: 800px;"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+          class="mapboxgl-popup mapboxgl-popup-content">
+        </div>
       </div>
-      </div>
-
+    </div>
+  </div>
 </div>
 
 

@@ -2,6 +2,7 @@
   border-radius: 7px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   color: black;
+  position: relative;
 }
 .card p:hover {
   text-decoration: none;
@@ -22,11 +23,15 @@
 
 .title-index {
   font-size: 24px;
-  font-weight: 900;
+  h4 {
+    font-weight: 600;
+  }
 }
 
 .user-index {
   display: flex;
+  align-items: center;
+  color: $dark-gray;
 }
 
 .user-index .avatar {
@@ -46,8 +51,15 @@
   white-space: pre;
 }
 
+.icon-index {
+  color: $orange;
+  position: absolute;
+  font-size: 24px;
+  right: 24px;
+}
+
 .footer-index {
-  color: #929292;
+  color: $dark-gray;
 }
 
 
