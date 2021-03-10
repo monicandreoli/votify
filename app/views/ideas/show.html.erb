@@ -50,22 +50,24 @@
 
       <div class="show-details">
 
-        <div class="show-title d-flex">
-          <div class="icon-show">
-            <% if @idea.municipality == true %>
-              <i class="fas fa-landmark"></i>
-            <% else %>
-              <i class="fas fa-handshake"></i>
-            <% end %>
-          </div>
-          <div class="d-flex justify-content-between">
+        <div class="show-title">
+          <div class="d-flex justify-content-between align-items-center">
              <h1><%= @idea.title %></h1>
-             <div class="mt-3 pl-3">
-              <%# if the idea reached the goal will have the label showing: %>
-              <% if @idea.votes.count %>
-                  <small class="<%= @label %>" id="label-idea"><%= @idea.status %></small>
-              <% end %>
-            </div>
+              <div class="d-flex  align-items-center">
+                <div class="mr-3">
+                  <%# if the idea reached the goal will have the label showing: %>
+                  <% if @idea.votes.count %>
+                      <small class="<%= @label %>" id="label-idea"><%= @idea.status %></small>
+                  <% end %>
+                </div>
+                <div class="icon-show">
+                  <% if @idea.municipality == true %>
+                    <i class="fas fa-landmark"></i>
+                  <% else %>
+                    <i class="fas fa-handshake"></i>
+                  <% end %>
+                </div>
+              </div>
           </div>
         </div>
 
@@ -163,40 +165,76 @@
           </div>
         </div>
 
+        <%# CONGRATULATIONS %>
+        <div class="d-flex justify-content-center" id="congratulations">
+          <div class="show-congratulations">
+            
+            <% if @idea.votes.count >= @idea.goal %>
+              
+              <% if @idea.user == current_user %>
+                <div class="congrats">
+                  <p>Congratulations!</p>
+                </div>
+                <p class="m-0">Your idea has reached its goal.</p>
+                <% if @idea.municipality == true %>
+                  <p class="m-0">Wait for your local municipality to contact you soon.</p>
+                <% else %>
+                  <p class="m-0">Reach out to the participants and make it come true!</p>
+                <% end %>
+
+              <% else %>
+
+                <div class="congrats">
+                  <p>Congratulations!</p>
+                </div>
+                <p class="m-0">The idea has reached its goal.</p>
+                <% if @idea.municipality == true %>
+                  <p class="m-0">Your local municipality will decide on it soon.</p>
+                <% else %>
+                  <p class="m-0">The participants are on their way to making it come true!</p>
+                <% end %>
+
+              <% end %>
+
+            <% end %>
+            
+          </div>
+        </div>
 
 
-        <div class="ml-4 mt-4 show-goal-info">
-          <p>Goal: <%= @idea.goal %></p> 
-          <p>Status: <%= @idea.votes.count %></p>
-
+        <div class="d-flex justify-content-center">
+          <div class="show-goal-info">
+            
+            <p><i class="fas fa-bullseye mr-2"></i>Goal: <strong><%= @idea.goal %></strong>
+            
+              <% if @idea.municipality == true %>
+                votes
+              <% else %>
+                participants
+              <% end %>
+            
+            </p> 
+            
+            <% if @idea.municipality == true %>
+              <p class="mb-0"><i class="far fa-check-square mr-2"></i>Status: <strong><%= @idea.votes.count %></strong>
           
+                <% if @idea.votes.count == 0 %>
+                  vote
+                <% else %>
+                  votes
+                <% end %>
 
-
-          <%# INFO IF IDEA OFFICIAL %>
-          <% if @idea.municipality == true %>
-            <p class="mb-2">So far the idea has <strong><%= @idea.votes.count %></strong> votes.</p>
-
-            <% if @idea.votes.count > @idea.goal %>
-              <p class="m-0">The idea has <strong><%= @idea.votes.count - @idea.goal %></strong> votes more than needed in order to be discussed in your local municipality.</p>
-            <% elsif @idea.votes.count == @idea.goal %>
-              <p class="m-0">Congratulations! The idea has reached the amount of votes needed in order to be discussed in your local municipality.</p>
+              </p>
             <% else %>
-              <p class="m-0"> The idea needs <strong><%= @idea.goal - @idea.votes.count %></strong> votes more in order to be discussed in your local municipality.</p>
+              <p class="mb-0"><i class="fas fa-handshake mr-1"></i>Status: <strong><%= @idea.votes.count %></strong>
+                <% if @idea.votes.count == 0 %>
+                  participant
+                <% else %>
+                  participants
+                <% end %>
+              </p>
             <% end %>
-
-          <%# INFO IF IDEA PERSONAL   %>
-          <% else %>
-            <p class="mb-2">So far the idea has <strong><%= @idea.votes.count %></strong> participants.</p>
-
-            <% if @idea.votes.count > @idea.goal %>
-              <p class="m-0">The idea has <strong><%= @idea.votes.count - @idea.goal %></strong> participants more than needed in order to be realised.</p>
-            <% elsif @idea.votes.count == @idea.goal %>
-              <p class="m-0">Congratulations! The idea has reached the amount of paricipants needed in order to be realised.</p>
-            <% else %>
-              <p class="m-0"> The idea needs <strong><%= @idea.goal - @idea.votes.count %></strong> participants more in order to be realised.</p>
-            <% end %>
-          <% end %>
-
+          </div>
         </div>
       </div>
     </div>
