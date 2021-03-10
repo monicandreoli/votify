@@ -4,7 +4,7 @@ class IdeasController < ApplicationController
 
   def dashboard
     @ideas = Idea.all
-
+    @idea = Idea.new
 
       if params[:status].present?
         @ideas = @ideas.by_status(params[:status])
@@ -12,7 +12,7 @@ class IdeasController < ApplicationController
       if params[:votes].present?
         @ideas = @ideas.by_votes(params[:votes])
       end
-  
+
 
     @latest_ideas = Idea.order(:created_at).limit(5)
     @popular_ideas = Idea.most_popular
