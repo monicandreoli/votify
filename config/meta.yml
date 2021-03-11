@@ -1,0 +1,5 @@
+meta_product_name: "Votify"
+meta_title: "Votify - Gives voice to local people"
+meta_description: "Ready to take your neighbourhood to another level? Votify is here to help you bring your ideas to life."
+meta_image: "votify.png" # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account"   # required for Twitter Cards
