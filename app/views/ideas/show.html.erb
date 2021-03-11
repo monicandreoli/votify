@@ -111,6 +111,8 @@
       <% if current_user.role == "municipality" %>
         <div class="pt-5 d-flex justify-content-center">
             <%# if the idea has the right vote can be approved/declined %>
+            
+            <% if @idea.municipality == true %>
               <% if @idea.votes.count >= @idea.goal %>
                 <div class="approved-declined">
                     <p class="subtitle"> The idea will be:</p>
@@ -126,6 +128,8 @@
                   </div>
                 </div>
               <% end %>
+            <% end %>
+            
         </div>
       <% else %>
         <% unless @idea.user == current_user %>
