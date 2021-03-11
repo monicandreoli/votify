@@ -3,3 +3,5 @@ $('#exampleModal').modal('show')
 document.getElementById('vote-btn').innerHTML = '<%= button_to vote_path(@vote), method: :delete, remote: true, class: "btn btn-warning py-2 w-100 vote-btn" do %> <% if @idea.municipality == true %> <i class="far fa-square mr-1"></i></i> Unvote <% else %> <i class="fas fa-handshake-slash mr-1"></i> Resign <% end %> <% end %>'
 
 document.querySelector('.modal-body').innerHTML = '<%= j render "form", vote: @vote %>'
+
+document.querySelector('#congratulations').innerHTML = '<%= j render "ideas/congrats", idea: @idea %>'
