@@ -119,3 +119,16 @@
   border-radius: 4px;
 
 }
+
+.approved-denied {
+  width: 200px;
+  color: $dark-gray;
+}
+
+.approved-denied-waiting {
+  width: 200px;
+  color: $dark-gray;
+  border: 1px solid $orange;
+  padding: 12px;
+  border-radius: 4px;
+}

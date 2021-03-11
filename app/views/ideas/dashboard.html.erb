@@ -128,12 +128,12 @@
 
                     <td>
                       <div class="d-flex align-items-center">
-                        <% if @idea.status == "Pending" %>
-                          <p class="bg-info text-dark status-label m-0"><%= @idea.status %></p>
-                        <% elsif @idea.status == "Approved" %>
-                          <p class="bg-success text-light status-label m-0"><%= @idea.status %></p>
+                        <% if idea.status == "Pending" %>
+                          <p class="bg-light text-dark status-label m-0"><%= idea.status %></p>
+                        <% elsif idea.status == "Approved" %>
+                          <p class="bg-success text-light status-label m-0"><%= idea.status %></p>
                         <% else %>
-                          <p class="bg-danger text-light status-label m-0"><%= @idea.status %></p>
+                          <p class="bg-danger text-light status-label m-0"><%= idea.status %></p>
                         <% end %>
                       </div>
                     </td>
