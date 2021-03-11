@@ -1,0 +1,37 @@
+
+
+          <% if current_user.role != "municipality" %>
+            <% if idea.votes.count >= idea.goal %>
+              <div class="show-congratulations">
+
+
+                <% if idea.user == current_user %>
+                  <div class="congrats">
+                    <p>Congratulations!</p>
+                  </div>
+                  <p class="m-0">Youridea has reached its goal.</p>
+                  <% if idea.municipality == true %>
+                    <p class="m-0">Wait for your local municipality to contact you soon.</p>
+                  <% else %>
+                    <p class="m-0">Reach out to the participants and make it come true!</p>
+                  <% end %>
+
+                <% else %>
+
+                  <div class="congrats">
+                    <p>Congratulations!</p>
+                  </div>
+                  <p class="m-0">The idea has reached its goal.</p>
+                  <% if idea.municipality == true %>
+                    <p class="m-0">Your local municipality will decide on it soon.</p>
+                  <% else %>
+                    <p class="m-0">The participants are on their way to making it come true!</p>
+                  <% end %>
+
+                <% end %>
+
+
+              </div>
+            <% end %>
+          <% end %>
+
