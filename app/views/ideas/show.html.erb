@@ -109,20 +109,21 @@
     <div class="col-sm-12 col-md-4 text-center">
      <%# if the user is municipality %>
       <% if current_user.role == "municipality" %>
-        <div class="pt-5">
-          <h5>Status</h5>
+        <div class="pt-5 d-flex justify-content-center">
             <%# if the idea has the right vote can be approved/denied %>
               <% if @idea.votes.count >= @idea.goal %>
                 <div class="approved-denied">
-                    <h6 class="subtitle"> This idea will be:</h6>
+                    <p class="subtitle"> The idea will be:</p>
                       <div>
                         <%= link_to "Approved", approve_path(@idea), method: :patch, remote: true, class: "btn btn-outline-success" %>
                         <%= link_to "Denied", deny_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger show-denied-button" %>
                       </div>
                 </div>
               <% else %>
-                <div>
-                  <p>This idea still has to reach the right amount of votes to be approved or denied.</p>
+                <div class="approved-denied-waiting">
+                  <div>
+                    <p class="mb-0">The idea still has to reach its goal to be approved or denied.</p>
+                  </div>
                 </div>
               <% end %>
         </div>
@@ -169,38 +170,42 @@
 
         <%# CONGRATULATIONS %>
         <div class="d-flex justify-content-center" id="congratulations">
-          <% if @idea.votes.count >= @idea.goal %>
-            <div class="show-congratulations">
-            
+        
+          <% if current_user.role =! "municipality" %>
+            <% if @idea.votes.count >= @idea.goal %>
+              <div class="show-congratulations">
               
-              <% if @idea.user == current_user %>
-                <div class="congrats">
-                  <p>Congratulations!</p>
-                </div>
-                <p class="m-0">Your idea has reached its goal.</p>
-                <% if @idea.municipality == true %>
-                  <p class="m-0">Wait for your local municipality to contact you soon.</p>
+                
+                <% if @idea.user == current_user %>
+                  <div class="congrats">
+                    <p>Congratulations!</p>
+                  </div>
+                  <p class="m-0">Your idea has reached its goal.</p>
+                  <% if @idea.municipality == true %>
+                    <p class="m-0">Wait for your local municipality to contact you soon.</p>
+                  <% else %>
+                    <p class="m-0">Reach out to the participants and make it come true!</p>
+                  <% end %>
+
                 <% else %>
-                  <p class="m-0">Reach out to the participants and make it come true!</p>
+
+                  <div class="congrats">
+                    <p>Congratulations!</p>
+                  </div>
+                  <p class="m-0">The idea has reached its goal.</p>
+                  <% if @idea.municipality == true %>
+                    <p class="m-0">Your local municipality will decide on it soon.</p>
+                  <% else %>
+                    <p class="m-0">The participants are on their way to making it come true!</p>
+                  <% end %>
+
                 <% end %>
 
-              <% else %>
-
-                <div class="congrats">
-                  <p>Congratulations!</p>
-                </div>
-                <p class="m-0">The idea has reached its goal.</p>
-                <% if @idea.municipality == true %>
-                  <p class="m-0">Your local municipality will decide on it soon.</p>
-                <% else %>
-                  <p class="m-0">The participants are on their way to making it come true!</p>
-                <% end %>
-
-              <% end %>
-
-            
-            </div>
+              
+              </div>
+            <% end %>
           <% end %>
+        
         </div>
 
 
@@ -254,7 +259,7 @@
       <div class="modal-body-approved">
         <div class="pl-4"><h5 class="text-success">The idea has been successfully approved!</h5>
           <p class="pb-3">Set the date for the appointment with the resident who proposed it.</p>
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center mb-4">
           <a href = "mailto:<%= @idea.user.email %>" class="btn btn-warning py-2">Send Email</a>
           </div>
         </div>
