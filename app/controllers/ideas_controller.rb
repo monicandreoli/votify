@@ -107,9 +107,9 @@ class IdeasController < ApplicationController
 
   def set_label
     if @idea.status == "Approved"
-      @label = "bg-success text-light"
+      @label = "bg-success text-light status-label"
      elsif @idea.status == "Declined"
-      @label = "bg-danger text-light"
+      @label = "bg-danger text-light status-label"
      else
       @label = "bg-light text-dark status-label"
      end
