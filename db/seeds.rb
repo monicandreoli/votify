@@ -10,24 +10,67 @@ require 'faker'
 
 puts "Cleaning database..."
 Idea.destroy_all
+Message.destroy_all
 User.destroy_all
 Vote.destroy_all
 Chatroom.destroy_all
 
-puts "Creating municipality demo user..."
+# MUNICIPALITY SIDE
+
+# MUNICIPALITY DEMO USER
+
+puts "Creating municipality demo user, chat and messages..."
 mun_user = User.new(
-  first_name: "Zofia",
-  last_name: "Matryca",
-  email: "zofia@gmail.com",
+  first_name: "Zoe",
+  last_name: "Bakker",
+  email: "zoe@gmail.com",
   password: "123456",
   address: "Ruyschstraat 401, 1091MS Amsterdam",
   role: "municipality"
 )
-mun_user_image = URI.open("https://images.unsplash.com/photo-1565697451991-9c2bd0524fd2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2030&q=80")
+mun_user_image = URI.open("https://images.unsplash.com/photo-1502764613149-7f1d229e230f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80")
 mun_user.photo.attach(io: mun_user_image, filename: "female5.png", content_type: "image/png")
 mun_user.save!
 puts "User #{mun_user.first_name} created"
 
+# CHATROOM
+
+chatroom = Chatroom.new(
+  name: "general"
+)
+chatroom.save!
+puts "Chatroom #{chatroom.name} created"
+
+# 3 MESSAGES 
+
+message_one = Message.new(
+  content: "Dear Residents! The paper trash pickup schedule has been changed. From now on the paper trash will be collected on Mondays between 8am and 10pm and on Thursday betweeen 8am and 10am.",
+  chatroom: chatroom,
+  user: mun_user
+)
+message_one.save!
+puts "First message was created"
+
+message_two = Message.new(
+  content: "Dear Residents! From Tuesday 16.03.2021 new coronavirus measures are introduced. The curfew has been lifted and you can now leave home past 9pm. Please remember to wear masks in public spaces.",
+  chatroom: chatroom,
+  user: mun_user
+)
+message_two.save!
+puts "Second message was created"
+
+message_three = Message.new(
+  content: "Dear Residents! We are happy to inform that the municipality of Amsterdam has joined Voitfy. Propose your ideas and help us make the city of Amsterdam a better place.",
+  chatroom: chatroom,
+  user: mun_user
+)
+message_three.save!
+puts "Third message was created"
+
+
+# RESIDENT SIDE
+
+# RESIDENT DEMO USER & HER IDEA WITH FEEDBACK
 
 puts "Creating resident demo user & her ideas..."
 
@@ -44,46 +87,68 @@ res_user.save!
 puts "User #{res_user.first_name} created"
 
 demo_idea_official = Idea.new(
-  # title: "Paper Trash Flying Around",
-  title: "This is my official idea",
-  problem: "Fellow Neighbours! Have you also noticed that paper trash pickup seems to happen less often than needed? There is a lot of paper trash flying around on our street which gets particularily messy when it's raning... And it's rainig most of the time in the Netherlands :)",
-  solution: "Let's raise enough votes to change the trash pickup schedule! Maybe instead of only Thursday mornings we could arrange Monday mornings as well?",
-  address: "Ruyschstraat 401, 1091MS Amsterdam",
-  user: res_user
+  title: "Oosterpark Dark at Night",
+  problem: "After work I often go for a walk to Oosterpark, since it's just 5 minutes away from my apartment. I love this routine, it really calms me down, especially now when I rarely leave home. Unfortunately it's so so dark at night! The main alley is lit but it gets boring to walk the same path every night...",
+  solution: "I suggest we install more lamps in the park, not only on the main alley. Perahps we can use some solar-powered ones? Perhaps we can arrange a crowdfunding? This was all of us who feel uneasy in the darkness can enjoy more of our beautiful park.",
+  address: "Oosterpark, 1092CA Amsterdam",
+  user: res_user,
+  goal: 20,
+  status: "Approved"
   )
-demo_idea_official_image = URI.open("https://images.unsplash.com/photo-1528323273322-d81458248d40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2301&q=80")
-demo_idea_official.photo.attach(io: demo_idea_official_image, filename: "trash.png", content_type: "image/png")
+demo_idea_official_image = URI.open("https://images.unsplash.com/photo-1600075078247-8e01faaa44a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
+demo_idea_official.photo.attach(io: demo_idea_official_image, filename: "park.png", content_type: "image/png")
 demo_idea_official.save!
 puts "Idea #{demo_idea_official.title} of #{demo_idea_official.user.first_name} created"
 
-demo_idea_personal = Idea.new(
-  # title: "Paper Trash Flying Around",
-  title: "This is my personal idea",
-  problem: "Fellow Neighbours! Have you also noticed that paper trash pickup seems to happen less often than needed? There is a lot of paper trash flying around on our street which gets particularily messy when it's raning... And it's rainig most of the time in the Netherlands :)",
-  solution: "Let's raise enough votes to change the trash pickup schedule! Maybe instead of only Thursday mornings we could arrange Monday mornings as well?",
-  address: "Ruyschstraat 401, 1091MS Amsterdam",
-  user: res_user,
-  municipality: false
+# 18 NAKED VOTES
+
+18.times do
+  vote = Vote.new(
+    user: User.all.sample,
+    idea: demo_idea_official
   )
-demo_idea_personal_image = URI.open("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
-demo_idea_personal.photo.attach(io: demo_idea_personal_image, filename: "party.png", content_type: "image/png")
-demo_idea_personal.save!
-puts "Idea #{demo_idea_personal.title} of #{demo_idea_personal.user.first_name} created"
+  vote.save!
+  puts "Vote for #{vote.idea.title} created"
+end
 
+# 4 FEEDBACK VOTES
 
-puts "Creating users & ideas..."
+feedback_one = Vote.new(
+  user: User.all.sample,
+  idea: demo_idea_official,
+  comment: "Cool idea! I have the same problem."
+)
+feedback_one.save!
+puts "Vote with feedback for #{feedback_one.idea.title} created"
 
+feedback_two = Vote.new(
+  user: User.all.sample,
+  idea: demo_idea_official,
+  comment: "I vote for it. Most of the year is dark - the more light, the merrier."
+)
+feedback_two.save!
+puts "Vote with feedback for #{feedback_two.idea.title} created"
 
+feedback_three = Vote.new(
+  user: User.all.sample,
+  idea: demo_idea_official,
+  comment: "Hm, I'm not sure... Isn't the light on the main alley enough?"
+)
+feedback_three.save!
+puts "Vote with feedback for #{feedback_three.idea.title} created"
 
-# puts "creating cocktail 3..."
-# cocktail_3 = Cocktail.new(name: "Pau's Piña Colada")
-# cocktail_3_picture = URI.open('https://images.unsplash.com/photo-1582633987110-6b4ca43e9a49?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')
-# cocktail_3.photo.attach(io: cocktail_3_picture, filename: 'ginto.png', content_type: 'image/png')
-# cocktail_3.save!
-
+feedback_four = Vote.new(
+  user: User.all.sample,
+  idea: demo_idea_official,
+  comment: "Let's have a Latern Festival in Oosterpark! For sure it will be lit at least this one night <3"
+)
+feedback_four.save!
+puts "Vote with feedback for #{feedback_four.idea.title} created"
 
 
 # SIX USERS & SIX IDEAS
+
+puts "Creating users & ideas..."
 
 first_user = User.new(
   first_name: Faker::Name.female_first_name,
@@ -98,14 +163,15 @@ first_user.save!
 puts "User #{first_user.first_name} created"
   
 first_idea = Idea.new(
-  title: "Oosterpark Dark at Night",
-  problem: "After work I often go for a walk to Oosterpark, since it's just 5 minutes away from my apartment. I love this routine, it really calms me down, especially now when I rarely leave home. Unfortunately it's so so dark at night! The main alley is lit but it gets boring to walk the same path every night...",
-  solution: "I suggest we install more lamps in the park, not only on the main alley. Perahps we can use some solar-powered ones? Perhaps we can arrange a crowdfunding? This was all of us who feel uneasy in the darkness can enjoy more of our beautiful park.",
-  address: "Oosterpark, 1092CA Amsterdam",
-  user: first_user
+  title: "Paper Trash Flying Around",
+  problem: "Fellow Neighbours! Have you also noticed that paper trash pickup seems to happen less often than needed? There is a lot of paper trash flying around on our street which gets particularily messy when it's raning... And it's rainig most of the time in the Netherlands :)",
+  solution: "Let's raise enough votes to change the trash pickup schedule! Maybe instead of only Thursday mornings we could arrange Monday mornings as well?",
+  address: "Wagenaarstraat 32, 1093CR Amsterdam",
+  user: first_user,
+  goal: 18
   )
-first_idea_image = URI.open("https://images.unsplash.com/photo-1600075078247-8e01faaa44a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
-first_idea.photo.attach(io: first_idea_image, filename: "park.png", content_type: "image/png")
+first_idea_image = URI.open("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=8")
+first_idea.photo.attach(io: first_idea_image, filename: "trash.png", content_type: "image/png")
 first_idea.save!
 puts "Idea #{first_idea.title} of #{first_idea.user.first_name} created"
 
@@ -127,7 +193,8 @@ second_idea = Idea.new(
   problem: "My 'problem' is simple. I am a people watcher - I like observing the city life. There is this favourtite spot of mine and oh how I wish there was a nice bench there!",
   solution: "My solution is even simpler. Let's have a bench!",
   address: "Plantage Lepellaan, 1018DL Amsterdam",
-  user: second_user
+  user: second_user,
+  goal: 12
 )
 second_idea_image = URI.open("https://images.unsplash.com/photo-1561326598-8e19291f9c7b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
 second_idea.photo.attach(io: second_idea_image, filename: "bench.png", content_type: "image/png")
@@ -152,7 +219,8 @@ third_idea = Idea.new(
   problem: "Any minigolf fans around here? I've always wanted to play some golf, but going to the real field is a long trip.",
   solution: "Having a minigolf field in Funenpark would we awesome. I don't think it requires much inter",
   address: "Funenpark, 1018AK Amsterdam",
-  user: third_user
+  user: third_user,
+  goal: 24
 )
 third_idea_image = URI.open("https://images.unsplash.com/photo-1593111774642-a746f5006b7b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2275&q=80")
 third_idea.photo.attach(io: third_idea_image, filename: "minigolf.png", content_type: "image/png")
@@ -178,6 +246,7 @@ fourth_idea = Idea.new(
   solution: "Clean Window Saturday: we chip in for a very long stick and tackle those stains! It would be ideal if the city could provide such a service in the future.",
   address: "Populierenweg 64, 1092ER Amsterdam",
   user: fourth_user,
+  goal: 28,
   municipality: false
 )
 fourth_idea_image = URI.open("https://images.unsplash.com/photo-1518662932499-75af27874c30?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
@@ -203,7 +272,8 @@ fifth_idea = Idea.new(
   problem: "Like some of you here, I am a local food producer who sells their goodies on Dappermarkt. The infrastructure is working, but there is always space for improvement.",
   solution: "The other day I was wondering how to make the place more attractive (and increase sales :) I did some research and found some cool permanent market stall solutions.",
   address: "Dappermarkt, 1093BX Amsterdam",
-  user: fifth_user
+  user: fifth_user,
+  goal: 16
 )
 fifth_idea_image = URI.open("https://images.unsplash.com/photo-1533900298318-6b8da08a523e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80")
 fifth_idea.photo.attach(io: fifth_idea_image, filename: "market.png", content_type: "image/png")
@@ -223,18 +293,29 @@ sixth_user.photo.attach(io: sixth_user_image, filename: "male3.png", content_typ
 sixth_user.save!
 puts "User #{sixth_user.first_name} created"
 
+# DEMO IDEA & ITS VOTES
+
 sixth_idea = Idea.new(
-  title: "Greener Playground",
-  problem: "I am a nature lover and I want to raise my kids in such a spirit. The playround in front of our house is soo dull and gray though... No trees, just a few small plants.",
-  solution: "My suggestion is to plant some more greenery around the playground. It's a win win for us and for the climate. It can be trees or maybe some fruit trees, or maybe some vegetable mini-gardens...",
+  title: "Green Playground",
+  problem: "I am a father of two and we like spending time outside. However, there is no playground close to my house and walking a long distance with a three-year old is not a piece of cake.",
+  solution: "My suggestion is to build a new playground. It could be a theme playgournd oriented around plant varietes. It can be both entertaining and educational for kids. During my paternity leave I had some free time and designed a project so I am ready to discuss it in the municipality.",
   address: "Domselaerstraat 121, 1093MB Amsterdam",
   user: sixth_user,
-  municipality: false
+  goal: 24
 )
 sixth_idea_image = URI.open("https://images.unsplash.com/photo-1596997000103-e597b3ca50df?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80")
-sixth_idea.photo.attach(io: sixth_idea_image, filename: "playgournd.png", content_type: "image/png")
+sixth_idea.photo.attach(io: sixth_idea_image, filename: "playground.png", content_type: "image/png")
 sixth_idea.save!
 puts "Idea #{sixth_idea.title} of #{sixth_idea.user.first_name} created"
+
+23.times do 
+  vote = Vote.new(
+    user: User.all.sample,
+    idea: sixth_idea
+  )
+  vote.save!
+  puts "Vote for #{vote.idea.title} created"
+end
 
 
 # 14 USERS
@@ -264,24 +345,18 @@ end
 end
 
 
-# CHATROOM
-
-chatroom = Chatroom.new(
-  name: "general"
-)
-chatroom.save!
-puts "Chatroom #{chatroom.name} created"
-
-
 # 80 VOTES
 
 puts "Creating votes..."
 
   80.times do
-  vote = Vote.new(
-    user: User.all.sample,
-    idea: Idea.all.sample
-  )
+  
+  if User.all.where.not(id: 2)
+    vote = Vote.new(
+        user: User.all.sample,
+        idea: Idea.all.sample
+    )
+  end
   vote.save!
   puts "Vote for #{vote.idea.title} created"
 end
