@@ -33,11 +33,16 @@ const circleProgress = () => {
   
     // bar.animate(container.dataset.vote / container.dataset.total);
 
-    if (container.dataset.vote <= container.dataset.total) {
-      bar.animate(container.dataset.vote / container.dataset.total);
+    const vote = parseInt(container.dataset.vote)
+    const total = parseInt(container.dataset.total)
+
+    if (vote <= total) {
+      bar.animate(vote / total);
     } else {
-      bar.animate(container.dataset.total / container.dataset.total);
+      bar.animate(total / total);
     }
+
+    console.log(container.dataset)
    
     // Number from 0.0 to 1.0
   });
