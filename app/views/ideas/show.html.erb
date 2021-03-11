@@ -110,19 +110,19 @@
      <%# if the user is municipality %>
       <% if current_user.role == "municipality" %>
         <div class="pt-5 d-flex justify-content-center">
-            <%# if the idea has the right vote can be approved/denied %>
+            <%# if the idea has the right vote can be approved/declined %>
               <% if @idea.votes.count >= @idea.goal %>
-                <div class="approved-denied">
+                <div class="approved-declined">
                     <p class="subtitle"> The idea will be:</p>
                       <div>
                         <%= link_to "Approved", approve_path(@idea), method: :patch, remote: true, class: "btn btn-outline-success" %>
-                        <%= link_to "Denied", deny_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger show-denied-button" %>
+                        <%= link_to "Declined", decline_path(@idea), method: :patch, remote: true, class: "btn btn-outline-danger show-declined-button" %>
                       </div>
                 </div>
               <% else %>
-                <div class="approved-denied-waiting">
+                <div class="approved-declined-waiting">
                   <div>
-                    <p class="mb-0">The idea still has to reach its goal to be approved or denied.</p>
+                    <p class="mb-0">The idea still has to reach its goal to be approved or declined.</p>
                   </div>
                 </div>
               <% end %>
@@ -268,15 +268,15 @@
   </div>
 </div>
 
-<!--Deny Modal -->
-<div class="modal fade" id="denyModalCenter" tabindex="-1" role="dialog" aria-labelledby="denyModalCenterTitle" aria-hidden="true">
+<!--Decline Modal -->
+<div class="modal fade" id="declineModalCenter" tabindex="-1" role="dialog" aria-labelledby="declineModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
         <button type="button" class="close text-right pr-3 pt-2" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       <div class="modal-body-approved">
-        <div class="pl-4"><h5 class="text-danger">The idea has been officially denied.</h5>
+        <div class="pl-4"><h5 class="text-danger">The idea has been officially declined.</h5>
           <p class="pb-3">The resident who proposed it will be informed shortly.</p>
         </div>
 

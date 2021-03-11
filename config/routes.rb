@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'ideas#dashboard'
   patch '/approve/:id', to: "ideas#approve", as: :approve
-  patch '/deny/:id', to: "ideas#deny", as: :deny
+  patch '/decline/:id', to: "ideas#decline", as: :decline
 end

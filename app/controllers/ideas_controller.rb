@@ -1,7 +1,7 @@
 class IdeasController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
-  before_action :set_idea, only: [:show, :edit, :update, :destroy, :approve, :deny]
-  before_action :set_label, only: [:show, :approve, :deny]
+  before_action :set_idea, only: [:show, :edit, :update, :destroy, :approve, :decline]
+  before_action :set_label, only: [:show, :approve, :decline]
 
   def dashboard
     @ideas = Idea.all
@@ -87,8 +87,8 @@ class IdeasController < ApplicationController
     end
   end
 
-  def deny
-    @idea.status = "Denied"
+  def decline
+    @idea.status = "Declined"
     @idea.save
     respond_to do |format|
       format.js
@@ -108,7 +108,7 @@ class IdeasController < ApplicationController
   def set_label
     if @idea.status == "Approved"
       @label = "bg-success text-light"
-     elsif @idea.status == "Denied"
+     elsif @idea.status == "Declined"
       @label = "bg-danger text-light"
      else
       @label = "bg-light text-dark status-label"

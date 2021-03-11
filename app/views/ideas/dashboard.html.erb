@@ -86,7 +86,7 @@
 
                       <%= link_to "Pending", url_for(params.permit("status", "votes").merge(status: "Pending")), class: "filter-icon dropdown-item" %>
                       <%= link_to "Approved", url_for(params.permit("status", "votes").merge(status: "Approved")), class: "filter-icon dropdown-item" %>
-                      <%= link_to "Denied", url_for(params.permit("status", "votes").merge(status: "Denied")), class: "filter-icon dropdown-item" %>
+                      <%= link_to "Declined", url_for(params.permit("status", "votes").merge(status: "Declined")), class: "filter-icon dropdown-item" %>
                       <%= link_to "All", dashboard_path(created_at: "asc"), class: "filter-icon dropdown-item" %>
                     </div>
 
