@@ -13,7 +13,8 @@
     <%= f.input :photo, as: :file %>
 
     <%= f.label :municipality, "Does your idea require involvment of your local municipality?
-            By selecting 'Yes' your idea will take place only with the approval of your town hall. By deselecting 'Yes' your idea will take place once the number of total partecipants is achieved. Every partecipant will collaborate at the realization of the idea." %>
+            By selecting 'Yes' your idea will be decided upon in you local municipality. 
+            By deselecting 'Yes' your idea will be realised by you and other participants." %>
     <div class="d-flex align-items-start pl-3">
       <%= f.input :municipality, as: :boolean, label: false, input_html: {id: "municipality-needed"} %>
       <p>Yes</p>
