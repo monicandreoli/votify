@@ -12,17 +12,16 @@
     <div class="col-sm-12 col-md-8">
 
       <div class="show-user d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <div>
-            <% if @idea.user.photo.attached?  %>
-            <%= cl_image_tag @idea.user.photo.key, class: 'avatar' %>
-            <% else %>
-            <p class="letter avatar">
-              <%=  @idea.user.first_name.first.capitalize %><%=  @idea.user.last_name.first.capitalize %></p>
-            <% end %>
-          </div>
-          <p class="m-0 pl-2"><%= @idea.user.first_name.capitalize %> <%= @idea.user.last_name.capitalize  %></p>
-          <p class="m-0 pl-4"><%= time_ago_in_words(@idea.created_at) %> ago</p>
+         <div class='user-index'>
+              <% if @idea.user.photo.attached?  %>
+                <%= cl_image_tag @idea.user.photo.key, crop: :fill, class: 'avatar m-0 p-0' %>
+              <% else %>
+                <p class="letter avatar"><%= @idea.user.first_name.first.capitalize %><%= @idea.user.last_name.first.capitalize %></p>
+              <% end %>
+              <div class='user-name ml-2'>
+                <p><strong class="p-0 m-0"><%= @idea.user.first_name %></strong></p>
+              <small class='date'><%= time_ago_in_words(@idea.created_at) %> ago</small>
+              </div>
         </div>
 
         <div class="show-icons">
