@@ -1,7 +1,7 @@
 <div class="m-4 pt-5">
   <div class="d-flex">
     <div class=" box-card-index mr-3">
-      <h3><strong>Explore initiatives around you</strong></h3>
+      <h2>Explore initiatives around you</h2>
       <p>
         These are all the ideas from people living in your neighborhood.
         <br> Your vote can make the real difference!
@@ -13,7 +13,7 @@
             <div class="icon-index">
               <% if idea.municipality == true %>
                 <i class="fas fa-landmark"></i>
-              <% else %>  
+              <% else %>
                 <i class="fas fa-handshake"></i>
               <% end %>
             </div>
@@ -25,10 +25,8 @@
                 <p class="letter avatar"><%= idea.user.first_name.first.capitalize %><%= idea.user.last_name.first.capitalize %></p>
               <% end %>
               <div class='user-name ml-2'>
-                <%= idea.user.first_name %>
-              </div>
-              <div class='date'>
-                <%= time_ago_in_words(idea.created_at) %> ago
+                <p><strong class="p-0 m-0"><%= idea.user.first_name %></strong></p>
+              <small class='date'><%= time_ago_in_words(idea.created_at) %> ago</small>
               </div>
             </div>
 
@@ -37,7 +35,7 @@
             </div>
 
             <div class='content-index'>
-              <p><%= truncate(idea.problem, length: 120) %></p> 
+              <p><%= truncate(idea.problem, length: 120) %></p>
             </div>
 
             <div class='footer-index'>

@@ -21,16 +21,16 @@ const circleProgress = () => {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
 
-        
+
       let centerText = `${container.dataset.vote}/${container.dataset.total}`;
       circle.setText(centerText);
-        
+
 
       }
     });
     bar.text.style.fontFamily = 'Source Sans Pro, Helvetica, sans-serif';
     bar.text.style.fontSize = '28px';
-  
+
     // bar.animate(container.dataset.vote / container.dataset.total);
 
     const vote = parseInt(container.dataset.vote)
@@ -42,8 +42,7 @@ const circleProgress = () => {
       bar.animate(total / total);
     }
 
-    console.log(container.dataset)
-   
+
     // Number from 0.0 to 1.0
   });
 }

@@ -16,7 +16,7 @@
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-chart-pie pr-2"></i>Overview</a>
 
-        
+
 
         <a class="nav-link" id="v-pills-chat-tab" data-toggle="pill" href="#v-pills-chat" role="tab"
           aria-controls="v-pills-chat" aria-selected="true"><i class="fas fa-info-circle pr-2"></i></i>InfoChat</a>
@@ -168,7 +168,7 @@
 
         <%# SETTINGS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-
+               <%= render(partial: "devise/registrations/destroy", locals: { resource: current_user, resource_name: :user, devise_mapping: Devise.mappings[:user] }) %>
         </div>
       </div>
     </div>
@@ -298,7 +298,7 @@
                     <div class="icon-dashboard">
                       <% if idea.municipality == true %>
                         <i class="fas fa-landmark"></i>
-                      <% else %>  
+                      <% else %>
                         <i class="fas fa-handshake"></i>
                       <% end %>
                     </div>
@@ -351,7 +351,7 @@
                     <div class="icon-dashboard">
                       <% if idea.municipality == true %>
                         <i class="fas fa-landmark"></i>
-                      <% else %>  
+                      <% else %>
                         <i class="fas fa-handshake"></i>
                       <% end %>
                     </div>
@@ -380,7 +380,7 @@
 
         <%# MY IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-          <h4>My ideas</h4>
+          <h2>My ideas</h2>
           <p>See all the ideas you pitched</p>
           <% @my_ideas.each do |idea| %>
           <%= link_to idea_path(idea), class: 'link-latest' do %>
@@ -409,7 +409,7 @@
               <div class="icon-dashboard">
                 <% if idea.municipality == true %>
                   <i class="fas fa-landmark"></i>
-                <% else %>  
+                <% else %>
                   <i class="fas fa-handshake"></i>
                 <% end %>
               </div>
@@ -450,7 +450,7 @@
 
         <%# MY VOTED IDEAS CONTENT  %>
         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-          <h4>My voted ideas</h4>
+          <h2>My voted ideas</h2>
           <p>See all the ideas you voted for</p>
           <% @my_voted_ideas.each do |idea| %>
 
@@ -481,7 +481,7 @@
               <div class="icon-dashboard">
                 <% if idea.municipality == true %>
                   <i class="fas fa-landmark"></i>
-                <% else %>  
+                <% else %>
                   <i class="fas fa-handshake"></i>
                 <% end %>
               </div>

@@ -41,25 +41,31 @@
 
 .user-name {
   align-self: center;
+  line-height: 0px;
+  small {
+    font-size: 12px;
+  }
+  strong {
+    color: $green;
+  }
 }
 .user-index .date {
   align-self: center;
 }
 
-.user-name::after {
-  content: " - ";
-  white-space: pre;
-}
+
 
 .icon-index {
-  color: $orange;
+  color: $green;
+  opacity: 0.6;
   position: absolute;
   font-size: 24px;
   right: 24px;
 }
 
 .footer-index {
-  color: $dark-gray;
+  color: $green;
+  font-weight: 700;
 }
 
 
