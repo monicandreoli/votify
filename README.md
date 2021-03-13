@@ -1,1 +1,4 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+#### Votify - Gives voice to local people
+-----------------------------------------------
+Votify is a platform where, people living in the same neighborhood, can communicate with each other and make a change! Votify gives a chance of a possible digital solution between the town hall and the resident of a specific area! 
+know more about it: 👉🏼 http://votify.nl 👈🏼
